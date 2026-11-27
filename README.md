@@ -38,7 +38,7 @@ Requires Python 3.10+ and Node 18+.
 cd backend && python -m venv .venv && . .venv/bin/activate && pip install torch --index-url https://download.pytorch.org/whl/cpu && pip install -r requirements.txt && cp -n .env.example .env; uvicorn app.main:app --reload --port 8000
 ```
 
-**Frontend** (http://localhost:5173; `/api` is proxied to the backend):
+**Frontend** (http://localhost:5173):
 
 ```bash
 cd frontend && npm install && npm run dev
@@ -46,7 +46,13 @@ cd frontend && npm install && npm run dev
 
 On Windows, activate the venv with `.venv\Scripts\activate` instead of `. .venv/bin/activate`.
 
-**Single-port demo:** run `npm run build` in `frontend/`. The backend then serves the built app at http://localhost:8000.
+By default the frontend runs **fully in the browser**: the model is exported to ONNX (`backend/scripts/export_onnx.py` → `frontend/public/model/`) and runs with ONNX Runtime Web, and symptom matching and knowledge-base lookup happen in JS (`frontend/src/local.js`). No backend is needed. To use the FastAPI backend instead, run `npm run dev:server`, or set `VITE_API_MODE=server`.
+
+**Single-port demo:** run `VITE_API_MODE=server npm run build` in `frontend/`. The backend then serves the built app at http://localhost:8000.
+
+## ☁️ Deploy (Netlify)
+
+`netlify.toml` builds `frontend/` as a static site, with the in-browser model and no server. Connect the repo in Netlify, or run `netlify deploy --build --prod` from the repo root.
 
 > Camera capture and voice input need HTTPS or `localhost`. For phone testing, use a tunnel such as `ngrok http 5173`.
 
