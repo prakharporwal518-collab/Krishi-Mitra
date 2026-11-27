@@ -1,0 +1,154 @@
+{
+ "Apple Scab": {
+  "crop": "apple",
+  "disease_id": "apple_scab"
+ },
+ "Apple with Black Rot": {
+  "crop": "apple",
+  "disease_id": "apple_black_rot"
+ },
+ "Cedar Apple Rust": {
+  "crop": "apple",
+  "disease_id": "apple_cedar_rust"
+ },
+ "Healthy Apple": {
+  "crop": "apple",
+  "disease_id": "healthy"
+ },
+ "Healthy Blueberry Plant": {
+  "crop": "blueberry",
+  "disease_id": "healthy"
+ },
+ "Cherry with Powdery Mildew": {
+  "crop": "cherry",
+  "disease_id": "cherry_powdery_mildew"
+ },
+ "Healthy Cherry Plant": {
+  "crop": "cherry",
+  "disease_id": "healthy"
+ },
+ "Corn (Maize) with Cercospora and Gray Leaf Spot": {
+  "crop": "maize",
+  "disease_id": "maize_gray_leaf_spot"
+ },
+ "Corn (Maize) with Common Rust": {
+  "crop": "maize",
+  "disease_id": "maize_common_rust"
+ },
+ "Corn (Maize) with Northern Leaf Blight": {
+  "crop": "maize",
+  "disease_id": "maize_northern_leaf_blight"
+ },
+ "Healthy Corn (Maize) Plant": {
+  "crop": "maize",
+  "disease_id": "healthy"
+ },
+ "Grape with Black Rot": {
+  "crop": "grape",
+  "disease_id": "grape_black_rot"
+ },
+ "Grape with Esca (Black Measles)": {
+  "crop": "grape",
+  "disease_id": "grape_esca"
+ },
+ "Grape with Isariopsis Leaf Spot": {
+  "crop": "grape",
+  "disease_id": "grape_leaf_blight"
+ },
+ "Healthy Grape Plant": {
+  "crop": "grape",
+  "disease_id": "healthy"
+ },
+ "Orange with Citrus Greening": {
+  "crop": "orange",
+  "disease_id": "orange_citrus_greening"
+ },
+ "Peach with Bacterial Spot": {
+  "crop": "peach",
+  "disease_id": "peach_bacterial_spot"
+ },
+ "Healthy Peach Plant": {
+  "crop": "peach",
+  "disease_id": "healthy"
+ },
+ "Bell Pepper with Bacterial Spot": {
+  "crop": "chilli",
+  "disease_id": "pepper_bacterial_spot"
+ },
+ "Healthy Bell Pepper Plant": {
+  "crop": "chilli",
+  "disease_id": "healthy"
+ },
+ "Potato with Early Blight": {
+  "crop": "potato",
+  "disease_id": "potato_early_blight"
+ },
+ "Potato with Late Blight": {
+  "crop": "potato",
+  "disease_id": "potato_late_blight"
+ },
+ "Healthy Potato Plant": {
+  "crop": "potato",
+  "disease_id": "healthy"
+ },
+ "Healthy Raspberry Plant": {
+  "crop": "raspberry",
+  "disease_id": "healthy"
+ },
+ "Healthy Soybean Plant": {
+  "crop": "soybean",
+  "disease_id": "healthy"
+ },
+ "Squash with Powdery Mildew": {
+  "crop": "squash",
+  "disease_id": "squash_powdery_mildew"
+ },
+ "Strawberry with Leaf Scorch": {
+  "crop": "strawberry",
+  "disease_id": "strawberry_leaf_scorch"
+ },
+ "Healthy Strawberry Plant": {
+  "crop": "strawberry",
+  "disease_id": "healthy"
+ },
+ "Tomato with Bacterial Spot": {
+  "crop": "tomato",
+  "disease_id": "tomato_bacterial_spot"
+ },
+ "Tomato with Early Blight": {
+  "crop": "tomato",
+  "disease_id": "tomato_early_blight"
+ },
+ "Tomato with Late Blight": {
+  "crop": "tomato",
+  "disease_id": "tomato_late_blight"
+ },
+ "Tomato with Leaf Mold": {
+  "crop": "tomato",
+  "disease_id": "tomato_leaf_mold"
+ },
+ "Tomato with Septoria Leaf Spot": {
+  "crop": "tomato",
+  "disease_id": "tomato_septoria_leaf_spot"
+ },
+ "Tomato with Spider Mites or Two-spotted Spider Mite": {
+  "crop": "tomato",
+  "disease_id": "tomato_spider_mites"
+ },
+ "Tomato with Target Spot": {
+  "crop": "tomato",
+  "disease_id": "tomato_target_spot"
+ },
+ "Tomato Yellow Leaf Curl Virus": {
+  "crop": "tomato",
+  "disease_id": "tomato_leaf_curl"
+ },
+ "Tomato Mosaic Virus": {
+  "crop": "tomato",
+  "disease_id": "tomato_mosaic_virus"
+ },
+ "Healthy Tomato Plant": {
+  "crop": "tomato",
+  "disease_id": "healthy"
+ }
+}

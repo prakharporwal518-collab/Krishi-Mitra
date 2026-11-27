@@ -1,0 +1,29 @@
+{
+ "languages": [
+  {"code": "en", "name": "English", "native": "English", "speech": "en-IN"},
+  {"code": "hi", "name": "Hindi", "native": "हिन्दी", "speech": "hi-IN"},
+  {"code": "mr", "name": "Marathi", "native": "मराठी", "speech": "mr-IN"},
+  {"code": "te", "name": "Telugu", "native": "తెలుగు", "speech": "te-IN"},
+  {"code": "ta", "name": "Tamil", "native": "தமிழ்", "speech": "ta-IN"},
+  {"code": "bn", "name": "Bengali", "native": "বাংলা", "speech": "bn-IN"}
+ ],
+ "crops": [
+  {"id": "tomato", "icon": "🍅", "main": true, "names": {"en": "Tomato", "hi": "टमाटर", "mr": "टोमॅटो", "te": "టమాటా", "ta": "தக்காளி", "bn": "টমেটো"}},
+  {"id": "potato", "icon": "🥔", "main": true, "names": {"en": "Potato", "hi": "आलू", "mr": "बटाटा", "te": "బంగాళాదుంప", "ta": "உருளைக்கிழங்கு", "bn": "আলু"}},
+  {"id": "rice", "icon": "🌾", "main": true, "names": {"en": "Rice (Paddy)", "hi": "धान", "mr": "भात", "te": "వరి", "ta": "நெல்", "bn": "ধান"}},
+  {"id": "wheat", "icon": "🌿", "main": true, "names": {"en": "Wheat", "hi": "गेहूँ", "mr": "गहू", "te": "గోధుమ", "ta": "கோதுமை", "bn": "গম"}},
+  {"id": "cotton", "icon": "☁️", "main": true, "names": {"en": "Cotton", "hi": "कपास", "mr": "कापूस", "te": "పత్తి", "ta": "பருத்தி", "bn": "তুলা"}},
+  {"id": "maize", "icon": "🌽", "main": true, "names": {"en": "Maize (Corn)", "hi": "मक्का", "mr": "मका", "te": "మొక్కజొన్న", "ta": "மக்காச்சோளம்", "bn": "ভুট্টা"}},
+  {"id": "chilli", "icon": "🌶️", "main": true, "names": {"en": "Chilli / Capsicum", "hi": "मिर्च / शिमला मिर्च", "mr": "मिरची / ढोबळी मिरची", "te": "మిరప", "ta": "மிளகாய்", "bn": "লঙ্কা"}},
+  {"id": "apple", "icon": "🍎", "main": false, "names": {"en": "Apple", "hi": "सेब", "mr": "सफरचंद", "te": "ఆపిల్", "ta": "ஆப்பிள்", "bn": "আপেল"}},
+  {"id": "grape", "icon": "🍇", "main": false, "names": {"en": "Grape", "hi": "अंगूर", "mr": "द्राक्ष", "te": "ద్రాక్ష", "ta": "திராட்சை", "bn": "আঙুর"}},
+  {"id": "orange", "icon": "🍊", "main": false, "names": {"en": "Orange / Citrus", "hi": "संतरा", "mr": "संत्रा", "te": "నారింజ", "ta": "ஆரஞ்சு", "bn": "কমলা"}},
+  {"id": "peach", "icon": "🍑", "main": false, "names": {"en": "Peach", "hi": "आड़ू", "mr": "पीच", "te": "పీచ్", "ta": "பீச்", "bn": "পীচ"}},
+  {"id": "cherry", "icon": "🍒", "main": false, "names": {"en": "Cherry", "hi": "चेरी", "mr": "चेरी", "te": "చెర్రీ", "ta": "செர்ரி", "bn": "চেরি"}},
+  {"id": "squash", "icon": "🎃", "main": false, "names": {"en": "Squash / Pumpkin", "hi": "कद्दू", "mr": "भोपळा", "te": "గుమ్మడి", "ta": "பூசணி", "bn": "কুমড়া"}},
+  {"id": "strawberry", "icon": "🍓", "main": false, "names": {"en": "Strawberry", "hi": "स्ट्रॉबेरी", "mr": "स्ट्रॉबेरी", "te": "స్ట్రాబెర్రీ", "ta": "ஸ்ட்ராபெர்ரி", "bn": "স্ট্রবেরি"}},
+  {"id": "blueberry", "icon": "🫐", "main": false, "names": {"en": "Blueberry", "hi": "ब्लूबेरी", "mr": "ब्लूबेरी", "te": "బ్లూబెర్రీ", "ta": "புளூபெர்ரி", "bn": "ব্লুবেরি"}},
+  {"id": "raspberry", "icon": "🍇", "main": false, "names": {"en": "Raspberry", "hi": "रास्पबेरी", "mr": "रास्पबेरी", "te": "రాస్ప్బెర్రీ", "ta": "ராஸ்பெர்ரி", "bn": "রাস্পবেরি"}},
+  {"id": "soybean", "icon": "🫘", "main": false, "names": {"en": "Soybean", "hi": "सोयाबीन", "mr": "सोयाबीन", "te": "సోయాబీన్", "ta": "சோயாபீன்", "bn": "সয়াবিন"}}
+ ]
+}
