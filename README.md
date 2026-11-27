@@ -19,17 +19,22 @@ Farmers often can't identify crop diseases with confidence. They depend on neigh
 
 ## 🧠 How it works
 
-- **Disease detection:** MobileNetV2 with 38 PlantVillage classes. The base model is [`linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification`](https://huggingface.co/linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification), which we **fine-tuned on real field photos** ([PlantDoc](https://huggingface.co/datasets/agyaatcoder/PlantDoc)) because the base model was trained only on lab photos (`backend/scripts/finetune_fieldphotos.py`, weights in `backend/models/krishi-mobilenetv2-field`). Each prediction averages 3 views of the photo (test-time augmentation). If the model can't be loaded, the backend falls back to a vision LLM (Claude) when `ANTHROPIC_API_KEY` is set.
+- **Disease detection:** one small MobileNetV2 model (9 MB, **54 classes**) runs in the browser. It covers the 38 PlantVillage classes, plus **rice** (bacterial leaf blight, blast, brown spot, tungro, hispa, healthy), **wheat** (yellow rust, brown rust, septoria, healthy), **cotton** (bacterial blight, Alternaria leaf spot, Fusarium wilt, Verticillium wilt, healthy) and a **"Not a Plant Leaf"** class for unrelated photos. It started from [`linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification`](https://huggingface.co/linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification) and was trained in two stages:
+  1. `backend/scripts/finetune_fieldphotos.py`: real field photos ([PlantDoc](https://huggingface.co/datasets/agyaatcoder/PlantDoc)), because the base model only knew lab photos.
+  2. `backend/scripts/add_crops.py`: adds rice, wheat and cotton from [rice (India)](https://huggingface.co/datasets/Project-AgML/rice_leaf_disease_classification_india), [cotton](https://huggingface.co/datasets/Project-AgML/cotton_leaf_disease_classification) and [CropLeafDiseases](https://huggingface.co/datasets/wambugu71/CropLeafDiseases) (wheat, rice, non-leaf photos).
 
-  | Measured on unseen photos | Base model | Krishi Mitra model |
+  Weights are in `backend/models/krishi-mobilenetv2-field` (with `training_report.json`). Each prediction averages 3 views of the photo. If the model can't be loaded, the backend falls back to a vision LLM (Claude) when `ANTHROPIC_API_KEY` is set.
+
+  | Measured on held-out photos | Base model | Krishi Mitra model |
   |---|---|---|
   | Field photos (PlantDoc test, 236): correct disease | 31% | **67%** |
-  | Field photos: correct crop | 51% | **84%** |
-  | Field photos: correct when ≥60% confident | 41% | **85%** |
-  | Lab photos (PlantVillage held-out) | 94% | **97%** |
+  | Field photos: correct crop | 51% | **82%** |
+  | Lab photos (PlantVillage held-out) | 94% | **95%** |
+  | Rice / wheat / cotton test photos (1,281): correct disease | n/a | **89%** |
+  | Rice / wheat / cotton: correct crop | n/a | **99%** |
 
-  Below 60% confidence the app asks for a retake, or suggests the symptom checker instead.
-- **Knowledge base:** `backend/data/diseases.json` holds **36 diseases + a healthy entry** across tomato, potato, rice, wheat, cotton, maize and chilli, plus the PlantVillage fruit crops. Every disease has full **English, Hindi and Marathi** content. All 38 model classes map to an entry (`class_map.json`). The JSON is generated from `backend/scripts/build_kb.py`.
+  **Known weak spots:** rice hispa is often mistaken for healthy rice (36%), because the scraping damage is tiny in its training photos. Cotton bacterial blight is 65%. Rice/wheat/cotton test photos come from the same sources as their training photos, so real-world accuracy will be lower than 89%. Cotton leaf curl virus has no photo dataset, so use the symptom checker for it. Results between 35% and 60% confidence are shown as "possible disease"; below 35%, or for non-leaf photos, the app asks for a retake.
+- **Knowledge base:** `backend/data/diseases.json` holds **41 diseases + a healthy entry** across tomato, potato, rice, wheat, cotton, maize and chilli, plus the PlantVillage fruit crops. Every disease has full **English, Hindi and Marathi** content. All 38 model classes map to an entry (`class_map.json`). The JSON is generated from `backend/scripts/build_kb.py`.
 - **Translation:** the UI is pre-translated into all 6 languages. Disease advice is pre-translated into en/hi/mr. For te/ta/bn the backend uses Google Translate if `GOOGLE_TRANSLATE_API_KEY` is set, and falls back to English otherwise (the UI says so).
 - **Symptom matching:** cosine similarity between the selected or spoken symptoms and each disease's symptom tags. Voice text is matched against keywords in 6 languages.
 
@@ -78,7 +83,7 @@ Interactive docs are at http://localhost:8000/docs.
 
 ## 🖼️ Demo samples
 
-`samples/` holds real PlantVillage leaf images (tomato early blight, potato late blight, tomato leaf curl virus, maize common rust, healthy tomato). The Photo screen also offers them as one-tap samples.
+`samples/` holds real leaf images: tomato early blight, potato late blight, tomato leaf curl virus, maize common rust, healthy tomato, rice blast, wheat yellow rust and cotton wilt. The Photo screen also offers them as one-tap samples.
 
 ## 📁 Structure
 

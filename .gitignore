@@ -9,3 +9,4 @@ __pycache__/
 frontend/src/data/
 frontend/public/samples/
 finetuned/
+finetuned_crops/

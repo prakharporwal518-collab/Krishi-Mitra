@@ -73,13 +73,15 @@ export const localApi = {
     const [s, views] = await Promise.all([loadModel(), toTensors(file)])
     const probs = new Float32Array(labels.length)
     for (const x of views) (await s.run({ pixel_values: x })).probs.data.forEach((p, i) => { probs[i] += p / views.length })
-    const top = [...probs].map((p, i) => [p, i]).sort((a, b) => b[0] - a[0]).slice(0, 3).map(([p, i]) => {
+    const top = [...probs].map((p, i) => [p, i]).sort((a, b) => b[0] - a[0]).slice(0, 4).map(([p, i]) => {
       const m = classMap[labels[i]]
       return { label: labels[i], crop: m.crop, crop_name: cropName(m.crop, lang), disease_id: m.disease_id,
-        disease: diseaseName(m.disease_id, lang), confidence: Math.round(p * 1000) / 10 }
+        disease: m.disease_id === 'invalid' ? 'Not a plant leaf' : diseaseName(m.disease_id, lang), confidence: Math.round(p * 1000) / 10 }
     })
-    return { ...top[0], is_healthy: top[0].disease_id === 'healthy', low_confidence: top[0].confidence < MIN_CONFIDENCE,
-      alternatives: top.slice(1), engine: 'onnx-browser' }
+    const notLeaf = top[0].disease_id === 'invalid' // model's "Not a Plant Leaf" class
+    return { ...top[0], is_healthy: top[0].disease_id === 'healthy', not_leaf: notLeaf,
+      low_confidence: notLeaf || top[0].confidence < MIN_CONFIDENCE,
+      alternatives: top.slice(1).filter((x) => x.disease_id !== 'invalid').slice(0, 2), engine: 'onnx-browser' }
   },
 
   async symptoms({ crop, symptoms = [], text, lang }) {

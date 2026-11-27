@@ -4028,6 +4028,569 @@
    }
   },
   {
+   "id": "rice_tungro",
+   "crop": "rice",
+   "kind": "viral",
+   "pathogen": "Rice tungro viruses (spread by green leafhopper)",
+   "symptom_tags": [
+    "yellowing",
+    "stunted",
+    "insects_underside"
+   ],
+   "source": "ICAR-NRRI Cuttack / ICAR-IIRR Hyderabad",
+   "region_tips": [
+    {
+     "states": [
+      "Odisha",
+      "West Bengal",
+      "Andhra Pradesh",
+      "Tamil Nadu",
+      "Chhattisgarh"
+     ],
+     "seasons": [
+      "kharif",
+      "rabi"
+     ],
+     "tip": {
+      "en": "Eastern and southern rice belts see tungro outbreaks when leafhopper numbers rise; check nursery and young crop weekly.",
+      "hi": "पूर्वी और दक्षिणी धान क्षेत्रों में फुदके बढ़ने पर टुंग्रो फैलता है; नर्सरी और छोटी फसल हर सप्ताह जाँचें।",
+      "mr": "पूर्व व दक्षिण भात पट्ट्यात तुडतुडे वाढल्यास टुंग्रो पसरतो; रोपवाटिका व लहान पीक दर आठवड्याला तपासा."
+     }
+    }
+   ],
+   "content": {
+    "en": {
+     "name": "Rice Tungro Virus",
+     "about": "A virus disease spread by the green leafhopper insect. Infected plants cannot be cured; control the leafhopper and remove infected plants early.",
+     "symptoms": [
+      "Leaves turn yellow-orange starting from the tip",
+      "Plants are stunted with fewer tillers",
+      "Young leaves twist; panicles are small and grains partly empty"
+     ],
+     "chemical": {
+      "product": "Thiamethoxam 25% WG (for green leafhopper)",
+      "dosage": "0.2 g per litre (40 g per acre in 200 L water)",
+      "timing": "Spray in nursery and 15 and 30 days after transplanting when leafhoppers are seen; alternate with Imidacloprid 17.8% SL 0.25 ml/L",
+      "safety": [
+       "Wear gloves, mask and full sleeves while spraying",
+       "Spray in the morning or evening, not against the wind",
+       "Keep away from children, animals and water sources",
+       "Follow the waiting period before harvest written on the label"
+      ]
+     },
+     "organic": [
+      "Install light traps to monitor and kill leafhoppers",
+      "Uproot and bury infected hills",
+      "Neem oil (1500 ppm) 5 ml/L in nursery"
+     ],
+     "prevention": [
+      "Grow tungro-resistant varieties recommended for your state",
+      "Synchronous planting in the whole village",
+      "Remove stubble and volunteer rice after harvest",
+      "Avoid planting near infected fields"
+     ],
+     "warning": "Do not overuse pesticides or mix two chemicals in one tank unless the label allows it. Overuse causes resistance, harms soil, bees and your health. Use only the recommended dose."
+    },
+    "hi": {
+     "name": "धान का टुंग्रो विषाणु रोग",
+     "about": "यह हरे फुदके (ग्रीन लीफहॉपर) से फैलने वाला विषाणु रोग है। संक्रमित पौधे ठीक नहीं होते; फुदके का नियंत्रण करें और संक्रमित पौधे जल्दी हटाएँ।",
+     "symptoms": [
+      "पत्तियाँ सिरे से पीली-नारंगी होने लगती हैं",
+      "पौधे बौने, कल्ले कम",
+      "नई पत्तियाँ मुड़ती हैं; बालियाँ छोटी, दाने आधे खाली"
+     ],
+     "chemical": {
+      "product": "Thiamethoxam 25% WG (थायमेथोक्साम - हरे फुदके हेतु)",
+      "dosage": "0.2 ग्राम प्रति लीटर (40 ग्राम प्रति एकड़ 200 लीटर पानी में)",
+      "timing": "नर्सरी में और रोपाई के 15 व 30 दिन बाद फुदके दिखने पर छिड़काव; इमिडाक्लोप्रिड 17.8% SL 0.25 मि.ली./लीटर से बदलें",
+      "safety": [
+       "छिड़काव करते समय दस्ताने, मास्क और पूरी बाँह के कपड़े पहनें",
+       "सुबह या शाम को छिड़काव करें, हवा के विपरीत नहीं",
+       "बच्चों, पशुओं और पानी के स्रोतों से दूर रखें",
+       "लेबल पर लिखी कटाई से पहले की प्रतीक्षा अवधि का पालन करें"
+      ]
+     },
+     "organic": [
+      "फुदकों की निगरानी व नियंत्रण हेतु प्रकाश प्रपंच लगाएँ",
+      "संक्रमित पौधे उखाड़कर दबा दें",
+      "नर्सरी में नीम तेल (1500 ppm) 5 मि.ली./लीटर"
+     ],
+     "prevention": [
+      "अपने राज्य हेतु अनुशंसित टुंग्रो-प्रतिरोधी किस्में लगाएँ",
+      "पूरे गाँव में एक साथ रोपाई",
+      "कटाई के बाद ठूँठ और अपने-आप उगे धान हटाएँ",
+      "संक्रमित खेतों के पास रोपाई न करें"
+     ],
+     "warning": "कीटनाशक का ज़्यादा उपयोग न करें और लेबल की अनुमति के बिना दो रसायन एक टंकी में न मिलाएँ। ज़्यादा उपयोग से प्रतिरोध बढ़ता है, मिट्टी, मधुमक्खियों और आपके स्वास्थ्य को नुकसान होता है। केवल सुझाई गई मात्रा का उपयोग करें।"
+    },
+    "mr": {
+     "name": "भातावरील टुंग्रो विषाणू",
+     "about": "हा हिरव्या तुडतुड्यांमुळे पसरणारा विषाणूजन्य रोग आहे. रोगट झाडे बरी होत नाहीत; तुडतुड्यांचे नियंत्रण करा व रोगट झाडे लवकर काढा.",
+     "symptoms": [
+      "पाने टोकापासून पिवळी-नारिंगी होतात",
+      "झाडे खुजी, फुटवे कमी",
+      "कोवळी पाने वळतात; लोंब्या लहान, दाणे अर्धवट पोचट"
+     ],
+     "chemical": {
+      "product": "Thiamethoxam 25% WG (थायामेथोक्झाम - हिरव्या तुडतुड्यांसाठी)",
+      "dosage": "0.2 ग्रॅम प्रति लिटर (200 लिटर पाण्यात 40 ग्रॅम प्रति एकर)",
+      "timing": "रोपवाटिकेत व लावणीनंतर 15 व 30 दिवसांनी तुडतुडे दिसताच फवारणी; इमिडाक्लोप्रिड 17.8% SL 0.25 मि.ली./लिटरने आलटून पालटून",
+      "safety": [
+       "फवारणी करताना हातमोजे, मास्क आणि पूर्ण बाह्यांचे कपडे घाला",
+       "सकाळी किंवा संध्याकाळी फवारणी करा, वाऱ्याच्या विरुद्ध दिशेने नाही",
+       "मुले, जनावरे आणि पाण्याच्या स्रोतांपासून दूर ठेवा",
+       "लेबलवर दिलेला काढणीपूर्व प्रतीक्षा कालावधी पाळा"
+      ]
+     },
+     "organic": [
+      "तुडतुड्यांच्या पाहणी व नियंत्रणासाठी प्रकाश सापळे लावा",
+      "रोगट चुडे उपटून गाडा",
+      "रोपवाटिकेत निंबोळी तेल (1500 ppm) 5 मि.ली./लिटर"
+     ],
+     "prevention": [
+      "आपल्या राज्यासाठी शिफारस केलेल्या टुंग्रो-प्रतिकारक जाती लावा",
+      "संपूर्ण गावात एकाच वेळी लावणी",
+      "काढणीनंतर धसकटे व आपोआप उगवलेला भात काढा",
+      "रोगट शेतांजवळ लावणी टाळा"
+     ],
+     "warning": "कीटकनाशकांचा अतिवापर करू नका आणि लेबलवर परवानगी नसल्यास दोन रसायने एका टाकीत मिसळू नका. अतिवापरामुळे प्रतिकारशक्ती वाढते, माती, मधमाश्या आणि तुमच्या आरोग्याला हानी होते. फक्त शिफारस केलेले प्रमाण वापरा."
+    }
+   }
+  },
+  {
+   "id": "rice_hispa",
+   "crop": "rice",
+   "kind": "pest",
+   "pathogen": "Rice hispa beetle (Dicladispa armigera)",
+   "symptom_tags": [
+    "holes_chewing",
+    "leaf_blight",
+    "insects_underside"
+   ],
+   "source": "ICAR-NRRI Cuttack",
+   "region_tips": [],
+   "content": {
+    "en": {
+     "name": "Rice Hispa",
+     "about": "A small spiny blue-black beetle. Adults scrape the green tissue of leaves and grubs mine inside the leaf, so leaves turn white and dry.",
+     "symptoms": [
+      "White parallel streaks on leaves where green tissue is scraped",
+      "Leaves look whitish and dry from the tip",
+      "Small spiny dark beetles on leaves"
+     ],
+     "chemical": {
+      "product": "Quinalphos 25% EC",
+      "dosage": "2 ml per litre (400 ml per acre in 200 L water)",
+      "timing": "Spray when 1 adult or 1–2 damaged leaves per hill are seen; repeat after 15 days if needed",
+      "safety": [
+       "Wear gloves, mask and full sleeves while spraying",
+       "Spray in the morning or evening, not against the wind",
+       "Keep away from children, animals and water sources",
+       "Follow the waiting period before harvest written on the label"
+      ]
+     },
+     "organic": [
+      "Clip and destroy leaf tips of seedlings before transplanting (removes eggs and grubs)",
+      "Sweep with a hand net to collect beetles",
+      "Neem seed kernel extract 5%"
+     ],
+     "prevention": [
+      "Avoid excess nitrogen",
+      "Remove grassy weeds from bunds",
+      "Close planting spacing only as recommended"
+     ],
+     "warning": "Do not overuse pesticides or mix two chemicals in one tank unless the label allows it. Overuse causes resistance, harms soil, bees and your health. Use only the recommended dose."
+    },
+    "hi": {
+     "name": "धान का हिस्पा कीट",
+     "about": "यह छोटा काँटेदार नीला-काला भृंग है। वयस्क पत्ती की हरी सतह खुरचते हैं और ग्रब पत्ती के अंदर सुरंग बनाते हैं, जिससे पत्तियाँ सफेद होकर सूखती हैं।",
+     "symptoms": [
+      "पत्तियों पर खुरची हुई सफेद समानांतर धारियाँ",
+      "पत्तियाँ सिरे से सफेद होकर सूखती हैं",
+      "पत्तियों पर छोटे काँटेदार काले भृंग"
+     ],
+     "chemical": {
+      "product": "Quinalphos 25% EC (क्विनालफॉस)",
+      "dosage": "2 मि.ली. प्रति लीटर (400 मि.ली. प्रति एकड़ 200 लीटर पानी में)",
+      "timing": "प्रति पौधा 1 वयस्क या 1–2 क्षतिग्रस्त पत्तियाँ दिखने पर छिड़काव; ज़रूरत हो तो 15 दिन बाद दोहराएँ",
+      "safety": [
+       "छिड़काव करते समय दस्ताने, मास्क और पूरी बाँह के कपड़े पहनें",
+       "सुबह या शाम को छिड़काव करें, हवा के विपरीत नहीं",
+       "बच्चों, पशुओं और पानी के स्रोतों से दूर रखें",
+       "लेबल पर लिखी कटाई से पहले की प्रतीक्षा अवधि का पालन करें"
+      ]
+     },
+     "organic": [
+      "रोपाई से पहले पौध की पत्तियों के सिरे काटकर नष्ट करें (अंडे व ग्रब हटते हैं)",
+      "हाथ के जाल से भृंग इकट्ठा करें",
+      "5% नीम बीज अर्क"
+     ],
+     "prevention": [
+      "अधिक नाइट्रोजन न दें",
+      "मेड़ों से घास वाले खरपतवार हटाएँ",
+      "अनुशंसित दूरी पर ही रोपाई"
+     ],
+     "warning": "कीटनाशक का ज़्यादा उपयोग न करें और लेबल की अनुमति के बिना दो रसायन एक टंकी में न मिलाएँ। ज़्यादा उपयोग से प्रतिरोध बढ़ता है, मिट्टी, मधुमक्खियों और आपके स्वास्थ्य को नुकसान होता है। केवल सुझाई गई मात्रा का उपयोग करें।"
+    },
+    "mr": {
+     "name": "भातावरील हिस्पा (काटेरी भुंगेरा)",
+     "about": "हा लहान काटेरी निळसर-काळा भुंगेरा आहे. प्रौढ पानाचा हिरवा भाग खरवडतात व अळ्या पानात पोखरतात, त्यामुळे पाने पांढरी होऊन वाळतात.",
+     "symptoms": [
+      "पानांवर खरवडलेले पांढरे समांतर पट्टे",
+      "पाने टोकाकडून पांढरी होऊन वाळतात",
+      "पानांवर लहान काटेरी काळे भुंगेरे"
+     ],
+     "chemical": {
+      "product": "Quinalphos 25% EC (क्विनॉलफॉस)",
+      "dosage": "2 मि.ली. प्रति लिटर (200 लिटर पाण्यात 400 मि.ली. प्रति एकर)",
+      "timing": "प्रति चुडा 1 प्रौढ किंवा 1–2 खराब पाने दिसताच फवारणी; गरज असल्यास 15 दिवसांनी पुन्हा",
+      "safety": [
+       "फवारणी करताना हातमोजे, मास्क आणि पूर्ण बाह्यांचे कपडे घाला",
+       "सकाळी किंवा संध्याकाळी फवारणी करा, वाऱ्याच्या विरुद्ध दिशेने नाही",
+       "मुले, जनावरे आणि पाण्याच्या स्रोतांपासून दूर ठेवा",
+       "लेबलवर दिलेला काढणीपूर्व प्रतीक्षा कालावधी पाळा"
+      ]
+     },
+     "organic": [
+      "लावणीपूर्वी रोपांच्या पानांचे शेंडे कापून नष्ट करा (अंडी व अळ्या जातात)",
+      "हातजाळ्याने भुंगेरे गोळा करा",
+      "5% निंबोळी अर्क"
+     ],
+     "prevention": [
+      "जास्त नत्र टाळा",
+      "बांधावरील गवतवर्गीय तण काढा",
+      "शिफारशीप्रमाणेच अंतर ठेवा"
+     ],
+     "warning": "कीटकनाशकांचा अतिवापर करू नका आणि लेबलवर परवानगी नसल्यास दोन रसायने एका टाकीत मिसळू नका. अतिवापरामुळे प्रतिकारशक्ती वाढते, माती, मधमाश्या आणि तुमच्या आरोग्याला हानी होते. फक्त शिफारस केलेले प्रमाण वापरा."
+    }
+   }
+  },
+  {
+   "id": "wheat_septoria",
+   "crop": "wheat",
+   "kind": "fungal",
+   "pathogen": "Zymoseptoria tritici (Septoria tritici blotch)",
+   "symptom_tags": [
+    "brown_spots",
+    "leaf_blight",
+    "black_spots",
+    "yellowing"
+   ],
+   "source": "ICAR-IIWBR Karnal",
+   "region_tips": [],
+   "content": {
+    "en": {
+     "name": "Wheat Septoria Leaf Blotch",
+     "about": "A fungal disease spread by rain splash from infected stubble; favoured by cool, wet weather.",
+     "symptoms": [
+      "Yellow patches that turn into long brown blotches on lower leaves",
+      "Tiny black dots (fungal bodies) inside the blotches",
+      "Disease moves up to the flag leaf in wet weather"
+     ],
+     "chemical": {
+      "product": "Propiconazole 25% EC",
+      "dosage": "1 ml per litre (200 ml per acre)",
+      "timing": "Spray when blotches reach the upper leaves; repeat after 15 days if wet weather continues. Alternative: Tebuconazole 25.9% EC 1 ml/L",
+      "safety": [
+       "Wear gloves, mask and full sleeves while spraying",
+       "Spray in the morning or evening, not against the wind",
+       "Keep away from children, animals and water sources",
+       "Follow the waiting period before harvest written on the label"
+      ]
+     },
+     "organic": [
+      "Remove and burn infected stubble",
+      "Avoid dense sowing"
+     ],
+     "prevention": [
+      "Crop rotation with non-cereal crops",
+      "Grow tolerant varieties",
+      "Balanced nitrogen",
+      "Timely sowing"
+     ],
+     "warning": "Do not overuse pesticides or mix two chemicals in one tank unless the label allows it. Overuse causes resistance, harms soil, bees and your health. Use only the recommended dose."
+    },
+    "hi": {
+     "name": "गेहूँ का सेप्टोरिया पत्ती धब्बा",
+     "about": "यह फफूंद रोग संक्रमित ठूँठ से बारिश की छींटों द्वारा फैलता है; ठंडे, गीले मौसम में बढ़ता है।",
+     "symptoms": [
+      "निचली पत्तियों पर पीले धब्बे जो लंबे भूरे धब्बों में बदलते हैं",
+      "धब्बों के अंदर छोटे काले बिंदु",
+      "गीले मौसम में रोग ऊपर ध्वज पत्ती तक पहुँचता है"
+     ],
+     "chemical": {
+      "product": "Propiconazole 25% EC (प्रोपिकोनाज़ोल)",
+      "dosage": "1 मि.ली. प्रति लीटर (200 मि.ली. प्रति एकड़)",
+      "timing": "धब्बे ऊपरी पत्तियों तक पहुँचने पर छिड़काव; गीला मौसम रहे तो 15 दिन बाद दोहराएँ। विकल्प: टेबुकोनाज़ोल 25.9% EC 1 मि.ली./लीटर",
+      "safety": [
+       "छिड़काव करते समय दस्ताने, मास्क और पूरी बाँह के कपड़े पहनें",
+       "सुबह या शाम को छिड़काव करें, हवा के विपरीत नहीं",
+       "बच्चों, पशुओं और पानी के स्रोतों से दूर रखें",
+       "लेबल पर लिखी कटाई से पहले की प्रतीक्षा अवधि का पालन करें"
+      ]
+     },
+     "organic": [
+      "संक्रमित ठूँठ हटाकर जलाएँ",
+      "घनी बुवाई न करें"
+     ],
+     "prevention": [
+      "गैर-अनाज फसलों के साथ फसल चक्र",
+      "सहनशील किस्में लगाएँ",
+      "संतुलित नाइट्रोजन",
+      "समय पर बुवाई"
+     ],
+     "warning": "कीटनाशक का ज़्यादा उपयोग न करें और लेबल की अनुमति के बिना दो रसायन एक टंकी में न मिलाएँ। ज़्यादा उपयोग से प्रतिरोध बढ़ता है, मिट्टी, मधुमक्खियों और आपके स्वास्थ्य को नुकसान होता है। केवल सुझाई गई मात्रा का उपयोग करें।"
+    },
+    "mr": {
+     "name": "गव्हावरील सेप्टोरिया पानांवरील डाग",
+     "about": "हा बुरशीजन्य रोग रोगट धसकटांवरून पावसाच्या शिंतोड्यांनी पसरतो; थंड, ओल्या हवामानात वाढतो.",
+     "symptoms": [
+      "खालच्या पानांवर पिवळे चट्टे जे लांब तपकिरी डागांत बदलतात",
+      "डागांमध्ये लहान काळे ठिपके",
+      "ओल्या हवामानात रोग वरच्या ध्वज पानापर्यंत पोहोचतो"
+     ],
+     "chemical": {
+      "product": "Propiconazole 25% EC (प्रोपिकोनाझोल)",
+      "dosage": "1 मि.ली. प्रति लिटर (200 मि.ली. प्रति एकर)",
+      "timing": "डाग वरच्या पानांपर्यंत पोहोचताच फवारणी; ओले हवामान राहिल्यास 15 दिवसांनी पुन्हा. पर्याय: टेब्युकोनाझोल 25.9% EC 1 मि.ली./लिटर",
+      "safety": [
+       "फवारणी करताना हातमोजे, मास्क आणि पूर्ण बाह्यांचे कपडे घाला",
+       "सकाळी किंवा संध्याकाळी फवारणी करा, वाऱ्याच्या विरुद्ध दिशेने नाही",
+       "मुले, जनावरे आणि पाण्याच्या स्रोतांपासून दूर ठेवा",
+       "लेबलवर दिलेला काढणीपूर्व प्रतीक्षा कालावधी पाळा"
+      ]
+     },
+     "organic": [
+      "रोगट धसकटे काढून जाळा",
+      "दाट पेरणी टाळा"
+     ],
+     "prevention": [
+      "तृणधान्येतर पिकांसोबत फेरपालट",
+      "सहनशील जाती लावा",
+      "संतुलित नत्र",
+      "वेळेवर पेरणी"
+     ],
+     "warning": "कीटकनाशकांचा अतिवापर करू नका आणि लेबलवर परवानगी नसल्यास दोन रसायने एका टाकीत मिसळू नका. अतिवापरामुळे प्रतिकारशक्ती वाढते, माती, मधमाश्या आणि तुमच्या आरोग्याला हानी होते. फक्त शिफारस केलेले प्रमाण वापरा."
+    }
+   }
+  },
+  {
+   "id": "cotton_alternaria",
+   "crop": "cotton",
+   "kind": "fungal",
+   "pathogen": "Alternaria macrospora",
+   "symptom_tags": [
+    "brown_spots",
+    "concentric_rings",
+    "yellowing"
+   ],
+   "source": "ICAR-CICR Nagpur",
+   "region_tips": [],
+   "content": {
+    "en": {
+     "name": "Cotton Alternaria Leaf Spot",
+     "about": "A fungal leaf spot that increases in humid weather and on potash-deficient or stressed plants.",
+     "symptoms": [
+      "Small brown round spots with rings on older leaves",
+      "Spots join, leaves turn yellow and drop early",
+      "Spots may also appear on bracts and bolls"
+     ],
+     "chemical": {
+      "product": "Mancozeb 75% WP",
+      "dosage": "2.5 g per litre (500 g per acre)",
+      "timing": "Spray at first spots; repeat after 15 days. Alternative: Propiconazole 25% EC 1 ml/L",
+      "safety": [
+       "Wear gloves, mask and full sleeves while spraying",
+       "Spray in the morning or evening, not against the wind",
+       "Keep away from children, animals and water sources",
+       "Follow the waiting period before harvest written on the label"
+      ]
+     },
+     "organic": [
+      "Remove and destroy fallen infected leaves",
+      "Spray Pseudomonas fluorescens 10 g/L"
+     ],
+     "prevention": [
+      "Apply potash as per soil test",
+      "Avoid water stress",
+      "Destroy crop residue after harvest"
+     ],
+     "warning": "Do not overuse pesticides or mix two chemicals in one tank unless the label allows it. Overuse causes resistance, harms soil, bees and your health. Use only the recommended dose."
+    },
+    "hi": {
+     "name": "कपास का अल्टरनेरिया पत्ती धब्बा",
+     "about": "यह फफूंद पत्ती धब्बा रोग नम मौसम में और पोटाश की कमी वाले या कमज़ोर पौधों पर बढ़ता है।",
+     "symptoms": [
+      "पुरानी पत्तियों पर छल्लों वाले छोटे भूरे गोल धब्बे",
+      "धब्बे मिलकर पत्तियाँ पीली होकर जल्दी गिरती हैं",
+      "सहपत्रों और टिंडों पर भी धब्बे"
+     ],
+     "chemical": {
+      "product": "Mancozeb 75% WP (मैंकोज़ेब)",
+      "dosage": "2.5 ग्राम प्रति लीटर (500 ग्राम प्रति एकड़)",
+      "timing": "पहले धब्बे पर छिड़काव; 15 दिन बाद दोहराएँ। विकल्प: प्रोपिकोनाज़ोल 25% EC 1 मि.ली./लीटर",
+      "safety": [
+       "छिड़काव करते समय दस्ताने, मास्क और पूरी बाँह के कपड़े पहनें",
+       "सुबह या शाम को छिड़काव करें, हवा के विपरीत नहीं",
+       "बच्चों, पशुओं और पानी के स्रोतों से दूर रखें",
+       "लेबल पर लिखी कटाई से पहले की प्रतीक्षा अवधि का पालन करें"
+      ]
+     },
+     "organic": [
+      "गिरी संक्रमित पत्तियाँ हटाकर नष्ट करें",
+      "स्यूडोमोनास 10 ग्राम/लीटर छिड़कें"
+     ],
+     "prevention": [
+      "मिट्टी जाँच अनुसार पोटाश दें",
+      "पानी की कमी न होने दें",
+      "कटाई के बाद फसल अवशेष नष्ट करें"
+     ],
+     "warning": "कीटनाशक का ज़्यादा उपयोग न करें और लेबल की अनुमति के बिना दो रसायन एक टंकी में न मिलाएँ। ज़्यादा उपयोग से प्रतिरोध बढ़ता है, मिट्टी, मधुमक्खियों और आपके स्वास्थ्य को नुकसान होता है। केवल सुझाई गई मात्रा का उपयोग करें।"
+    },
+    "mr": {
+     "name": "कापसावरील अल्टरनेरिया पानठिपके",
+     "about": "हा बुरशीजन्य पानठिपका दमट हवामानात आणि पोटॅशची कमतरता असलेल्या किंवा कमकुवत झाडांवर वाढतो.",
+     "symptoms": [
+      "जुन्या पानांवर कड्यांचे लहान तपकिरी गोल ठिपके",
+      "ठिपके एकत्र येऊन पाने पिवळी पडून लवकर गळतात",
+      "पुष्पकोश व बोंडांवरही ठिपके"
+     ],
+     "chemical": {
+      "product": "Mancozeb 75% WP (मॅन्कोझेब)",
+      "dosage": "2.5 ग्रॅम प्रति लिटर (500 ग्रॅम प्रति एकर)",
+      "timing": "पहिले ठिपके दिसताच फवारणी; 15 दिवसांनी पुन्हा. पर्याय: प्रोपिकोनाझोल 25% EC 1 मि.ली./लिटर",
+      "safety": [
+       "फवारणी करताना हातमोजे, मास्क आणि पूर्ण बाह्यांचे कपडे घाला",
+       "सकाळी किंवा संध्याकाळी फवारणी करा, वाऱ्याच्या विरुद्ध दिशेने नाही",
+       "मुले, जनावरे आणि पाण्याच्या स्रोतांपासून दूर ठेवा",
+       "लेबलवर दिलेला काढणीपूर्व प्रतीक्षा कालावधी पाळा"
+      ]
+     },
+     "organic": [
+      "गळालेली रोगट पाने गोळा करून नष्ट करा",
+      "स्युडोमोनास 10 ग्रॅम/लिटर फवारा"
+     ],
+     "prevention": [
+      "माती परीक्षणानुसार पोटॅश द्या",
+      "पाण्याचा ताण टाळा",
+      "काढणीनंतर पीक अवशेष नष्ट करा"
+     ],
+     "warning": "कीटकनाशकांचा अतिवापर करू नका आणि लेबलवर परवानगी नसल्यास दोन रसायने एका टाकीत मिसळू नका. अतिवापरामुळे प्रतिकारशक्ती वाढते, माती, मधमाश्या आणि तुमच्या आरोग्याला हानी होते. फक्त शिफारस केलेले प्रमाण वापरा."
+    }
+   }
+  },
+  {
+   "id": "cotton_wilt",
+   "crop": "cotton",
+   "kind": "fungal",
+   "pathogen": "Fusarium oxysporum f. sp. vasinfectum / Verticillium dahliae (soil-borne)",
+   "symptom_tags": [
+    "wilting",
+    "yellowing",
+    "stunted"
+   ],
+   "source": "ICAR-CICR Nagpur",
+   "region_tips": [],
+   "content": {
+    "en": {
+     "name": "Cotton Wilt (Fusarium / Verticillium)",
+     "about": "Soil-borne fungi block the water-carrying tissue of the plant. Once a plant wilts it cannot be cured; protect the rest of the field and the next crop.",
+     "symptoms": [
+      "Leaves turn yellow between veins and droop; lower leaves first",
+      "Whole plant wilts and dries; stunted growth",
+      "Brown or black streaks inside the stem when cut"
+     ],
+     "chemical": {
+      "product": "Carbendazim 50% WP (soil drench around affected and nearby plants)",
+      "dosage": "1 g per litre, pour 100–200 ml at the root zone of each plant",
+      "timing": "Drench at first wilting in patches; seed treatment with Carbendazim 2 g/kg seed before sowing",
+      "safety": [
+       "Wear gloves, mask and full sleeves while spraying",
+       "Spray in the morning or evening, not against the wind",
+       "Keep away from children, animals and water sources",
+       "Follow the waiting period before harvest written on the label"
+      ]
+     },
+     "organic": [
+      "Seed treatment with Trichoderma viride 4 g/kg seed",
+      "Apply 2 kg Trichoderma mixed in 100 kg FYM per acre before sowing",
+      "Uproot and burn wilted plants"
+     ],
+     "prevention": [
+      "Grow wilt-tolerant varieties (desi cotton is resistant to Fusarium wilt)",
+      "Crop rotation with cereals for 2–3 years",
+      "Avoid waterlogging",
+      "Balanced NPK with potash"
+     ],
+     "warning": "Do not overuse pesticides or mix two chemicals in one tank unless the label allows it. Overuse causes resistance, harms soil, bees and your health. Use only the recommended dose."
+    },
+    "hi": {
+     "name": "कपास का उकठा रोग (फ्यूज़ेरियम / वर्टिसिलियम)",
+     "about": "मिट्टी में रहने वाली फफूंद पौधे की पानी ले जाने वाली नलिकाएँ बंद कर देती है। मुरझाया पौधा ठीक नहीं होता; बाकी खेत और अगली फसल को बचाएँ।",
+     "symptoms": [
+      "नसों के बीच पत्तियाँ पीली होकर लटकती हैं; पहले निचली पत्तियाँ",
+      "पूरा पौधा मुरझाकर सूख जाता है; बढ़वार रुकती है",
+      "तना काटने पर अंदर भूरी या काली धारियाँ"
+     ],
+     "chemical": {
+      "product": "Carbendazim 50% WP (कार्बेन्डाज़िम - प्रभावित व आसपास के पौधों की जड़ में)",
+      "dosage": "1 ग्राम प्रति लीटर, हर पौधे की जड़ में 100–200 मि.ली. डालें",
+      "timing": "पहली बार उकठा दिखने पर जड़ में डालें; बुवाई से पहले कार्बेन्डाज़िम 2 ग्राम/किलो बीज से बीज उपचार",
+      "safety": [
+       "छिड़काव करते समय दस्ताने, मास्क और पूरी बाँह के कपड़े पहनें",
+       "सुबह या शाम को छिड़काव करें, हवा के विपरीत नहीं",
+       "बच्चों, पशुओं और पानी के स्रोतों से दूर रखें",
+       "लेबल पर लिखी कटाई से पहले की प्रतीक्षा अवधि का पालन करें"
+      ]
+     },
+     "organic": [
+      "ट्राइकोडर्मा विरिडी 4 ग्राम/किलो बीज से बीज उपचार",
+      "बुवाई से पहले 2 किलो ट्राइकोडर्मा 100 किलो गोबर खाद में मिलाकर प्रति एकड़ डालें",
+      "मुरझाए पौधे उखाड़कर जलाएँ"
+     ],
+     "prevention": [
+      "उकठा-सहनशील किस्में लगाएँ (देसी कपास फ्यूज़ेरियम उकठा प्रतिरोधी)",
+      "2–3 साल अनाज फसलों के साथ फसल चक्र",
+      "जलभराव न होने दें",
+      "पोटाश सहित संतुलित NPK"
+     ],
+     "warning": "कीटनाशक का ज़्यादा उपयोग न करें और लेबल की अनुमति के बिना दो रसायन एक टंकी में न मिलाएँ। ज़्यादा उपयोग से प्रतिरोध बढ़ता है, मिट्टी, मधुमक्खियों और आपके स्वास्थ्य को नुकसान होता है। केवल सुझाई गई मात्रा का उपयोग करें।"
+    },
+    "mr": {
+     "name": "कापसावरील मर रोग (फ्युजेरियम / व्हर्टिसिलियम)",
+     "about": "जमिनीतील बुरशी झाडाच्या पाणी वाहणाऱ्या नलिका बंद करते. मलूल झाड बरे होत नाही; उरलेले शेत व पुढील पीक वाचवा.",
+     "symptoms": [
+      "शिरांमधील पाने पिवळी पडून लोंबतात; आधी खालची पाने",
+      "संपूर्ण झाड मलूल होऊन वाळते; वाढ खुंटते",
+      "खोड कापल्यास आत तपकिरी किंवा काळ्या रेषा"
+     ],
+     "chemical": {
+      "product": "Carbendazim 50% WP (कार्बेन्डाझिम - बाधित व आजूबाजूच्या झाडांच्या मुळांशी)",
+      "dosage": "1 ग्रॅम प्रति लिटर, प्रत्येक झाडाच्या मुळाशी 100–200 मि.ली. ओता",
+      "timing": "पहिल्यांदा मर दिसताच मुळाशी ओता; पेरणीपूर्वी कार्बेन्डाझिम 2 ग्रॅम/किलो बीजप्रक्रिया",
+      "safety": [
+       "फवारणी करताना हातमोजे, मास्क आणि पूर्ण बाह्यांचे कपडे घाला",
+       "सकाळी किंवा संध्याकाळी फवारणी करा, वाऱ्याच्या विरुद्ध दिशेने नाही",
+       "मुले, जनावरे आणि पाण्याच्या स्रोतांपासून दूर ठेवा",
+       "लेबलवर दिलेला काढणीपूर्व प्रतीक्षा कालावधी पाळा"
+      ]
+     },
+     "organic": [
+      "ट्रायकोडर्मा 4 ग्रॅम/किलो बीजप्रक्रिया",
+      "पेरणीपूर्वी 2 किलो ट्रायकोडर्मा 100 किलो शेणखतात मिसळून एकरी द्या",
+      "मलूल झाडे उपटून जाळा"
+     ],
+     "prevention": [
+      "मर-सहनशील जाती लावा (देशी कापूस फ्युजेरियम मरला प्रतिकारक)",
+      "2–3 वर्षे तृणधान्यांसोबत फेरपालट",
+      "पाणी साचू देऊ नका",
+      "पोटॅशसह संतुलित NPK"
+     ],
+     "warning": "कीटकनाशकांचा अतिवापर करू नका आणि लेबलवर परवानगी नसल्यास दोन रसायने एका टाकीत मिसळू नका. अतिवापरामुळे प्रतिकारशक्ती वाढते, माती, मधमाश्या आणि तुमच्या आरोग्याला हानी होते. फक्त शिफारस केलेले प्रमाण वापरा."
+    }
+   }
+  },
+  {
    "id": "healthy",
    "crop": "any",
    "kind": "healthy",
