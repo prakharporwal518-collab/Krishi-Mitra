@@ -2,6 +2,8 @@
 
 **A multilingual crop disease diagnosis and treatment assistant for Indian farmers.**
 
+🌐 **Live demo: [krishi-mitra-ol3d.netlify.app](https://krishi-mitra-ol3d.netlify.app)**. It works on phones too, with no install or sign-up.
+
 Farmers often can't identify crop diseases with confidence. They depend on neighbours or pesticide sellers, which leads to inconsistent advice and pesticide misuse. Most information is also not in their language or specific to their region. Krishi Mitra identifies the disease from a **leaf photo** or from **symptoms (tapped or spoken)**. It then gives **crop-specific, region-aware treatment advice in the farmer's language**, read aloud if needed, and every recommendation cites ICAR / State Agricultural University guidelines.
 
 ## ✨ Features
@@ -66,7 +68,9 @@ By default the frontend runs **fully in the browser**: the model is exported to 
 
 ## ☁️ Deploy (Netlify)
 
-`netlify.toml` builds `frontend/` as a static site, with the in-browser model and no server. Connect the repo in Netlify, or run `netlify deploy --build --prod` from the repo root.
+The app is live at **https://krishi-mitra-ol3d.netlify.app**. The repo is connected to Netlify, so every push to `main` deploys automatically, and pull requests get a preview link.
+
+`netlify.toml` builds `frontend/` as a static site, with the in-browser model and no server. To deploy your own copy, connect the repo in Netlify, or run `netlify deploy --build --prod` from the repo root.
 
 > Camera capture and voice input need HTTPS or `localhost`. For phone testing, use a tunnel such as `ngrok http 5173`.
 
