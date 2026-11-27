@@ -185,7 +185,7 @@ function Help({ t }) {
 function BottomNav({ t, current, go }) {
   const items = [['home', '🏠'], ['scan', '📷'], ['symptoms', '📝'], ['history', '🕘'], ['help', '📞']]
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-10 border-t border-leaf-100 bg-white/95 backdrop-blur">
+    <nav className="bottom-nav fixed inset-x-0 bottom-0 z-10 border-t border-leaf-100 bg-white/95 backdrop-blur">
       <div className="mx-auto grid max-w-xl grid-cols-5">
         {items.map(([k, icon]) => (
           <button key={k} onClick={() => go(k)} className={`flex flex-col items-center py-2 text-xs font-bold ${current === k ? 'text-leaf-700' : 'text-gray-500'}`}>
