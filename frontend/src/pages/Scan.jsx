@@ -11,6 +11,10 @@ const SAMPLES = [
   { file: 'tomato_healthy.jpg', icon: '🌱' },
 ]
 
+// Below MIN_CONFIDENCE (60%) the result is uncertain. Between POSSIBLE_MIN and 60% we still show the
+// likely disease and its treatment, clearly marked as unconfirmed; below POSSIBLE_MIN we only ask for a retake.
+const POSSIBLE_MIN = 35
+
 export default function Scan({ t, lang, go }) {
   const camRef = useRef()
   const fileRef = useRef()
@@ -39,7 +43,7 @@ export default function Scan({ t, lang, go }) {
     try {
       const r = await api.predict(file, lang)
       setResult(r)
-      if (!r.low_confidence) addHistory({ via: 'photo', disease_id: r.disease_id, disease: r.disease, crop: r.crop, crop_name: r.crop_name, confidence: r.confidence })
+      if (!r.low_confidence || r.confidence >= POSSIBLE_MIN) addHistory({ via: 'photo', disease_id: r.disease_id, disease: r.disease, crop: r.crop, crop_name: r.crop_name, confidence: r.confidence })
     } catch (e) { setError(e.message) } finally { setLoading(false) }
   }
 
@@ -89,12 +93,26 @@ export default function Scan({ t, lang, go }) {
 
       <ErrorBox t={t} error={error} onRetry={reset} />
 
-      {result && result.low_confidence && (
+      {result && result.low_confidence && result.confidence >= POSSIBLE_MIN && (
+        <div className="card mt-4 border-2 border-yellow-300 bg-yellow-50">
+          <p className="text-sm font-bold uppercase tracking-wide text-yellow-800">⚠️ {t('possibleTitle')}</p>
+          <p className="mt-1 text-2xl font-extrabold text-red-700">{result.is_healthy ? t('healthyTitle') : result.disease}</p>
+          <p className="text-gray-700">{t('crop')}: <b>{result.crop_name}</b> · {t('confidence')}: <b>{Math.round(result.confidence)}%</b></p>
+          <div className="mt-2"><ConfidenceBar value={result.confidence} /></div>
+          <p className="mt-3 text-yellow-900">{t('possibleMsg')}</p>
+          <div className="mt-4 grid gap-3">
+            <ReadAloud t={t} text={`${t('possibleTitle')}: ${result.disease}. ${t('possibleMsg')}`} lang={lang} />
+            <button className="btn-primary text-xl" onClick={() => go('disease', { id: result.disease_id, crop: result.crop })}>💊 {t('seeTreatment')} →</button>
+            <button className="btn-light" onClick={reset}>📸 {t('retake')}</button>
+            <button className="btn-light" onClick={() => go('symptoms')}>📝 {t('trySymptoms')}</button>
+          </div>
+        </div>
+      )}
+
+      {result && result.low_confidence && result.confidence < POSSIBLE_MIN && (
         <div className="card mt-4 border-2 border-yellow-300 bg-yellow-50">
           <p className="text-xl font-extrabold text-yellow-800">📷 {t('lowConfTitle')}</p>
           <p className="mt-2 text-yellow-900">{t('lowConfMsg')}</p>
-          <p className="mt-3 text-sm text-gray-700">{result.crop_name} – {result.disease} ({Math.round(result.confidence)}%)</p>
-          <div className="mt-2"><ConfidenceBar value={result.confidence} /></div>
           <p className="mt-3 rounded-xl bg-white/70 p-2 text-sm text-gray-700">🌾 {t('supportedCrops')}</p>
           <div className="mt-4 grid gap-3">
             <button className="btn-primary" onClick={reset}>📸 {t('retake')}</button>
