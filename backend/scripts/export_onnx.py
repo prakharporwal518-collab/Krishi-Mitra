@@ -1,6 +1,6 @@
 """Export the Hugging Face PlantVillage model to ONNX for in-browser inference (Netlify deploy).
 Run:  python scripts/export_onnx.py [--weights finetuned/]   (needs: pip install onnx)
-Writes frontend/public/model/plant_disease.onnx and labels.json
+Writes frontend/src/model/plant_disease.onnx and labels.json (bundled by Vite with content-hashed names)
 """
 import argparse
 import json
@@ -12,7 +12,7 @@ import torch  # noqa: E402
 from transformers import AutoModelForImageClassification  # noqa: E402
 
 MODEL_ID = "linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification"
-OUT = Path(__file__).resolve().parents[2] / "frontend" / "public" / "model"
+OUT = Path(__file__).resolve().parents[2] / "frontend" / "src" / "model"
 OUT.mkdir(parents=True, exist_ok=True)
 
 
