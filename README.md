@@ -19,7 +19,16 @@ Farmers often can't identify crop diseases with confidence. They depend on neigh
 
 ## 🧠 How it works
 
-- **Disease detection:** [`linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification`](https://huggingface.co/linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification) is a MobileNetV2 model trained on PlantVillage (38 classes), loaded with 🤗 `transformers` on CPU. If it can't be loaded, the backend falls back to a vision LLM (Claude) when `ANTHROPIC_API_KEY` is set in `.env`.
+- **Disease detection:** MobileNetV2 with 38 PlantVillage classes. The base model is [`linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification`](https://huggingface.co/linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification), which we **fine-tuned on real field photos** ([PlantDoc](https://huggingface.co/datasets/agyaatcoder/PlantDoc)) because the base model was trained only on lab photos (`backend/scripts/finetune_fieldphotos.py`, weights in `backend/models/krishi-mobilenetv2-field`). Each prediction averages 3 views of the photo (test-time augmentation). If the model can't be loaded, the backend falls back to a vision LLM (Claude) when `ANTHROPIC_API_KEY` is set.
+
+  | Measured on unseen photos | Base model | Krishi Mitra model |
+  |---|---|---|
+  | Field photos (PlantDoc test, 236): correct disease | 31% | **67%** |
+  | Field photos: correct crop | 51% | **84%** |
+  | Field photos: correct when ≥60% confident | 41% | **85%** |
+  | Lab photos (PlantVillage held-out) | 94% | **97%** |
+
+  Below 60% confidence the app asks for a retake, or suggests the symptom checker instead.
 - **Knowledge base:** `backend/data/diseases.json` holds **36 diseases + a healthy entry** across tomato, potato, rice, wheat, cotton, maize and chilli, plus the PlantVillage fruit crops. Every disease has full **English, Hindi and Marathi** content. All 38 model classes map to an entry (`class_map.json`). The JSON is generated from `backend/scripts/build_kb.py`.
 - **Translation:** the UI is pre-translated into all 6 languages. Disease advice is pre-translated into en/hi/mr. For te/ta/bn the backend uses Google Translate if `GOOGLE_TRANSLATE_API_KEY` is set, and falls back to English otherwise (the UI says so).
 - **Symptom matching:** cosine similarity between the selected or spoken symptoms and each disease's symptom tags. Voice text is matched against keywords in 6 languages.
@@ -38,7 +47,7 @@ Requires Python 3.10+ and Node 18+.
 cd backend && python -m venv .venv && . .venv/bin/activate && pip install torch --index-url https://download.pytorch.org/whl/cpu && pip install -r requirements.txt && cp -n .env.example .env; uvicorn app.main:app --reload --port 8000
 ```
 
-**Frontend** (http://localhost:5173; `/api` is proxied to the backend):
+**Frontend** (http://localhost:5173):
 
 ```bash
 cd frontend && npm install && npm run dev
@@ -46,7 +55,13 @@ cd frontend && npm install && npm run dev
 
 On Windows, activate the venv with `.venv\Scripts\activate` instead of `. .venv/bin/activate`.
 
-**Single-port demo:** run `npm run build` in `frontend/`. The backend then serves the built app at http://localhost:8000.
+By default the frontend runs **fully in the browser**: the model is exported to ONNX (`backend/scripts/export_onnx.py` → `frontend/public/model/`) and runs with ONNX Runtime Web, and symptom matching and knowledge-base lookup happen in JS (`frontend/src/local.js`). No backend is needed. To use the FastAPI backend instead, run `npm run dev:server`, or set `VITE_API_MODE=server`.
+
+**Single-port demo:** run `VITE_API_MODE=server npm run build` in `frontend/`. The backend then serves the built app at http://localhost:8000.
+
+## ☁️ Deploy (Netlify)
+
+`netlify.toml` builds `frontend/` as a static site, with the in-browser model and no server. Connect the repo in Netlify, or run `netlify deploy --build --prod` from the repo root.
 
 > Camera capture and voice input need HTTPS or `localhost`. For phone testing, use a tunnel such as `ngrok http 5173`.
 

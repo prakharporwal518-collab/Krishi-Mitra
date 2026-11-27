@@ -10,7 +10,7 @@ async function req(path, opts) {
   return data
 }
 
-export const api = {
+const serverApi = {
   crops: (lang) => req(`/api/crops?lang=${lang}`),
   symptomList: (lang, crop) => req(`/api/symptom-list?lang=${lang}&crop=${crop}`),
   predict: (file, lang) => {
@@ -27,3 +27,9 @@ export const api = {
     return req(`/api/disease/${id}?${p}`)
   },
 }
+
+// VITE_API_MODE=server uses the FastAPI backend; anything else runs fully in the browser.
+const local = () => import('./local.js').then((m) => m.localApi) // lazy: loads ONNX Runtime only when needed
+export const api = import.meta.env.VITE_API_MODE === 'server'
+  ? serverApi
+  : Object.fromEntries(Object.keys(serverApi).map((k) => [k, (...a) => local().then((l) => l[k](...a))]))
