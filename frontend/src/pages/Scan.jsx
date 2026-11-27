@@ -6,6 +6,9 @@ import { ConfidenceBar, ErrorBox, PageTitle, ReadAloud, Spinner } from '../compo
 const SAMPLES = [
   { file: 'tomato_early_blight.jpg', icon: '🍅' },
   { file: 'potato_late_blight.jpg', icon: '🥔' },
+  { file: 'rice_blast.jpg', icon: '🌾' },
+  { file: 'wheat_yellow_rust.jpg', icon: '🌿' },
+  { file: 'cotton_wilt.jpg', icon: '☁️' },
   { file: 'tomato_leaf_curl.jpg', icon: '🌀' },
   { file: 'maize_common_rust.jpg', icon: '🌽' },
   { file: 'tomato_healthy.jpg', icon: '🌱' },
@@ -43,7 +46,7 @@ export default function Scan({ t, lang, go }) {
     try {
       const r = await api.predict(file, lang)
       setResult(r)
-      if (!r.low_confidence || r.confidence >= POSSIBLE_MIN) addHistory({ via: 'photo', disease_id: r.disease_id, disease: r.disease, crop: r.crop, crop_name: r.crop_name, confidence: r.confidence })
+      if (!r.not_leaf && (!r.low_confidence || r.confidence >= POSSIBLE_MIN)) addHistory({ via: 'photo', disease_id: r.disease_id, disease: r.disease, crop: r.crop, crop_name: r.crop_name, confidence: r.confidence })
     } catch (e) { setError(e.message) } finally { setLoading(false) }
   }
 
@@ -66,7 +69,7 @@ export default function Scan({ t, lang, go }) {
           <p className="mt-3 text-center text-sm text-gray-600">💡 {t('photoTips')}</p>
           <div className="card mt-5">
             <p className="mb-3 font-semibold text-leaf-800">{t('trySample')}</p>
-            <div className="grid grid-cols-5 gap-2">
+            <div className="grid grid-cols-4 gap-2">
               {SAMPLES.map((s) => (
                 <button key={s.file} onClick={() => loadSample(s.file)} className="relative overflow-hidden rounded-2xl ring-2 ring-leaf-200 active:scale-95">
                   <img src={`/samples/${s.file}`} alt={s.file} className="aspect-square w-full object-cover" />
@@ -93,7 +96,7 @@ export default function Scan({ t, lang, go }) {
 
       <ErrorBox t={t} error={error} onRetry={reset} />
 
-      {result && result.low_confidence && result.confidence >= POSSIBLE_MIN && (
+      {result && result.low_confidence && !result.not_leaf && result.confidence >= POSSIBLE_MIN && (
         <div className="card mt-4 border-2 border-yellow-300 bg-yellow-50">
           <p className="text-sm font-bold uppercase tracking-wide text-yellow-800">⚠️ {t('possibleTitle')}</p>
           <p className="mt-1 text-2xl font-extrabold text-red-700">{result.is_healthy ? t('healthyTitle') : result.disease}</p>
@@ -109,7 +112,7 @@ export default function Scan({ t, lang, go }) {
         </div>
       )}
 
-      {result && result.low_confidence && result.confidence < POSSIBLE_MIN && (
+      {result && result.low_confidence && (result.not_leaf || result.confidence < POSSIBLE_MIN) && (
         <div className="card mt-4 border-2 border-yellow-300 bg-yellow-50">
           <p className="text-xl font-extrabold text-yellow-800">📷 {t('lowConfTitle')}</p>
           <p className="mt-2 text-yellow-900">{t('lowConfMsg')}</p>

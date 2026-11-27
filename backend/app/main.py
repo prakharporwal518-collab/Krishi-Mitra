@@ -124,14 +124,16 @@ async def predict(file: UploadFile = File(...), lang: str = "en"):
     def enrich(label, score):
         m = CLASS_MAP.get(label, {"crop": "unknown", "disease_id": "healthy"})
         return {"label": label, "crop": m["crop"], "crop_name": crop_name(m["crop"], lang),
-                "disease_id": m["disease_id"], "disease": disease_name(m["disease_id"], lang),
+                "disease_id": m["disease_id"],
+                "disease": "Not a plant leaf" if m["disease_id"] == "invalid" else disease_name(m["disease_id"], lang),
                 "confidence": round(score * 100, 1)}
 
-    top = [enrich(l, s) for l, s in preds[:3]]
+    top = [enrich(l, s) for l, s in preds[:4]]
     best = top[0]
-    return {**best, "is_healthy": best["disease_id"] == "healthy",
-            "low_confidence": best["confidence"] < MIN_CONFIDENCE * 100,
-            "alternatives": top[1:], "engine": engine}
+    not_leaf = best["disease_id"] == "invalid"  # model's "Not a Plant Leaf" class
+    return {**best, "is_healthy": best["disease_id"] == "healthy", "not_leaf": not_leaf,
+            "low_confidence": not_leaf or best["confidence"] < MIN_CONFIDENCE * 100,
+            "alternatives": [x for x in top[1:] if x["disease_id"] != "invalid"][:2], "engine": engine}
 
 
 # ---------------- symptom matching ----------------

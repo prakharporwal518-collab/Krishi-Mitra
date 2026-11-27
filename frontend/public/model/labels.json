@@ -36,5 +36,21 @@
  "Tomato with Target Spot",
  "Tomato Yellow Leaf Curl Virus",
  "Tomato Mosaic Virus",
- "Healthy Tomato Plant"
+ "Healthy Tomato Plant",
+ "Rice with Bacterial Leaf Blight",
+ "Rice with Blast",
+ "Rice with Brown Spot",
+ "Rice Tungro Virus",
+ "Rice with Hispa",
+ "Healthy Rice Plant",
+ "Wheat with Yellow Rust",
+ "Wheat with Brown Rust",
+ "Wheat with Septoria",
+ "Healthy Wheat Plant",
+ "Cotton with Bacterial Blight",
+ "Cotton with Alternaria Leaf Spot",
+ "Cotton with Fusarium Wilt",
+ "Cotton with Verticillium Wilt",
+ "Healthy Cotton Plant",
+ "Not a Plant Leaf"
 ]

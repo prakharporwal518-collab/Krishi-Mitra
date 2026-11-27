@@ -1,21 +1,10 @@
 {
+ "pipeline": [
+  "stage 1: scripts/finetune_fieldphotos.py (PlantDoc field photos + PlantVillage replay)",
+  "stage 2: scripts/add_crops.py (adds rice, wheat, cotton and Not a Plant Leaf)"
+ ],
  "base_model": "linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification",
- "data": "PlantDoc train (field photos + leaf crops) + PlantVillage replay",
- "before": {
-  "plantdoc_test": {
-   "top1": 0.309,
-   "crop": 0.513,
-   "confident_share": 0.521,
-   "confident_precision": 0.407
-  },
-  "plantvillage_held": {
-   "top1": 0.939,
-   "crop": 0.982,
-   "confident_share": 0.968,
-   "confident_precision": 0.957
-  }
- },
- "after": {
+ "stage1": {
   "epoch": 6,
   "loss": 1.276,
   "plantdoc_val": {
@@ -35,6 +24,46 @@
    "crop": 0.987,
    "confident_share": 0.905,
    "confident_precision": 0.991
+  }
+ },
+ "final": {
+  "epoch": 5,
+  "loss": 1.229,
+  "new_crops_test": {
+   "top1": 0.888,
+   "crop": 0.986,
+   "confident_share": 0.799,
+   "confident_precision": 0.969
+  },
+  "plantdoc_test": {
+   "top1": 0.665,
+   "crop": 0.822,
+   "confident_share": 0.61,
+   "confident_precision": 0.812
+  },
+  "plantvillage_held": {
+   "top1": 0.953,
+   "crop": 0.987,
+   "confident_share": 0.908,
+   "confident_precision": 0.994
+  },
+  "new_crops_per_class": {
+   "Rice with Bacterial Leaf Blight": 0.99,
+   "Rice with Blast": 0.94,
+   "Rice with Brown Spot": 0.96,
+   "Rice Tungro Virus": 1.0,
+   "Rice with Hispa": 0.36,
+   "Healthy Rice Plant": 0.8,
+   "Wheat with Yellow Rust": 0.89,
+   "Wheat with Brown Rust": 0.91,
+   "Wheat with Septoria": 0.91,
+   "Healthy Wheat Plant": 0.9,
+   "Cotton with Bacterial Blight": 0.65,
+   "Cotton with Alternaria Leaf Spot": 0.85,
+   "Cotton with Fusarium Wilt": 0.97,
+   "Cotton with Verticillium Wilt": 0.98,
+   "Healthy Cotton Plant": 1.0,
+   "Not a Plant Leaf": 0.91
   }
  }
 }

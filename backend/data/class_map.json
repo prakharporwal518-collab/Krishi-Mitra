@@ -150,5 +150,69 @@
  "Healthy Tomato Plant": {
   "crop": "tomato",
   "disease_id": "healthy"
+ },
+ "Rice with Bacterial Leaf Blight": {
+  "crop": "rice",
+  "disease_id": "rice_bacterial_leaf_blight"
+ },
+ "Rice with Blast": {
+  "crop": "rice",
+  "disease_id": "rice_blast"
+ },
+ "Rice with Brown Spot": {
+  "crop": "rice",
+  "disease_id": "rice_brown_spot"
+ },
+ "Rice Tungro Virus": {
+  "crop": "rice",
+  "disease_id": "rice_tungro"
+ },
+ "Rice with Hispa": {
+  "crop": "rice",
+  "disease_id": "rice_hispa"
+ },
+ "Healthy Rice Plant": {
+  "crop": "rice",
+  "disease_id": "healthy"
+ },
+ "Wheat with Yellow Rust": {
+  "crop": "wheat",
+  "disease_id": "wheat_rust"
+ },
+ "Wheat with Brown Rust": {
+  "crop": "wheat",
+  "disease_id": "wheat_rust"
+ },
+ "Wheat with Septoria": {
+  "crop": "wheat",
+  "disease_id": "wheat_septoria"
+ },
+ "Healthy Wheat Plant": {
+  "crop": "wheat",
+  "disease_id": "healthy"
+ },
+ "Cotton with Bacterial Blight": {
+  "crop": "cotton",
+  "disease_id": "cotton_bacterial_blight"
+ },
+ "Cotton with Alternaria Leaf Spot": {
+  "crop": "cotton",
+  "disease_id": "cotton_alternaria"
+ },
+ "Cotton with Fusarium Wilt": {
+  "crop": "cotton",
+  "disease_id": "cotton_wilt"
+ },
+ "Cotton with Verticillium Wilt": {
+  "crop": "cotton",
+  "disease_id": "cotton_wilt"
+ },
+ "Healthy Cotton Plant": {
+  "crop": "cotton",
+  "disease_id": "healthy"
+ },
+ "Not a Plant Leaf": {
+  "crop": "unknown",
+  "disease_id": "invalid"
  }
 }
