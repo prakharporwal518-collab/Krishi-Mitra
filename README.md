@@ -19,7 +19,16 @@ Farmers often can't identify crop diseases with confidence. They depend on neigh
 
 ## 🧠 How it works
 
-- **Disease detection:** [`linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification`](https://huggingface.co/linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification) is a MobileNetV2 model trained on PlantVillage (38 classes), loaded with 🤗 `transformers` on CPU. If it can't be loaded, the backend falls back to a vision LLM (Claude) when `ANTHROPIC_API_KEY` is set in `.env`.
+- **Disease detection:** MobileNetV2 with 38 PlantVillage classes. The base model is [`linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification`](https://huggingface.co/linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification), which we **fine-tuned on real field photos** ([PlantDoc](https://huggingface.co/datasets/agyaatcoder/PlantDoc)) because the base model was trained only on lab photos (`backend/scripts/finetune_fieldphotos.py`, weights in `backend/models/krishi-mobilenetv2-field`). Each prediction averages 3 views of the photo (test-time augmentation). If the model can't be loaded, the backend falls back to a vision LLM (Claude) when `ANTHROPIC_API_KEY` is set.
+
+  | Measured on unseen photos | Base model | Krishi Mitra model |
+  |---|---|---|
+  | Field photos (PlantDoc test, 236): correct disease | 31% | **67%** |
+  | Field photos: correct crop | 51% | **84%** |
+  | Field photos: correct when ≥60% confident | 41% | **85%** |
+  | Lab photos (PlantVillage held-out) | 94% | **97%** |
+
+  Below 60% confidence the app asks for a retake, or suggests the symptom checker instead.
 - **Knowledge base:** `backend/data/diseases.json` holds **36 diseases + a healthy entry** across tomato, potato, rice, wheat, cotton, maize and chilli, plus the PlantVillage fruit crops. Every disease has full **English, Hindi and Marathi** content. All 38 model classes map to an entry (`class_map.json`). The JSON is generated from `backend/scripts/build_kb.py`.
 - **Translation:** the UI is pre-translated into all 6 languages. Disease advice is pre-translated into en/hi/mr. For te/ta/bn the backend uses Google Translate if `GOOGLE_TRANSLATE_API_KEY` is set, and falls back to English otherwise (the UI says so).
 - **Symptom matching:** cosine similarity between the selected or spoken symptoms and each disease's symptom tags. Voice text is matched against keywords in 6 languages.

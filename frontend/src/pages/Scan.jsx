@@ -95,9 +95,10 @@ export default function Scan({ t, lang, go }) {
           <p className="mt-2 text-yellow-900">{t('lowConfMsg')}</p>
           <p className="mt-3 text-sm text-gray-700">{result.crop_name} – {result.disease} ({Math.round(result.confidence)}%)</p>
           <div className="mt-2"><ConfidenceBar value={result.confidence} /></div>
+          <p className="mt-3 rounded-xl bg-white/70 p-2 text-sm text-gray-700">🌾 {t('supportedCrops')}</p>
           <div className="mt-4 grid gap-3">
             <button className="btn-primary" onClick={reset}>📸 {t('retake')}</button>
-            <button className="btn-light" onClick={() => go('disease', { id: result.disease_id, crop: result.crop })}>{t('seeTreatment')} →</button>
+            <button className="btn-light" onClick={() => go('symptoms')}>📝 {t('trySymptoms')}</button>
           </div>
         </div>
       )}

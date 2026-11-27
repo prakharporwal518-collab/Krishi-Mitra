@@ -1,7 +1,8 @@
 """Export the Hugging Face PlantVillage model to ONNX for in-browser inference (Netlify deploy).
-Run:  python scripts/export_onnx.py   (needs: pip install onnx)
+Run:  python scripts/export_onnx.py [--weights finetuned/]   (needs: pip install onnx)
 Writes frontend/public/model/plant_disease.onnx and labels.json
 """
+import argparse
 import json
 import os
 from pathlib import Path
@@ -24,7 +25,9 @@ class Wrapper(torch.nn.Module):
         return self.m(pixel_values=pixel_values).logits.softmax(-1)
 
 
-model = AutoModelForImageClassification.from_pretrained(MODEL_ID).eval()
+ap = argparse.ArgumentParser()
+ap.add_argument("--weights", default=MODEL_ID, help="HF model id or local folder (e.g. finetuned/)")
+model = AutoModelForImageClassification.from_pretrained(ap.parse_args().weights).eval()
 torch.onnx.export(Wrapper(model), torch.zeros(1, 3, 224, 224), OUT / "plant_disease.onnx",
                   input_names=["pixel_values"], output_names=["probs"], opset_version=17, dynamo=False)
 labels = [model.config.id2label[i] for i in range(len(model.config.id2label))]

@@ -1,0 +1,40 @@
+{
+ "base_model": "linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification",
+ "data": "PlantDoc train (field photos + leaf crops) + PlantVillage replay",
+ "before": {
+  "plantdoc_test": {
+   "top1": 0.309,
+   "crop": 0.513,
+   "confident_share": 0.521,
+   "confident_precision": 0.407
+  },
+  "plantvillage_held": {
+   "top1": 0.939,
+   "crop": 0.982,
+   "confident_share": 0.968,
+   "confident_precision": 0.957
+  }
+ },
+ "after": {
+  "epoch": 6,
+  "loss": 1.276,
+  "plantdoc_val": {
+   "top1": 0.642,
+   "crop": 0.781,
+   "confident_share": 0.502,
+   "confident_precision": 0.85
+  },
+  "plantdoc_test": {
+   "top1": 0.665,
+   "crop": 0.822,
+   "confident_share": 0.525,
+   "confident_precision": 0.847
+  },
+  "plantvillage_held": {
+   "top1": 0.966,
+   "crop": 0.987,
+   "confident_share": 0.905,
+   "confident_precision": 0.991
+  }
+ }
+}

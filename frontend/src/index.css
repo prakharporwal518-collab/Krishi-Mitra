@@ -10,5 +10,7 @@ body { @apply bg-leaf-50 text-gray-900 antialiased; }
 .h2 { @apply text-xl font-extrabold text-leaf-900; }
 
 /* Netlify injects a "Powered by Netlify" badge at the bottom-right; keep the nav buttons above it */
-body:has(#nl-badge-frame) .bottom-nav { bottom: 64px; }
-body:has(#nl-badge-frame) #root > div { padding-bottom: 11rem; }
+@media (max-width: 1023px) {
+  body:has(#nl-badge-frame) .bottom-nav { bottom: 64px; }
+  body:has(#nl-badge-frame) #root > div { padding-bottom: 11rem; }
+}

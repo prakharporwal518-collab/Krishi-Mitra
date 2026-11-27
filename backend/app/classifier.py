@@ -1,6 +1,8 @@
 """Plant disease classifier.
 
-Primary: Hugging Face MobileNetV2 trained on PlantVillage (38 classes), loaded with `transformers`.
+Primary: MobileNetV2 (38 PlantVillage classes) fine-tuned on real field photos (PlantDoc), stored in
+backend/models/krishi-mobilenetv2-field (see scripts/finetune_fieldphotos.py). Falls back to the base
+Hugging Face model if that folder is missing. Predictions average 3 views (test-time augmentation).
 Fallback: a vision LLM (Anthropic Claude) asked to choose one of the same 38 labels.
 """
 import base64
@@ -16,7 +18,8 @@ import httpx
 os.environ.setdefault("HF_HUB_DISABLE_XET", "1")
 
 log = logging.getLogger("krishi.classifier")
-MODEL_ID = os.getenv("HF_MODEL_ID", "linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification")
+_LOCAL = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "models", "krishi-mobilenetv2-field")
+MODEL_ID = os.getenv("HF_MODEL_ID") or (_LOCAL if os.path.isdir(_LOCAL) else "linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification")
 
 _pipe = None
 _error = None
@@ -33,20 +36,26 @@ def _load():
         if _pipe is not None or _error is not None:
             return
         try:
+            import numpy as np
             import torch
+            from PIL import Image, ImageOps
             from transformers import AutoModelForImageClassification
-            try:  # transformers >= 5 (PIL backend, no torchvision needed)
-                from transformers import MobileNetV2ImageProcessorPil as MobileNetV2ImageProcessor
-            except ImportError:
-                from transformers import MobileNetV2ImageProcessor
             log.info("Loading model %s ...", MODEL_ID)
-            # Explicit processor class: the repo's config names a deprecated FeatureExtractor
-            proc = MobileNetV2ImageProcessor.from_pretrained(MODEL_ID)
             model = AutoModelForImageClassification.from_pretrained(MODEL_ID).eval()
 
+            def view(img, short):  # resize shortest edge, centre-crop 224, scale to [-1, 1] (same as the browser)
+                w, h = img.size
+                k = short / min(w, h)
+                img = img.resize((round(w * k), round(h * k)), Image.BILINEAR)
+                w, h = img.size
+                l, t = (w - 224) // 2, (h - 224) // 2
+                return img.crop((l, t, l + 224, t + 224))
+
             def run(img, top_k=5):
+                views = [view(img, 256), ImageOps.mirror(view(img, 256)), view(img, 300)]
+                x = torch.from_numpy(np.stack([(np.asarray(v, np.float32) / 127.5 - 1).transpose(2, 0, 1) for v in views]))
                 with torch.no_grad():
-                    probs = model(**proc(images=img, return_tensors="pt")).logits.softmax(-1)[0]
+                    probs = model(pixel_values=x).logits.softmax(-1).mean(0)
                 vals, idx = probs.topk(top_k)
                 return [{"label": model.config.id2label[int(i)], "score": float(v)} for v, i in zip(vals, idx)]
 
@@ -63,7 +72,7 @@ def warm_up_async():
 
 def status():
     if _pipe is not None:
-        return {"engine": "huggingface", "model": MODEL_ID, "ready": True}
+        return {"engine": "huggingface", "model": os.path.basename(MODEL_ID.rstrip("/")), "ready": True}
     return {"engine": "llm-fallback" if _error else "loading", "error": _error,
             "llm_configured": bool(os.getenv("ANTHROPIC_API_KEY")), "ready": _error is not None and bool(os.getenv("ANTHROPIC_API_KEY"))}
 
