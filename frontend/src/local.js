@@ -5,6 +5,10 @@ import kb from './data/diseases.json'
 import classMap from './data/class_map.json'
 import cropData from './data/crops.json'
 import symData from './data/symptoms.json'
+// Imported through Vite so the built file names contain a content hash: a new model always gets a new URL,
+// and browsers can never pair new code with a stale cached model.
+import modelUrl from './model/plant_disease.onnx?url'
+import labels from './model/labels.json'
 
 ort.env.wasm.numThreads = 1 // avoids needing cross-origin isolation headers
 
@@ -20,14 +24,9 @@ const symName = (id, lang) => SYM[id].names[lang] || SYM[id].names.en
 const uiTags = (d) => new Set(d.symptom_tags.map(alias).filter((t) => SYM[t]))
 const fail = (msg) => { throw new Error(msg) }
 
-let session, labels
+let session
 async function loadModel() {
-  if (!session) {
-    ;[session, labels] = await Promise.all([
-      ort.InferenceSession.create('/model/plant_disease.onnx', { executionProviders: ['wasm'] }),
-      fetch('/model/labels.json').then((r) => r.json()),
-    ])
-  }
+  if (!session) session = await ort.InferenceSession.create(modelUrl, { executionProviders: ['wasm'] })
   return session
 }
 

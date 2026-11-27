@@ -60,7 +60,7 @@ cd frontend && npm install && npm run dev
 
 On Windows, activate the venv with `.venv\Scripts\activate` instead of `. .venv/bin/activate`.
 
-By default the frontend runs **fully in the browser**: the model is exported to ONNX (`backend/scripts/export_onnx.py` → `frontend/public/model/`) and runs with ONNX Runtime Web, and symptom matching and knowledge-base lookup happen in JS (`frontend/src/local.js`). No backend is needed. To use the FastAPI backend instead, run `npm run dev:server`, or set `VITE_API_MODE=server`.
+By default the frontend runs **fully in the browser**: the model is exported to ONNX (`backend/scripts/export_onnx.py` → `frontend/src/model/`, bundled with content-hashed file names so browsers never use a stale model) and runs with ONNX Runtime Web, and symptom matching and knowledge-base lookup happen in JS (`frontend/src/local.js`). No backend is needed. To use the FastAPI backend instead, run `npm run dev:server`, or set `VITE_API_MODE=server`.
 
 **Single-port demo:** run `VITE_API_MODE=server npm run build` in `frontend/`. The backend then serves the built app at http://localhost:8000.
 
