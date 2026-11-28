@@ -2,7 +2,7 @@
 
 **A multilingual crop disease diagnosis and treatment assistant for Indian farmers.**
 
-🌐 **Live demo: [krishi-mitra-ol3d.netlify.app](https://krishi-mitra-ol3d.netlify.app)**. It works on phones too, with no install or sign-up, and keeps working offline after the first visit.
+🌐 **Live demo: [krishi-mitra-ol3d.netlify.app](https://krishi-mitra-ol3d.netlify.app)** · 📊 **Pitch deck: [PowerPoint](docs/pitch/Krishi_Mitra_Avishkaar_S4.pptx) / [PDF](docs/pitch/Krishi_Mitra_Avishkaar_S4.pdf)** (Team Codebreaker, Avishkaar Season 4). It works on phones too, with no install or sign-up, and keeps working offline after the first visit.
 
 ![Krishi Mitra dashboard: weather-based disease risk, quick checks, recent diagnoses](docs/screenshots/dashboard.jpg)
 
