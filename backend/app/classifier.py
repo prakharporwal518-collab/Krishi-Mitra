@@ -56,7 +56,7 @@ def _load():
                 x = torch.from_numpy(np.stack([(np.asarray(v, np.float32) / 127.5 - 1).transpose(2, 0, 1) for v in views]))
                 with torch.no_grad():
                     probs = model(pixel_values=x).logits.softmax(-1).mean(0)
-                vals, idx = probs.topk(top_k)
+                vals, idx = probs.topk(min(top_k, probs.numel()))
                 return [{"label": model.config.id2label[int(i)], "score": float(v)} for v, i in zip(vals, idx)]
 
             _pipe = run
@@ -81,7 +81,7 @@ def predict(img, raw_bytes, labels):
     """Return ([(label, score), ...] sorted desc, engine)."""
     _load()
     if _pipe is not None:
-        out = _pipe(img, top_k=5)
+        out = _pipe(img, top_k=1000)  # full distribution: main.py may restrict it to one crop
         return [(o["label"], float(o["score"])) for o in out], "huggingface"
     return _llm_predict(raw_bytes, labels), "llm"
 

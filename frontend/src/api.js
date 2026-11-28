@@ -14,10 +14,10 @@ const serverApi = {
   explain: () => Promise.reject(new Error('Heatmap is only available in browser mode')),
   crops: (lang) => req(`/api/crops?lang=${lang}`),
   symptomList: (lang, crop) => req(`/api/symptom-list?lang=${lang}&crop=${crop}`),
-  predict: (file, lang) => {
+  predict: (file, lang, crop) => {
     const fd = new FormData()
     fd.append('file', file)
-    return req(`/api/predict?lang=${lang}`, { method: 'POST', body: fd })
+    return req(`/api/predict?lang=${lang}${crop ? `&crop=${crop}` : ''}`, { method: 'POST', body: fd })
   },
   symptoms: (body) => req('/api/symptoms', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }),
   disease: (id, { lang, state, season, crop }) => {

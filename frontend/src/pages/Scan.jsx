@@ -19,10 +19,15 @@ const SAMPLES = [
 // likely disease and its treatment, clearly marked as unconfirmed; below POSSIBLE_MIN we only ask for a retake.
 const POSSIBLE_MIN = 35
 
-export default function Scan({ t, lang, go }) {
+const loadHint = () => { try { return localStorage.getItem('km_scan_crop') || '' } catch { return '' } }
+
+export default function Scan({ t, lang, go, crops = [] }) {
   const camRef = useRef()
   const fileRef = useRef()
   const [file, setFile] = useState(null)
+  const [hint, setHint] = useState(loadHint) // crop the farmer says this is ('' = detect automatically)
+  const chooseHint = (c) => { setHint(c); setResult(null); try { localStorage.setItem('km_scan_crop', c) } catch { /* ignore */ } }
+  const hintName = crops.find((c) => c.id === hint)?.name || hint
   const [preview, setPreview] = useState(null)
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState(null)
@@ -45,9 +50,9 @@ export default function Scan({ t, lang, go }) {
   const diagnose = async () => {
     setLoading(true); setError(null)
     try {
-      const r = await api.predict(file, lang)
+      const r = await api.predict(file, lang, hint || undefined)
       setResult(r)
-      if (!r.not_leaf && (!r.low_confidence || r.confidence >= POSSIBLE_MIN)) addHistory({ via: 'photo', disease_id: r.disease_id, disease: r.disease, crop: r.crop, crop_name: r.crop_name, confidence: r.confidence })
+      if (!r.not_leaf && !r.crop_mismatch && (!r.low_confidence || r.confidence >= POSSIBLE_MIN)) addHistory({ via: 'photo', disease_id: r.disease_id, disease: r.disease, crop: r.crop, crop_name: r.crop_name, confidence: r.confidence })
     } catch (e) { setError(e.message) } finally { setLoading(false) }
   }
 
@@ -63,13 +68,31 @@ export default function Scan({ t, lang, go }) {
 
       <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-6">
       <div>
+      <section className="card mb-4" aria-label={t('cropQuestion')}>
+        <p className="font-extrabold text-leaf-900">🌱 {t('cropQuestion')}</p>
+        <p className="mb-3 text-sm text-gray-600">{t('cropOptional')}</p>
+        <div className="flex flex-wrap gap-2">
+          {[{ id: '', icon: '✨', name: t('autoDetect') }, ...crops.filter((c) => c.main)].map((c) => (
+            <button key={c.id || 'auto'} onClick={() => chooseHint(c.id)} aria-pressed={hint === c.id}
+              className={`lift rounded-full px-3 py-2 text-sm font-bold ring-2 ${hint === c.id ? 'bg-leaf-700 text-white ring-leaf-700' : 'bg-white text-leaf-900 ring-leaf-100 hover:ring-leaf-200'}`}>
+              {c.icon} {c.name}
+            </button>
+          ))}
+        </div>
+      </section>
       {!preview && (
         <>
           <div className="grid grid-cols-2 gap-3">
             <button className="btn-primary flex-col py-8 lg:py-12 text-xl" onClick={() => camRef.current.click()}><span className="text-5xl">📸</span>{t('takePhoto')}</button>
             <button className="btn-light flex-col py-8 text-xl lg:py-12" onClick={() => fileRef.current.click()}><span className="text-5xl">🖼️</span>{t('uploadPhoto')}</button>
           </div>
-          <p className="mt-3 text-center text-sm text-gray-600">💡 {t('photoTips')}</p>
+          <div className="mt-3 grid grid-cols-2 gap-2 text-sm font-semibold sm:grid-cols-4">
+            <span className="rounded-xl bg-leaf-100 px-3 py-2 text-leaf-900">✅ {t('leafDo')}</span>
+            <span className="rounded-xl bg-red-50 px-3 py-2 text-red-800">❌ {t('leafDont1')}</span>
+            <span className="rounded-xl bg-red-50 px-3 py-2 text-red-800">❌ {t('leafDont2')}</span>
+            <span className="rounded-xl bg-red-50 px-3 py-2 text-red-800">❌ {t('leafDont3')}</span>
+          </div>
+          <p className="mt-2 text-center text-sm text-gray-600">💡 {t('photoTips')}</p>
           <div className="card mt-5">
             <p className="mb-3 font-semibold text-leaf-800">{t('trySample')}</p>
             <div className="grid grid-cols-4 gap-2">
@@ -107,13 +130,14 @@ export default function Scan({ t, lang, go }) {
       )}
       <ErrorBox t={t} error={error} onRetry={reset} />
 
-      {result && result.low_confidence && !result.not_leaf && result.confidence >= POSSIBLE_MIN && (
+      {result && result.low_confidence && !result.not_leaf && !result.crop_mismatch && result.confidence >= POSSIBLE_MIN && (
         <div className="card mt-4 border-2 border-yellow-300 bg-yellow-50">
           <p className="text-sm font-bold uppercase tracking-wide text-yellow-800">⚠️ {t('possibleTitle')}</p>
           <p className="mt-1 text-2xl font-extrabold text-red-700">{result.is_healthy ? t('healthyTitle') : result.disease}</p>
           <p className="text-gray-700">{t('crop')}: <b>{result.crop_name}</b> · {t('confidence')}: <b>{Math.round(result.confidence)}%</b></p>
           <div className="mt-2"><ConfidenceBar value={result.confidence} /></div>
           <p className="mt-3 text-yellow-900">{t('possibleMsg')}</p>
+          <p className="mt-2 text-sm text-gray-700">🍃 {t('leafHint')}</p>
           <div className="mt-4 grid gap-3">
             <ReadAloud t={t} text={`${t('possibleTitle')}: ${result.disease}. ${t('possibleMsg')}`} lang={lang} />
             <Heatmap t={t} file={file} label={result.label} />
@@ -124,10 +148,11 @@ export default function Scan({ t, lang, go }) {
         </div>
       )}
 
-      {result && result.low_confidence && (result.not_leaf || result.confidence < POSSIBLE_MIN) && (
+      {result && result.low_confidence && (result.not_leaf || result.crop_mismatch || result.confidence < POSSIBLE_MIN) && (
         <div className="card mt-4 border-2 border-yellow-300 bg-yellow-50">
-          <p className="text-xl font-extrabold text-yellow-800">📷 {t('lowConfTitle')}</p>
-          <p className="mt-2 text-yellow-900">{t('lowConfMsg')}</p>
+          <p className="text-xl font-extrabold text-yellow-800">📷 {result.crop_mismatch ? t('cropMismatchTitle').replace('{crop}', hintName) : t('lowConfTitle')}</p>
+          <p className="mt-2 text-yellow-900">{result.crop_mismatch ? t('cropMismatchMsg') : t('lowConfMsg')}</p>
+          <p className="mt-2 text-sm text-gray-700">🍃 {t('leafHint')}</p>
           <p className="mt-3 rounded-xl bg-white/70 p-2 text-sm text-gray-700">🌾 {t('supportedCrops')}</p>
           <div className="mt-4 grid gap-3">
             <button className="btn-primary" onClick={reset}>📸 {t('retake')}</button>
