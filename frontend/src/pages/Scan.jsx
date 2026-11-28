@@ -143,7 +143,7 @@ export default function Scan({ t, lang, go, crops = [] }) {
             <Heatmap t={t} file={file} label={result.label} />
             <button className="btn-primary text-xl" onClick={() => go('disease', { id: result.disease_id, crop: result.crop })}>💊 {t('seeTreatment')} →</button>
             <button className="btn-light" onClick={reset}>📸 {t('retake')}</button>
-            <button className="btn-light" onClick={() => go('symptoms')}>📝 {t('trySymptoms')}</button>
+            <button className="btn-light" onClick={() => go('symptoms', { crop: hint || result.crop })}>📝 {t('trySymptoms')}</button>
           </div>
         </div>
       )}
@@ -156,7 +156,7 @@ export default function Scan({ t, lang, go, crops = [] }) {
           <p className="mt-3 rounded-xl bg-white/70 p-2 text-sm text-gray-700">🌾 {t('supportedCrops')}</p>
           <div className="mt-4 grid gap-3">
             <button className="btn-primary" onClick={reset}>📸 {t('retake')}</button>
-            <button className="btn-light" onClick={() => go('symptoms')}>📝 {t('trySymptoms')}</button>
+            <button className="btn-light" onClick={() => go('symptoms', { crop: hint || undefined })}>📝 {t('trySymptoms')}</button>
           </div>
         </div>
       )}
