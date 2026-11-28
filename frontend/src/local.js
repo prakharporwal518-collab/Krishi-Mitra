@@ -57,7 +57,7 @@ export const localApi = {
   async crops(lang) {
     lang = L(lang)
     return cropData.crops.filter((c) => c.main || kb.diseases.some((d) => d.crop === c.id))
-      .map((c) => ({ id: c.id, icon: c.icon, name: cropName(c.id, lang), main: c.main }))
+      .map((c) => ({ id: c.id, icon: c.icon, name: cropName(c.id, lang), main: c.main, diseases: kb.diseases.filter((d) => d.crop === c.id).length }))
   },
 
   async symptomList(lang, crop) {

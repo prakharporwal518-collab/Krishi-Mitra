@@ -60,11 +60,13 @@ export default function Scan({ t, lang, go }) {
       <input ref={camRef} type="file" accept="image/*" capture="environment" hidden onChange={(e) => pick(e.target.files[0])} />
       <input ref={fileRef} type="file" accept="image/*" hidden onChange={(e) => pick(e.target.files[0])} />
 
+      <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-6">
+      <div>
       {!preview && (
         <>
           <div className="grid grid-cols-2 gap-3">
-            <button className="btn-primary flex-col py-8 text-xl" onClick={() => camRef.current.click()}><span className="text-5xl">📸</span>{t('takePhoto')}</button>
-            <button className="btn-light flex-col py-8 text-xl" onClick={() => fileRef.current.click()}><span className="text-5xl">🖼️</span>{t('uploadPhoto')}</button>
+            <button className="btn-primary flex-col py-8 lg:py-12 text-xl" onClick={() => camRef.current.click()}><span className="text-5xl">📸</span>{t('takePhoto')}</button>
+            <button className="btn-light flex-col py-8 text-xl lg:py-12" onClick={() => fileRef.current.click()}><span className="text-5xl">🖼️</span>{t('uploadPhoto')}</button>
           </div>
           <p className="mt-3 text-center text-sm text-gray-600">💡 {t('photoTips')}</p>
           <div className="card mt-5">
@@ -83,7 +85,7 @@ export default function Scan({ t, lang, go }) {
 
       {preview && (
         <div className="card">
-          <img src={preview} alt="leaf" className="mx-auto max-h-72 rounded-2xl object-contain" />
+          <img src={preview} alt="leaf" className="mx-auto max-h-72 rounded-2xl object-contain lg:max-h-[26rem]" />
           {!result && !loading && (
             <div className="mt-4 grid gap-3">
               <button className="btn-primary text-xl" onClick={diagnose}>🔍 {t('diagnose')}</button>
@@ -93,7 +95,15 @@ export default function Scan({ t, lang, go }) {
           {loading && <Spinner label={t('analysing')} />}
         </div>
       )}
+      </div>
 
+      <div className="lg:sticky lg:top-8 [&>.card]:lg:mt-0">
+      {!result && !error && (
+        <div className="card hidden min-h-[16rem] flex-col items-center justify-center border-2 border-dashed border-leaf-200 text-center text-gray-500 lg:flex">
+          <span className="text-6xl opacity-60">🔬</span>
+          <p className="mt-3 text-lg font-semibold">{t('resultHere')}</p>
+        </div>
+      )}
       <ErrorBox t={t} error={error} onRetry={reset} />
 
       {result && result.low_confidence && !result.not_leaf && result.confidence >= POSSIBLE_MIN && (
@@ -150,6 +160,8 @@ export default function Scan({ t, lang, go }) {
           </div>
         </div>
       )}
+      </div>
+      </div>
     </div>
   )
 }

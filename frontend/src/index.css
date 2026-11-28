@@ -3,11 +3,13 @@
 @tailwind utilities;
 
 body { @apply bg-leaf-50 text-gray-900 antialiased; }
-.btn { @apply inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-4 text-lg font-bold shadow-sm transition active:scale-95 disabled:opacity-50 disabled:active:scale-100; }
-.btn-primary { @apply btn bg-leaf-700 text-white hover:bg-leaf-800; }
-.btn-light { @apply btn bg-white text-leaf-800 ring-2 ring-leaf-200 hover:bg-leaf-100; }
-.card { @apply rounded-3xl bg-white p-5 shadow-sm ring-1 ring-leaf-100; }
-.h2 { @apply text-xl font-extrabold text-leaf-900; }
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-4 text-lg font-bold shadow-sm transition active:scale-95 disabled:opacity-50 disabled:active:scale-100; }
+  .btn-primary { @apply btn bg-leaf-700 text-white hover:bg-leaf-800; }
+  .btn-light { @apply btn bg-white text-leaf-800 ring-2 ring-leaf-200 hover:bg-leaf-100; }
+  .card { @apply rounded-3xl bg-white p-5 shadow-sm ring-1 ring-leaf-100; }
+  .h2 { @apply text-xl font-extrabold text-leaf-900; }
+}
 
 /* Netlify injects a "Powered by Netlify" badge at the bottom-right; keep the nav buttons above it */
 @media (max-width: 1023px) {

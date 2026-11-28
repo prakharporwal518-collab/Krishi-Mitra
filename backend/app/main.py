@@ -90,7 +90,8 @@ def languages():
 @app.get("/api/crops")
 def crops(lang: str = "en", all: bool = False):
     lang = _lang(lang)
-    return [{"id": c["id"], "icon": c["icon"], "name": crop_name(c["id"], lang), "main": c["main"]}
+    return [{"id": c["id"], "icon": c["icon"], "name": crop_name(c["id"], lang), "main": c["main"],
+             "diseases": sum(d["crop"] == c["id"] for d in KB.values())}
             for c in CROPS.values() if all or c["main"] or any(d["crop"] == c["id"] for d in KB.values())]
 
 
