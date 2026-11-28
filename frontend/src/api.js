@@ -11,6 +11,7 @@ async function req(path, opts) {
 }
 
 const serverApi = {
+  explain: () => Promise.reject(new Error('Heatmap is only available in browser mode')),
   crops: (lang) => req(`/api/crops?lang=${lang}`),
   symptomList: (lang, crop) => req(`/api/symptom-list?lang=${lang}&crop=${crop}`),
   predict: (file, lang) => {

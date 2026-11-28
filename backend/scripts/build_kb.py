@@ -4,6 +4,7 @@ Each language block is: [name, about(cause), symptoms[], product, dosage, timing
 Run:  python scripts/build_kb.py
 """
 import json
+import re
 from pathlib import Path
 
 SAFETY = {
@@ -743,6 +744,16 @@ E("healthy", "any", "healthy", "", [], ICAR,
    ["दर आठवड्याला पिकाची पाहणी करा", "माती परीक्षणावर आधारित संतुलित खत", "शेत तणमुक्त व चांगल्या निचऱ्याचे ठेवा"]])
 
 
+AUTO = Path(__file__).resolve().parent.parent / "data" / "kb_auto_translations.json"
+AUTO_TR = json.loads(AUTO.read_text(encoding="utf-8")) if AUTO.exists() else {}  # from translate_kb.py (te/ta/bn)
+NOT_SPRAYS = {"cotton_wilt", "grape_esca"}  # root drench / wound paste: the per-tank spray calculator does not apply
+
+
+def dose_per_litre(d, dosage_en):
+    m = re.match(r"\s*([\d.]+)\s*(g|ml) per litre", dosage_en)
+    return {"amount": float(m.group(1)), "unit": m.group(2)} if m and d["id"] not in NOT_SPRAYS else None
+
+
 def expand(d):
     content = {}
     for lang, v in d.pop("L").items():
@@ -752,7 +763,21 @@ def expand(d):
             "chemical": {"product": product, "dosage": dosage, "timing": timing, "safety": SAFETY[lang]},
             "organic": organic, "prevention": prevention, "warning": WARNING[lang],
         }
+    en = content["en"]
+    for lang, tr in AUTO_TR.items():  # machine translations; product names stay in English like on the label
+        f = lambda x: tr.get(x, x)  # noqa: E731
+        content[lang] = {
+            # machine-translated disease names can be too literal, so keep the English name alongside
+            "name": f"{f(en['name'])} ({en['name']})" if f(en["name"]) != en["name"] else en["name"], "about": f(en["about"]), "symptoms": [f(x) for x in en["symptoms"]],
+            "chemical": {"product": en["chemical"]["product"], "dosage": f(en["chemical"]["dosage"]),
+                         "timing": f(en["chemical"]["timing"]), "safety": [f(x) for x in en["chemical"]["safety"]]},
+            "organic": [f(x) for x in en["organic"]], "prevention": [f(x) for x in en["prevention"]],
+            "warning": f(en["warning"]), "auto_translated": True,
+        }
+        for t in d["region_tips"]:
+            t["tip"][lang] = f(t["tip"]["en"])
     d["content"] = content
+    d["dose_per_litre"] = dose_per_litre(d, en["chemical"]["dosage"])
     return d
 
 

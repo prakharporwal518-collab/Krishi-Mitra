@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { api } from '../api'
 import { ErrorBox, ReadAloud, Spinner } from '../components/ui'
+import SprayCalculator from '../components/SprayCalculator'
 
 const Section = ({ icon, title, children, tone = 'card' }) => (
   <section className={`${tone} mt-4`}>
@@ -45,6 +46,7 @@ export default function Disease({ t, lang, params, region, go }) {
         {d.pathogen && <p className="mt-1 text-sm italic text-gray-600">{d.pathogen}</p>}
         <p className="mt-3 inline-block rounded-full bg-leaf-700 px-3 py-1 text-xs font-bold text-white">🏛️ {t('source')}: {d.source}</p>
         {!d.translated && <p className="mt-3 rounded-xl bg-yellow-50 p-2 text-sm text-yellow-800">🌐 {t('notTranslated')}</p>}
+        {d.auto_translated && <p className="mt-3 rounded-xl bg-blue-50 p-2 text-sm text-blue-800">🌐 {t('autoTranslated')}</p>}
         <div className="mt-4"><ReadAloud t={t} text={speech} lang={d.translated ? lang : 'en'} /></div>
       </div>
 
@@ -59,6 +61,7 @@ export default function Disease({ t, lang, params, region, go }) {
             <div className="rounded-2xl bg-leaf-50 p-3"><dt className="text-sm font-bold text-gray-500">⚖️ {t('dosage')}</dt><dd className="font-bold">{c.dosage}</dd></div>
             <div><dt className="text-sm font-bold text-gray-500">⏰ {t('timing')}</dt><dd>{c.timing}</dd></div>
           </dl>
+          {d.dose_per_litre && <SprayCalculator t={t} dose={d.dose_per_litre} product={c.product} />}
           <div className="mt-4 rounded-2xl bg-orange-50 p-3">
             <p className="mb-2 font-bold text-orange-800">🧤 {t('safety')}</p>
             <List items={c.safety} />

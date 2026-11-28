@@ -47,6 +47,10 @@ function view(bmp, short, mirror) {
   return new ort.Tensor('float32', data, [1, 3, 224, 224])
 }
 
+async function toBitmap(file) {
+  try { return await createImageBitmap(file) } catch { fail('This file is not a valid image (use JPG or PNG).') }
+}
+
 async function toTensors(file) {
   let bmp
   try { bmp = await createImageBitmap(file) } catch { fail('This file is not a valid image (use JPG or PNG).') }
@@ -108,7 +112,33 @@ export const localApi = {
     const tips = d.region_tips.filter((t) => (!state || t.states.includes(state)) && (!season || t.seasons.includes(season)))
       .map((t) => ({ states: t.states, seasons: t.seasons, tip: t.tip[lang] || t.tip.en }))
     const cropId = d.crop === 'any' && crop ? crop : d.crop
-    return { id, crop: cropId, crop_name: cropName(cropId, lang), kind: d.kind, pathogen: d.pathogen, source: d.source,
+    return { id, crop: cropId, crop_name: cropName(cropId, lang), kind: d.kind, pathogen: d.pathogen, source: d.source, dose_per_litre: d.dose_per_litre,
       lang: translated ? lang : 'en', translated, ...content, region_tips: tips, region_match: !!(state || season) && tips.length > 0 }
   },
+
+  // Explainability by occlusion: grey out one patch at a time and measure how much the
+  // predicted class's probability drops. Big drop = the model relied on that area.
+  async explain(file, label, grid = 7) {
+    const [s, bmp] = await Promise.all([loadModel(), toBitmap(file)])
+    const k = labels.indexOf(label)
+    const base = view(bmp, 256, false)
+    const run = async (data) => (await s.run({ pixel_values: new ort.Tensor('float32', data, [1, 3, 224, 224]) })).probs.data[k]
+    const p0 = await run(base.data)
+    const cell = 224 / grid, heat = []
+    for (let gy = 0; gy < grid; gy++) {
+      for (let gx = 0; gx < grid; gx++) {
+        const data = base.data.slice()
+        for (let c = 0; c < 3; c++) for (let y = gy * cell; y < (gy + 1) * cell; y++) data.fill(0, c * 50176 + y * 224 + gx * cell, c * 50176 + y * 224 + (gx + 1) * cell)
+        heat.push(Math.max(0, p0 - (await run(data))))
+      }
+    }
+    const max = Math.max(...heat) || 1
+    // the exact 224x224 view the model saw, so the overlay lines up
+    const canvas = document.createElement('canvas')
+    canvas.width = canvas.height = 224
+    const kk = 256 / Math.min(bmp.width, bmp.height), w = Math.round(bmp.width * kk), h = Math.round(bmp.height * kk)
+    canvas.getContext('2d').drawImage(bmp, -Math.floor((w - 224) / 2), -Math.floor((h - 224) / 2), w, h)
+    return { grid, heat: heat.map((v) => v / max), image: canvas.toDataURL('image/jpeg', 0.9) }
+  },
 }
+
