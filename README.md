@@ -39,6 +39,7 @@ Farmers often can't identify crop diseases with confidence. They depend on neigh
 |---|---|
 | 🌐 | **6 languages**: English, हिन्दी, मराठी, తెలుగు, தமிழ், বাংলা. The whole UI switches language. |
 | 📷 | **Image diagnosis**: take a photo with the camera or upload one. Shows the crop, disease, confidence % and a "healthy" result. Below 60% confidence it asks for a retake. |
+| 🌱 | **"Which crop is this?" selector** (optional): with the crop chosen, only that crop's diseases are ranked. On real field photos accuracy rises from **69% to 82%**, rice can never come out as maize, and a photo that doesn't look like the chosen crop is flagged. A guide on the photo page asks for one leaf, close-up, not grains, fruit or the whole field. |
 | 📝 | **Symptom diagnosis**: pick a crop, tick symptoms (icon tiles) **or speak them** (Web Speech API). Returns the top 3 likely diseases. |
 | 💊 | **Treatment**: simple explanation and cause, chemical product, **dose per litre and per acre**, spray timing, safety precautions, organic / low-cost alternative, prevention, and a warning against overuse and tank-mixing. Each one is tagged with its source. |
 | 📍 | **Region & season awareness**: choose a state and season (Kharif / Rabi / Zaid) to get region-specific tips. |
@@ -60,15 +61,15 @@ Farmers often can't identify crop diseases with confidence. They depend on neigh
 
   | Measured on held-out photos | Base model | Krishi Mitra model |
   |---|---|---|
-  | Field photos (PlantDoc test, 236): correct disease | 31% | **67%** |
+  | Field photos (PlantDoc test, 236): correct disease | 31% | **67%** (**82%** with the crop chosen) |
   | Field photos: correct crop | 51% | **82%** |
   | Lab photos (PlantVillage held-out) | 94% | **95%** |
   | Rice / wheat / cotton test photos (1,281): correct disease | n/a | **89%** |
   | Rice / wheat / cotton: correct crop | n/a | **99%** |
 
   **Known weak spots:** rice hispa is often mistaken for healthy rice (36%), because the scraping damage is tiny in its training photos. Cotton bacterial blight is 65%. Rice/wheat/cotton test photos come from the same sources as their training photos, so real-world accuracy will be lower than 89%. Cotton leaf curl virus has no photo dataset, so use the symptom checker for it. Results between 35% and 60% confidence are shown as "possible disease"; below 35%, or for non-leaf photos, the app asks for a retake.
-- **Knowledge base:** `backend/data/diseases.json` holds **41 diseases + a healthy entry** across tomato, potato, rice, wheat, cotton, maize and chilli, plus the PlantVillage fruit crops. Every disease has full **English, Hindi and Marathi** content. All 54 model classes map to an entry (`class_map.json`). The JSON is generated from `backend/scripts/build_kb.py`.
-- **Translation:** the UI is hand-translated into all 6 languages. Disease advice is hand-written in English, Hindi and Marathi. Telugu, Tamil and Bengali advice is machine-translated with Meta's open [NLLB-200](https://huggingface.co/facebook/nllb-200-distilled-600M) model, running locally for free (`backend/scripts/translate_kb.py`). Those pages say they are auto-translated and keep the English disease name alongside; strings whose numbers didn't survive translation stay in English, so doses are never garbled. A native-speaker review is still recommended.
+- **Knowledge base:** `backend/data/diseases.json` holds **43 diseases + a healthy entry** (including rice grain diseases: false smut, grain discolouration, neck blast) across tomato, potato, rice, wheat, cotton, maize and chilli, plus the PlantVillage fruit crops. Every disease has full **English, Hindi and Marathi** content. All 54 model classes map to an entry (`class_map.json`). The JSON is generated from `backend/scripts/build_kb.py`.
+- **Translation:** the UI is hand-translated into all 6 languages. Disease advice is hand-written in English, Hindi and Marathi. Telugu, Tamil and Bengali advice is machine-translated with Meta's open [NLLB-200](https://huggingface.co/facebook/nllb-200-distilled-600M) model, running locally for free (`backend/scripts/translate_kb.py`). Those pages say they are auto-translated and keep the English disease name alongside; any sentence where a number was dropped, added or repeated stays in English, so doses are never garbled. A native-speaker review is still recommended.
 - **Symptom matching:** cosine similarity between the selected or spoken symptoms and each disease's symptom tags. Voice text is matched against keywords in 6 languages.
 
 ## 🛠️ Tech stack

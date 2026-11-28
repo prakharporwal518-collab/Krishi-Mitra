@@ -46,6 +46,8 @@ _sym = _load("symptoms.json")
 SYMPTOMS = {s["id"]: s for s in _sym["symptoms"]}
 ALIASES = _sym["aliases"]
 MIN_CONFIDENCE = float(os.getenv("MIN_CONFIDENCE", "0.6"))
+# With a crop chosen (same rule as frontend/src/local.js, tuned on PlantDoc field photos)
+CROP_MASS_FULL, CROP_MISMATCH = 0.5, 0.12
 MAX_UPLOAD_MB = 8
 
 app = FastAPI(title="Krishi Mitra API", version="1.0")
@@ -105,7 +107,7 @@ def symptom_list(lang: str = "en", crop: str | None = None):
 
 # ---------------- image prediction ----------------
 @app.post("/api/predict")
-async def predict(file: UploadFile = File(...), lang: str = "en"):
+async def predict(file: UploadFile = File(...), lang: str = "en", crop: str | None = None):
     lang = _lang(lang)
     data = await file.read()
     if not data:
@@ -129,11 +131,19 @@ async def predict(file: UploadFile = File(...), lang: str = "en"):
                 "disease": "Not a plant leaf" if m["disease_id"] == "invalid" else disease_name(m["disease_id"], lang),
                 "confidence": round(score * 100, 1)}
 
-    top = [enrich(l, s) for l, s in preds[:4]]
+    not_leaf = CLASS_MAP.get(preds[0][0], {}).get("disease_id") == "invalid"  # model's "Not a Plant Leaf" class
+    mine = [(l, p) for l, p in preds if CLASS_MAP.get(l, {}).get("crop") == crop] if crop and not not_leaf else []
+    crop_mass = sum(p for _, p in mine) if mine else None
+    if mine:  # rank only the chosen crop's diseases; scale confidence down if the photo doesn't look like that crop
+        factor = min(1.0, crop_mass / CROP_MASS_FULL)
+        top = [enrich(l, p / crop_mass * factor) for l, p in mine[:3]]
+    else:
+        top = [enrich(l, p) for l, p in preds[:4]]
     best = top[0]
-    not_leaf = best["disease_id"] == "invalid"  # model's "Not a Plant Leaf" class
-    return {**best, "is_healthy": best["disease_id"] == "healthy", "not_leaf": not_leaf,
-            "low_confidence": not_leaf or best["confidence"] < MIN_CONFIDENCE * 100,
+    mismatch = crop_mass is not None and crop_mass < CROP_MISMATCH
+    return {**best, "is_healthy": best["disease_id"] == "healthy", "not_leaf": not_leaf, "crop_hint": crop,
+            "crop_mismatch": mismatch, "crop_match": None if crop_mass is None else round(crop_mass * 100),
+            "low_confidence": not_leaf or mismatch or best["confidence"] < MIN_CONFIDENCE * 100,
             "alternatives": [x for x in top[1:] if x["disease_id"] != "invalid"][:2], "engine": engine}
 
 

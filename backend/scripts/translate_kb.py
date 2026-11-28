@@ -5,6 +5,7 @@ Writes backend/data/kb_auto_translations.json  ({lang: {english text: translatio
 strings are kept, so re-running only translates new text. Then run:  python scripts/build_kb.py
 Run:  python scripts/translate_kb.py      (first run downloads the ~2.5 GB model)
 """
+import collections
 import json
 import os
 import re
@@ -18,6 +19,12 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "data" / "kb_auto_translations.json"
 MODEL = "facebook/nllb-200-distilled-600M"
 LANGS = {"te": "tel_Telu", "ta": "tam_Taml", "bn": "ben_Beng"}
+
+
+def numbers_ok(src, out):
+    """Doses must survive translation exactly: every number appears the same number of times."""
+    nums = lambda t: collections.Counter(re.findall(r"\d+(?:\.\d+)?", t))  # noqa: E731
+    return nums(src) == nums(out)
 
 
 def english_strings():
@@ -52,8 +59,8 @@ def main():
                 gen = model.generate(**enc, forced_bos_token_id=tok.convert_tokens_to_ids(code), num_beams=3, max_new_tokens=256)
             for src, out in zip(batch, tok.batch_decode(gen, skip_special_tokens=True)):
                 out = "".join(str(unicodedata.digit(ch)) if ch.isdigit() else ch for ch in out)  # native digits -> 0-9
-                # keep numbers intact: if the model dropped a number, fall back to English for that string
-                cache[src] = out if set(re.findall(r"\d+(?:\.\d+)?", src)) <= set(re.findall(r"\d+(?:\.\d+)?", out)) else src
+                # keep numbers intact: if the model dropped, added or repeated a number, keep English for that string
+                cache[src] = out if numbers_ok(src, out) else src
             OUT.write_text(json.dumps(done, ensure_ascii=False, indent=1), encoding="utf-8")
             print(f"  {lang} {i + len(batch)}/{len(todo)} ({time.time() - t0:.0f}s)", flush=True)
     print("done")

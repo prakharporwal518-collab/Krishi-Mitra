@@ -249,7 +249,7 @@ E("potato_late_blight", "potato", "fungal", "Phytophthora infestans",
 
 # ---------------- RICE ----------------
 E("rice_blast", "rice", "fungal", "Magnaporthe oryzae",
-  ["eye_shaped_spots", "brown_spots", "neck_rot", "leaf_blight"], "ICAR-NRRI Cuttack / ICAR-IIRR Hyderabad",
+  ["eye_shaped_spots", "brown_spots", "neck_rot", "leaf_blight", "grain_discolor"], "ICAR-NRRI Cuttack / ICAR-IIRR Hyderabad",
   ["Rice Blast", "A serious fungal disease (Magnaporthe oryzae). High nitrogen, cloudy weather, dew and cool nights favour it.",
    ["Eye/spindle-shaped spots with grey centre and brown border on leaves", "Neck of the panicle turns black and breaks (neck blast)", "Empty, chaffy grains"],
    "Tricyclazole 75% WP", "0.6 g per litre (120 g per acre in 200 L water)", "Spray at first leaf spots and again at 50% panicle emergence",
@@ -727,6 +727,47 @@ E("cotton_wilt", "cotton", "fungal", "Fusarium oxysporum f. sp. vasinfectum / Ve
    "Carbendazim 50% WP (कार्बेन्डाझिम - बाधित व आजूबाजूच्या झाडांच्या मुळांशी)", "1 ग्रॅम प्रति लिटर, प्रत्येक झाडाच्या मुळाशी 100–200 मि.ली. ओता", "पहिल्यांदा मर दिसताच मुळाशी ओता; पेरणीपूर्वी कार्बेन्डाझिम 2 ग्रॅम/किलो बीजप्रक्रिया",
    ["ट्रायकोडर्मा 4 ग्रॅम/किलो बीजप्रक्रिया", "पेरणीपूर्वी 2 किलो ट्रायकोडर्मा 100 किलो शेणखतात मिसळून एकरी द्या", "मलूल झाडे उपटून जाळा"],
    ["मर-सहनशील जाती लावा (देशी कापूस फ्युजेरियम मरला प्रतिकारक)", "2–3 वर्षे तृणधान्यांसोबत फेरपालट", "पाणी साचू देऊ नका", "पोटॅशसह संतुलित NPK"]])
+
+# ---------------- RICE GRAIN / PANICLE DISEASES (symptom checker) ----------------
+E("rice_false_smut", "rice", "fungal", "Ustilaginoidea virens",
+  ["grain_balls", "grain_discolor"], "ICAR-NRRI Cuttack / ICAR-IIRR Hyderabad",
+  ["Rice False Smut", "A fungal disease of the grains. It appears at flowering in humid, rainy weather, especially in fields given a lot of nitrogen.",
+   ["Single grains turn into velvety yellow-orange balls", "The balls later turn greenish-black and burst into powder", "Only a few grains per panicle are affected, but grain quality falls"],
+   "Propiconazole 25% EC", "1 ml per litre (200 ml per acre in 200 L water)", "Spray at the boot-leaf stage (just before panicles come out); a second spray at 50% flowering if rain continues. Alternative: Copper Hydroxide 77% WP 2 g/L",
+   ["Carefully cut and bag infected panicles, then burn them (don't shake the powder onto healthy plants)", "Seed treatment with Pseudomonas fluorescens 10 g/kg", "Salt-water float test: discard light, infected seed"],
+   ["Avoid excess nitrogen; apply urea in splits", "Use clean, certified seed", "Remove infected panicles before harvest", "Deep summer ploughing to bury fungal bodies"]],
+  ["धान का आभासी कंडुआ (हल्दी रोग)", "यह दानों का फफूंद रोग है। फूल आने के समय नम, बरसाती मौसम में और अधिक नाइट्रोजन वाले खेतों में होता है।",
+   ["अलग-अलग दाने मखमली पीले-नारंगी गोलों में बदल जाते हैं", "गोले बाद में हरे-काले होकर फूटते हैं और पाउडर बिखरता है", "हर बाली में कुछ ही दाने प्रभावित होते हैं, पर दानों की गुणवत्ता घटती है"],
+   "Propiconazole 25% EC (प्रोपिकोनाज़ोल)", "1 मि.ली. प्रति लीटर (200 मि.ली. प्रति एकड़ 200 लीटर पानी में)", "गभोट अवस्था (बाली निकलने से ठीक पहले) पर छिड़काव; बारिश जारी रहे तो 50% फूल आने पर दूसरा छिड़काव। विकल्प: कॉपर हाइड्रॉक्साइड 77% WP 2 ग्राम/लीटर",
+   ["संक्रमित बालियाँ सावधानी से काटकर थैले में रखें और जलाएँ (पाउडर स्वस्थ पौधों पर न झाड़ें)", "स्यूडोमोनास 10 ग्राम/किलो से बीज उपचार", "नमक के पानी में बीज डुबोकर हल्के, संक्रमित बीज निकाल दें"],
+   ["अधिक नाइट्रोजन न दें; यूरिया किस्तों में दें", "साफ, प्रमाणित बीज लें", "कटाई से पहले संक्रमित बालियाँ हटाएँ", "गर्मी में गहरी जुताई करें"]],
+  ["भातावरील खोटी काजळी (हळद्या)", "हा दाण्यांचा बुरशीजन्य रोग आहे. फुलोऱ्याच्या वेळी दमट, पावसाळी हवामानात आणि जास्त नत्र दिलेल्या शेतात येतो.",
+   ["एकेक दाणा मखमली पिवळ्या-नारिंगी गोळ्यात बदलतो", "गोळे नंतर हिरवट-काळे होऊन फुटतात व भुकटी पसरते", "प्रत्येक लोंबीतील थोडेच दाणे बाधित होतात, पण दाण्यांची गुणवत्ता घटते"],
+   "Propiconazole 25% EC (प्रोपिकोनाझोल)", "1 मि.ली. प्रति लिटर (200 लिटर पाण्यात 200 मि.ली. प्रति एकर)", "पोटरी अवस्थेत (लोंबी बाहेर पडण्यापूर्वी) फवारणी; पाऊस सुरू राहिल्यास 50% फुलोऱ्यावर दुसरी फवारणी. पर्याय: कॉपर हायड्रॉक्साईड 77% WP 2 ग्रॅम/लिटर",
+   ["बाधित लोंब्या काळजीपूर्वक कापून पिशवीत भरा व जाळा (भुकटी निरोगी झाडांवर झटकू नका)", "स्युडोमोनास 10 ग्रॅम/किलो बीजप्रक्रिया", "मिठाच्या पाण्यात बियाणे टाकून हलके, बाधित बियाणे काढून टाका"],
+   ["जास्त नत्र टाळा; युरिया हप्त्यांत द्या", "स्वच्छ, प्रमाणित बियाणे वापरा", "काढणीपूर्वी बाधित लोंब्या काढा", "उन्हाळ्यात खोल नांगरट करा"]],
+  [tip(["Telangana", "Andhra Pradesh", "Punjab", "Haryana", "Tamil Nadu", "Karnataka"], ["kharif", "rabi"],
+       "False smut has become common in high-yield paddy areas. Watch panicles closely if it rains during flowering.",
+       "अधिक उपज वाले धान क्षेत्रों में आभासी कंडुआ आम हो गया है। फूल आने के समय बारिश हो तो बालियों पर ध्यान दें।",
+       "जास्त उत्पादनाच्या भात पट्ट्यात खोटी काजळी सामान्य झाली आहे. फुलोऱ्याच्या वेळी पाऊस पडल्यास लोंब्यांवर लक्ष ठेवा.")])
+
+E("rice_grain_discoloration", "rice", "fungal", "Fungal complex (Bipolaris, Curvularia, Fusarium, Sarocladium and others)",
+  ["grain_discolor", "brown_spots"], "ICAR-NRRI Cuttack",
+  ["Rice Grain Discolouration (Dirty Panicle)", "Several fungi attack the grains when it rains or stays humid during flowering and grain filling. Grains become spotted and lighter.",
+   ["Brown, black or reddish spots and patches on the grain husk", "Partly filled, light or chaffy grains", "Whole panicles look dirty and dark"],
+   "Propiconazole 25% EC", "1 ml per litre (200 ml per acre)", "Spray at 50% flowering and again 10–15 days later if humid weather continues. Alternative: Mancozeb 75% WP 2.5 g/L",
+   ["Seed treatment with Trichoderma 4 g/kg or Pseudomonas 10 g/kg", "Dry harvested grain quickly to below 14% moisture"],
+   ["Use clean seed from a healthy crop", "Balanced fertiliser with potash", "Timely harvest; don't leave the crop standing in rain", "Control sucking pests that damage grains"]],
+  ["धान के दानों का बदरंग होना (गंदी बाली)", "फूल आने और दाना भरने के समय बारिश या नमी रहने पर कई फफूंद दानों पर हमला करती हैं। दाने धब्बेदार और हल्के हो जाते हैं।",
+   ["दानों के छिलके पर भूरे, काले या लाल धब्बे", "आधे भरे, हल्के या खाली दाने", "पूरी बाली गंदी और काली दिखती है"],
+   "Propiconazole 25% EC (प्रोपिकोनाज़ोल)", "1 मि.ली. प्रति लीटर (200 मि.ली. प्रति एकड़)", "50% फूल आने पर छिड़काव और नमी बनी रहे तो 10–15 दिन बाद दोबारा। विकल्प: मैंकोज़ेब 75% WP 2.5 ग्राम/लीटर",
+   ["ट्राइकोडर्मा 4 ग्राम/किलो या स्यूडोमोनास 10 ग्राम/किलो से बीज उपचार", "कटे हुए धान को जल्दी 14% से कम नमी तक सुखाएँ"],
+   ["स्वस्थ फसल का साफ बीज लें", "पोटाश सहित संतुलित खाद", "समय पर कटाई; फसल को बारिश में खड़ा न छोड़ें", "दानों को नुकसान पहुँचाने वाले रस चूसक कीटों का नियंत्रण करें"]],
+  ["भाताच्या दाण्यांचा रंग बदलणे (मळकट लोंबी)", "फुलोरा व दाणे भरण्याच्या काळात पाऊस किंवा आर्द्रता राहिल्यास अनेक बुरशी दाण्यांवर हल्ला करतात. दाणे डागाळलेले व हलके होतात.",
+   ["दाण्यांच्या टरफलावर तपकिरी, काळे किंवा लालसर डाग", "अर्धवट भरलेले, हलके किंवा पोचट दाणे", "संपूर्ण लोंबी मळकट व काळपट दिसते"],
+   "Propiconazole 25% EC (प्रोपिकोनाझोल)", "1 मि.ली. प्रति लिटर (200 मि.ली. प्रति एकर)", "50% फुलोऱ्यावर फवारणी व आर्द्रता राहिल्यास 10–15 दिवसांनी पुन्हा. पर्याय: मॅन्कोझेब 75% WP 2.5 ग्रॅम/लिटर",
+   ["ट्रायकोडर्मा 4 ग्रॅम/किलो किंवा स्युडोमोनास 10 ग्रॅम/किलो बीजप्रक्रिया", "कापलेला भात लवकर 14% पेक्षा कमी ओलाव्यापर्यंत वाळवा"],
+   ["निरोगी पिकाचे स्वच्छ बियाणे वापरा", "पोटॅशसह संतुलित खत", "वेळेवर काढणी; पीक पावसात उभे ठेवू नका", "दाण्यांना इजा करणाऱ्या रसशोषक किडींचे नियंत्रण करा"]])
 
 # ---------------- HEALTHY ----------------
 E("healthy", "any", "healthy", "", [], ICAR,

@@ -1,38 +1,624 @@
 {
  "aliases": {
-  "olive_spots": "black_spots", "vein_blackening": "black_spots",
-  "purple_spots": "brown_spots", "small_spots_grey_center": "brown_spots", "angular_spots": "brown_spots", "rectangular_spots": "brown_spots", "grain_discolor": "brown_spots",
-  "long_grey_lesions": "leaf_blight", "neck_rot": "leaf_blight", "cankers": "leaf_blight",
-  "wavy_margin_lesions": "yellow_stripes", "tiger_stripes": "yellow_stripes",
+  "olive_spots": "black_spots",
+  "vein_blackening": "black_spots",
+  "purple_spots": "brown_spots",
+  "small_spots_grey_center": "brown_spots",
+  "angular_spots": "brown_spots",
+  "rectangular_spots": "brown_spots",
+  "long_grey_lesions": "leaf_blight",
+  "cankers": "leaf_blight",
+  "wavy_margin_lesions": "yellow_stripes",
+  "tiger_stripes": "yellow_stripes",
   "blotchy_mottle": "mosaic",
-  "white_mold_underside": "mold_underside", "olive_mold_underside": "mold_underside",
-  "sunken_fruit_spots": "fruit_rot", "fruit_spots": "fruit_rot", "tuber_rot": "fruit_rot", "fruit_misshapen": "fruit_rot",
+  "white_mold_underside": "mold_underside",
+  "olive_mold_underside": "mold_underside",
+  "sunken_fruit_spots": "fruit_rot",
+  "fruit_spots": "fruit_rot",
+  "tuber_rot": "fruit_rot",
+  "fruit_misshapen": "fruit_rot",
   "dieback": "wilting",
   "leaf_bronzing": "yellow_spots",
   "small_leaves": "stunted",
-  "leaf_enations": "leaf_curl", "vein_thickening": "leaf_curl",
-  "sawdust_frass": "holes_chewing", "whorl_damage": "holes_chewing", "shot_holes": "holes_chewing"
+  "leaf_enations": "leaf_curl",
+  "vein_thickening": "leaf_curl",
+  "sawdust_frass": "holes_chewing",
+  "whorl_damage": "holes_chewing",
+  "shot_holes": "holes_chewing"
  },
  "symptoms": [
-  {"id": "yellow_spots", "icon": "🟡", "names": {"en": "Yellow spots / dots", "hi": "पीले धब्बे", "mr": "पिवळे ठिपके", "te": "పసుపు మచ్చలు", "ta": "மஞ்சள் புள்ளிகள்", "bn": "হলুদ দাগ"}, "kw": ["yellow spot", "yellow dot", "पीले धब्बे", "पीला धब्बा", "पिवळे ठिपके", "పసుపు మచ్చ", "மஞ்சள் புள்ளி", "হলুদ দাগ"]},
-  {"id": "brown_spots", "icon": "🟤", "names": {"en": "Brown spots", "hi": "भूरे धब्बे", "mr": "तपकिरी ठिपके", "te": "గోధుమ రంగు మచ్చలు", "ta": "பழுப்பு புள்ளிகள்", "bn": "বাদামি দাগ"}, "kw": ["brown spot", "brown patch", "भूरे धब्बे", "भूरा धब्बा", "भूरे", "तपकिरी", "గోధుమ", "பழுப்பு", "বাদামি"]},
-  {"id": "black_spots", "icon": "⚫", "names": {"en": "Black / dark spots", "hi": "काले धब्बे", "mr": "काळे ठिपके", "te": "నల్ల మచ్చలు", "ta": "கருப்பு புள்ளிகள்", "bn": "কালো দাগ"}, "kw": ["black spot", "dark spot", "काले धब्बे", "काला धब्बा", "काळे ठिपके", "काळे", "నల్ల", "கருப்பு", "কালো"]},
-  {"id": "concentric_rings", "icon": "🎯", "names": {"en": "Spots with rings (target)", "hi": "छल्लेदार धब्बे", "mr": "कड्यांचे ठिपके", "te": "వలయాల మచ్చలు", "ta": "வளைய புள்ளிகள்", "bn": "বলয়যুক্ত দাগ"}, "kw": ["ring", "target", "circle", "छल्ले", "छल्ला", "गोल", "कडे", "वर्तुळ", "వలయ", "வளைய", "বলয়"]},
-  {"id": "eye_shaped_spots", "icon": "👁️", "names": {"en": "Eye / boat-shaped spots", "hi": "आँख/नाव जैसे धब्बे", "mr": "डोळ्याच्या आकाराचे ठिपके", "te": "కంటి ఆకార మచ్చలు", "ta": "கண் வடிவ புள்ளிகள்", "bn": "চোখের মতো দাগ"}, "kw": ["eye shape", "spindle", "boat", "आँख", "नाव", "डोळ्या", "కంటి", "கண் வடிவ", "চোখের"]},
-  {"id": "water_soaked", "icon": "💧", "names": {"en": "Water-soaked / greasy patches", "hi": "पानी जैसे गीले धब्बे", "mr": "पाणथळ डाग", "te": "నీటి మచ్చలు", "ta": "நீர் ஊறிய திட்டுகள்", "bn": "জলে ভেজা দাগ"}, "kw": ["water soaked", "wet patch", "greasy", "oily", "पानी जैसे", "गीले", "चिकने", "पाणथळ", "तेलकट", "నీటి", "நீர்", "ভেজা"]},
-  {"id": "white_powder", "icon": "⚪", "names": {"en": "White powder on leaves", "hi": "सफेद पाउडर", "mr": "पांढरी भुकटी", "te": "తెల్లని పొడి", "ta": "வெள்ளை தூள்", "bn": "সাদা গুঁড়ো"}, "kw": ["white powder", "powdery", "powder", "सफेद पाउडर", "पाउडर", "चूर्ण", "पांढरी भुकटी", "भुकटी", "భూడిద", "పొడి", "தூள்", "গুঁড়ো"]},
-  {"id": "mold_underside", "icon": "☁️", "names": {"en": "Fungal growth under leaf", "hi": "पत्ती के नीचे फफूंद", "mr": "पानाखाली बुरशी", "te": "ఆకు కింద బూజు", "ta": "இலையின் அடியில் பூஞ்சை", "bn": "পাতার নিচে ছত্রাক"}, "kw": ["mould", "mold", "fungus", "cottony", "फफूंद", "फफूँद", "बुरशी", "బూజు", "பூஞ்சை", "ছত্রাক"]},
-  {"id": "rust_pustules", "icon": "🟠", "names": {"en": "Orange / rusty powder", "hi": "नारंगी रतुआ पाउडर", "mr": "नारिंगी तांबेरा भुकटी", "te": "తుప్పు రంగు పొడి", "ta": "துரு நிற தூள்", "bn": "মরিচা রঙের গুঁড়ো"}, "kw": ["rust", "orange", "pustule", "रतुआ", "गेरुई", "नारंगी", "तांबेरा", "नारिंगी", "తుప్పు", "துரு", "মরিচা"]},
-  {"id": "yellow_stripes", "icon": "〰️", "names": {"en": "Yellow stripes / streaks", "hi": "पीली धारियाँ", "mr": "पिवळे पट्टे", "te": "పసుపు చారలు", "ta": "மஞ்சள் கோடுகள்", "bn": "হলুদ ডোরা"}, "kw": ["stripe", "streak", "धारी", "धारियाँ", "पट्टे", "చారలు", "கோடு", "ডোরা"]},
-  {"id": "yellowing", "icon": "💛", "names": {"en": "Leaves turning yellow", "hi": "पत्तियाँ पीली होना", "mr": "पाने पिवळी पडणे", "te": "ఆకులు పసుపు రంగు", "ta": "இலைகள் மஞ்சளாதல்", "bn": "পাতা হলুদ হওয়া"}, "kw": ["yellowing", "turning yellow", "yellow leaves", "पीली", "पीला", "पीलापन", "पिवळी", "पिवळेपणा", "పసుపు", "மஞ்சள்", "হলুদ"]},
-  {"id": "leaf_curl", "icon": "🌀", "names": {"en": "Leaves curling", "hi": "पत्तियाँ मुड़ना", "mr": "पाने वळणे / चुरडा", "te": "ఆకు ముడత", "ta": "இலை சுருள்", "bn": "পাতা কোঁকড়ানো"}, "kw": ["curl", "crinkle", "twist", "मुड़", "मरोड़", "सिकुड़", "वळ", "चुरडा", "मुरडा", "ముడత", "சுருள்", "কোঁকড়"]},
-  {"id": "mosaic", "icon": "🧩", "names": {"en": "Patchy light & dark green (mosaic)", "hi": "चितकबरी पत्तियाँ (मोज़ेक)", "mr": "चट्टेपट्टे पाने (मोझॅक)", "te": "మొజాయిక్", "ta": "மொசைக்", "bn": "মোজাইক"}, "kw": ["mosaic", "mottle", "patchy", "मोज़ेक", "मोजेक", "चितकबर", "मोझॅक", "चट्टे", "మొజాయిక్", "மொசைக்", "মোজাইক"]},
-  {"id": "wilting", "icon": "🥀", "names": {"en": "Wilting / drooping / drying", "hi": "पौधा मुरझाना / सूखना", "mr": "झाड मलूल होणे / वाळणे", "te": "వాడిపోవడం", "ta": "வாடுதல்", "bn": "ঢলে পড়া"}, "kw": ["wilt", "droop", "drying", "dry", "मुरझा", "सूख", "मलूल", "वाळ", "వాడి", "வாடு", "ঢলে", "শুকিয়ে"]},
-  {"id": "leaf_blight", "icon": "🔥", "names": {"en": "Large burnt / dried patches", "hi": "पत्तियाँ झुलसना", "mr": "पाने करपणे", "te": "ఆకు ఎండు తెగులు", "ta": "இலை கருகல்", "bn": "পাতা ঝলসানো"}, "kw": ["blight", "burnt", "burned", "scorch", "झुलस", "जली", "करप", "करपा", "ఎండు", "కాలిన", "கருகல்", "ঝলসা"]},
-  {"id": "fruit_rot", "icon": "🍅", "names": {"en": "Spots / rot on fruit or tuber", "hi": "फल / कंद पर धब्बे या सड़न", "mr": "फळ / कंदावर डाग किंवा कूज", "te": "పండు కుళ్ళు", "ta": "பழ அழுகல்", "bn": "ফল পচা"}, "kw": ["fruit rot", "fruit spot", "rotting", "rot", "सड़", "सड़न", "फल पर", "कूज", "कुज", "फळावर", "కుళ్ళు", "அழுகல்", "পচা"]},
-  {"id": "holes_chewing", "icon": "🐛", "names": {"en": "Holes / chewed leaves, caterpillars", "hi": "पत्तियों में छेद / इल्ली", "mr": "पानांना छिद्रे / अळी", "te": "ఆకులకు రంధ్రాలు / పురుగు", "ta": "இலையில் துளைகள் / புழு", "bn": "পাতায় ছিদ্র / শুঁয়োপোকা"}, "kw": ["hole", "chew", "caterpillar", "worm", "larva", "छेद", "इल्ली", "सुंडी", "कीड़ा", "छिद्र", "अळी", "రంధ్ర", "పురుగు", "துளை", "புழு", "ছিদ্র", "পোকা"]},
-  {"id": "insects_underside", "icon": "🦟", "names": {"en": "Tiny insects under leaves (whitefly)", "hi": "पत्तियों के नीचे छोटे कीट (सफेद मक्खी)", "mr": "पानाखाली लहान कीड (पांढरी माशी)", "te": "ఆకు కింద చిన్న పురుగులు (తెల్ల దోమ)", "ta": "இலையின் கீழ் சிறு பூச்சிகள் (வெள்ளை ஈ)", "bn": "পাতার নিচে ছোট পোকা (সাদা মাছি)"}, "kw": ["whitefly", "white fly", "insect", "aphid", "thrips", "jassid", "सफेद मक्खी", "कीट", "माहू", "पांढरी माशी", "माशी", "मावा", "तुडतुडे", "తెల్ల దోమ", "வெள்ளை ஈ", "সাদা মাছি"]},
-  {"id": "webbing", "icon": "🕸️", "names": {"en": "Fine webbing (mites)", "hi": "महीन जाला (मकड़ी)", "mr": "बारीक जाळे (कोळी)", "te": "సాలెగూడు (నల్లి)", "ta": "சிலந்தி வலை (பேன்)", "bn": "মাকড়সার জাল"}, "kw": ["web", "mite", "spider", "जाला", "मकड़ी", "जाळे", "कोळी", "సాలె", "నల్లి", "வலை", "சிலந்தி", "জাল", "মাকড়"]},
-  {"id": "stunted", "icon": "📏", "names": {"en": "Stunted plant / small leaves", "hi": "पौधा बौना / छोटी पत्तियाँ", "mr": "खुजे झाड / लहान पाने", "te": "ఎదుగుదల లేకపోవడం", "ta": "வளர்ச்சி குன்றல்", "bn": "বৃদ্ধি কম"}, "kw": ["stunted", "short", "small leaves", "not growing", "बौना", "छोटी पत्ती", "बढ़ नहीं", "खुजे", "लहान पाने", "వృద్ధి", "ఎదుగుదల", "குன்ற", "বৃদ্ধি"]}
+  {
+   "id": "yellow_spots",
+   "icon": "🟡",
+   "names": {
+    "en": "Yellow spots / dots",
+    "hi": "पीले धब्बे",
+    "mr": "पिवळे ठिपके",
+    "te": "పసుపు మచ్చలు",
+    "ta": "மஞ்சள் புள்ளிகள்",
+    "bn": "হলুদ দাগ"
+   },
+   "kw": [
+    "yellow spot",
+    "yellow dot",
+    "पीले धब्बे",
+    "पीला धब्बा",
+    "पिवळे ठिपके",
+    "పసుపు మచ్చ",
+    "மஞ்சள் புள்ளி",
+    "হলুদ দাগ"
+   ]
+  },
+  {
+   "id": "brown_spots",
+   "icon": "🟤",
+   "names": {
+    "en": "Brown spots",
+    "hi": "भूरे धब्बे",
+    "mr": "तपकिरी ठिपके",
+    "te": "గోధుమ రంగు మచ్చలు",
+    "ta": "பழுப்பு புள்ளிகள்",
+    "bn": "বাদামি দাগ"
+   },
+   "kw": [
+    "brown spot",
+    "brown patch",
+    "भूरे धब्बे",
+    "भूरा धब्बा",
+    "भूरे",
+    "तपकिरी",
+    "గోధుమ",
+    "பழுப்பு",
+    "বাদামি"
+   ]
+  },
+  {
+   "id": "black_spots",
+   "icon": "⚫",
+   "names": {
+    "en": "Black / dark spots",
+    "hi": "काले धब्बे",
+    "mr": "काळे ठिपके",
+    "te": "నల్ల మచ్చలు",
+    "ta": "கருப்பு புள்ளிகள்",
+    "bn": "কালো দাগ"
+   },
+   "kw": [
+    "black spot",
+    "dark spot",
+    "काले धब्बे",
+    "काला धब्बा",
+    "काळे ठिपके",
+    "काळे",
+    "నల్ల",
+    "கருப்பு",
+    "কালো"
+   ]
+  },
+  {
+   "id": "concentric_rings",
+   "icon": "🎯",
+   "names": {
+    "en": "Spots with rings (target)",
+    "hi": "छल्लेदार धब्बे",
+    "mr": "कड्यांचे ठिपके",
+    "te": "వలయాల మచ్చలు",
+    "ta": "வளைய புள்ளிகள்",
+    "bn": "বলয়যুক্ত দাগ"
+   },
+   "kw": [
+    "ring",
+    "target",
+    "circle",
+    "छल्ले",
+    "छल्ला",
+    "गोल",
+    "कडे",
+    "वर्तुळ",
+    "వలయ",
+    "வளைய",
+    "বলয়"
+   ]
+  },
+  {
+   "id": "eye_shaped_spots",
+   "icon": "👁️",
+   "names": {
+    "en": "Eye / boat-shaped spots",
+    "hi": "आँख/नाव जैसे धब्बे",
+    "mr": "डोळ्याच्या आकाराचे ठिपके",
+    "te": "కంటి ఆకార మచ్చలు",
+    "ta": "கண் வடிவ புள்ளிகள்",
+    "bn": "চোখের মতো দাগ"
+   },
+   "kw": [
+    "eye shape",
+    "spindle",
+    "boat",
+    "आँख",
+    "नाव",
+    "डोळ्या",
+    "కంటి",
+    "கண் வடிவ",
+    "চোখের"
+   ]
+  },
+  {
+   "id": "water_soaked",
+   "icon": "💧",
+   "names": {
+    "en": "Water-soaked / greasy patches",
+    "hi": "पानी जैसे गीले धब्बे",
+    "mr": "पाणथळ डाग",
+    "te": "నీటి మచ్చలు",
+    "ta": "நீர் ஊறிய திட்டுகள்",
+    "bn": "জলে ভেজা দাগ"
+   },
+   "kw": [
+    "water soaked",
+    "wet patch",
+    "greasy",
+    "oily",
+    "पानी जैसे",
+    "गीले",
+    "चिकने",
+    "पाणथळ",
+    "तेलकट",
+    "నీటి",
+    "நீர்",
+    "ভেজা"
+   ]
+  },
+  {
+   "id": "white_powder",
+   "icon": "⚪",
+   "names": {
+    "en": "White powder on leaves",
+    "hi": "सफेद पाउडर",
+    "mr": "पांढरी भुकटी",
+    "te": "తెల్లని పొడి",
+    "ta": "வெள்ளை தூள்",
+    "bn": "সাদা গুঁড়ো"
+   },
+   "kw": [
+    "white powder",
+    "powdery",
+    "powder",
+    "सफेद पाउडर",
+    "पाउडर",
+    "चूर्ण",
+    "पांढरी भुकटी",
+    "भुकटी",
+    "భూడిద",
+    "పొడి",
+    "தூள்",
+    "গুঁড়ো"
+   ]
+  },
+  {
+   "id": "mold_underside",
+   "icon": "☁️",
+   "names": {
+    "en": "Fungal growth under leaf",
+    "hi": "पत्ती के नीचे फफूंद",
+    "mr": "पानाखाली बुरशी",
+    "te": "ఆకు కింద బూజు",
+    "ta": "இலையின் அடியில் பூஞ்சை",
+    "bn": "পাতার নিচে ছত্রাক"
+   },
+   "kw": [
+    "mould",
+    "mold",
+    "fungus",
+    "cottony",
+    "फफूंद",
+    "फफूँद",
+    "बुरशी",
+    "బూజు",
+    "பூஞ்சை",
+    "ছত্রাক"
+   ]
+  },
+  {
+   "id": "rust_pustules",
+   "icon": "🟠",
+   "names": {
+    "en": "Orange / rusty powder",
+    "hi": "नारंगी रतुआ पाउडर",
+    "mr": "नारिंगी तांबेरा भुकटी",
+    "te": "తుప్పు రంగు పొడి",
+    "ta": "துரு நிற தூள்",
+    "bn": "মরিচা রঙের গুঁড়ো"
+   },
+   "kw": [
+    "rust",
+    "orange",
+    "pustule",
+    "रतुआ",
+    "गेरुई",
+    "नारंगी",
+    "तांबेरा",
+    "नारिंगी",
+    "తుప్పు",
+    "துரு",
+    "মরিচা"
+   ]
+  },
+  {
+   "id": "yellow_stripes",
+   "icon": "〰️",
+   "names": {
+    "en": "Yellow stripes / streaks",
+    "hi": "पीली धारियाँ",
+    "mr": "पिवळे पट्टे",
+    "te": "పసుపు చారలు",
+    "ta": "மஞ்சள் கோடுகள்",
+    "bn": "হলুদ ডোরা"
+   },
+   "kw": [
+    "stripe",
+    "streak",
+    "धारी",
+    "धारियाँ",
+    "पट्टे",
+    "చారలు",
+    "கோடு",
+    "ডোরা"
+   ]
+  },
+  {
+   "id": "yellowing",
+   "icon": "💛",
+   "names": {
+    "en": "Leaves turning yellow",
+    "hi": "पत्तियाँ पीली होना",
+    "mr": "पाने पिवळी पडणे",
+    "te": "ఆకులు పసుపు రంగు",
+    "ta": "இலைகள் மஞ்சளாதல்",
+    "bn": "পাতা হলুদ হওয়া"
+   },
+   "kw": [
+    "yellowing",
+    "turning yellow",
+    "yellow leaves",
+    "पीली",
+    "पीला",
+    "पीलापन",
+    "पिवळी",
+    "पिवळेपणा",
+    "పసుపు",
+    "மஞ்சள்",
+    "হলুদ"
+   ]
+  },
+  {
+   "id": "leaf_curl",
+   "icon": "🌀",
+   "names": {
+    "en": "Leaves curling",
+    "hi": "पत्तियाँ मुड़ना",
+    "mr": "पाने वळणे / चुरडा",
+    "te": "ఆకు ముడత",
+    "ta": "இலை சுருள்",
+    "bn": "পাতা কোঁকড়ানো"
+   },
+   "kw": [
+    "curl",
+    "crinkle",
+    "twist",
+    "मुड़",
+    "मरोड़",
+    "सिकुड़",
+    "वळ",
+    "चुरडा",
+    "मुरडा",
+    "ముడత",
+    "சுருள்",
+    "কোঁকড়"
+   ]
+  },
+  {
+   "id": "mosaic",
+   "icon": "🧩",
+   "names": {
+    "en": "Patchy light & dark green (mosaic)",
+    "hi": "चितकबरी पत्तियाँ (मोज़ेक)",
+    "mr": "चट्टेपट्टे पाने (मोझॅक)",
+    "te": "మొజాయిక్",
+    "ta": "மொசைக்",
+    "bn": "মোজাইক"
+   },
+   "kw": [
+    "mosaic",
+    "mottle",
+    "patchy",
+    "मोज़ेक",
+    "मोजेक",
+    "चितकबर",
+    "मोझॅक",
+    "चट्टे",
+    "మొజాయిక్",
+    "மொசைக்",
+    "মোজাইক"
+   ]
+  },
+  {
+   "id": "wilting",
+   "icon": "🥀",
+   "names": {
+    "en": "Wilting / drooping / drying",
+    "hi": "पौधा मुरझाना / सूखना",
+    "mr": "झाड मलूल होणे / वाळणे",
+    "te": "వాడిపోవడం",
+    "ta": "வாடுதல்",
+    "bn": "ঢলে পড়া"
+   },
+   "kw": [
+    "wilt",
+    "droop",
+    "drying",
+    "dry",
+    "मुरझा",
+    "सूख",
+    "मलूल",
+    "वाळ",
+    "వాడి",
+    "வாடு",
+    "ঢলে",
+    "শুকিয়ে"
+   ]
+  },
+  {
+   "id": "leaf_blight",
+   "icon": "🔥",
+   "names": {
+    "en": "Large burnt / dried patches",
+    "hi": "पत्तियाँ झुलसना",
+    "mr": "पाने करपणे",
+    "te": "ఆకు ఎండు తెగులు",
+    "ta": "இலை கருகல்",
+    "bn": "পাতা ঝলসানো"
+   },
+   "kw": [
+    "blight",
+    "burnt",
+    "burned",
+    "scorch",
+    "झुलस",
+    "जली",
+    "करप",
+    "करपा",
+    "ఎండు",
+    "కాలిన",
+    "கருகல்",
+    "ঝলসা"
+   ]
+  },
+  {
+   "id": "fruit_rot",
+   "icon": "🍅",
+   "names": {
+    "en": "Spots / rot on fruit or tuber",
+    "hi": "फल / कंद पर धब्बे या सड़न",
+    "mr": "फळ / कंदावर डाग किंवा कूज",
+    "te": "పండు కుళ్ళు",
+    "ta": "பழ அழுகல்",
+    "bn": "ফল পচা"
+   },
+   "kw": [
+    "fruit rot",
+    "fruit spot",
+    "rotting",
+    "rot",
+    "सड़",
+    "सड़न",
+    "फल पर",
+    "कूज",
+    "कुज",
+    "फळावर",
+    "కుళ్ళు",
+    "அழுகல்",
+    "পচা"
+   ]
+  },
+  {
+   "id": "grain_balls",
+   "icon": "🟠",
+   "names": {
+    "en": "Orange / yellow balls on grains",
+    "hi": "दानों पर नारंगी / पीले गोले",
+    "mr": "दाण्यांवर नारिंगी / पिवळे गोळे",
+    "te": "గింజలపై నారింజ / పసుపు ఉండలు",
+    "ta": "நெல்மணிகளில் ஆரஞ்சு / மஞ்சள் உருண்டைகள்",
+    "bn": "দানায় কমলা / হলুদ বল"
+   },
+   "kw": [
+    "ball",
+    "smut",
+    "false smut",
+    "orange grain",
+    "yellow grain",
+    "गोले",
+    "गोला",
+    "कंडुआ",
+    "हल्दी",
+    "गोळे",
+    "काजळी",
+    "हळद्या",
+    "ఉండలు",
+    "உருண்டை",
+    "বল",
+    "ঝুল"
+   ]
+  },
+  {
+   "id": "grain_discolor",
+   "icon": "🌾",
+   "names": {
+    "en": "Discoloured / empty grains",
+    "hi": "बदरंग / खाली दाने",
+    "mr": "रंग बदललेले / पोचट दाणे",
+    "te": "రంగు మారిన / తాలు గింజలు",
+    "ta": "நிறம் மாறிய / பதர் மணிகள்",
+    "bn": "বিবর্ণ / চিটা দানা"
+   },
+   "kw": [
+    "discolor",
+    "discolour",
+    "empty grain",
+    "chaffy",
+    "dirty panicle",
+    "grain spot",
+    "खाली दाने",
+    "बदरंग",
+    "दाने काले",
+    "पोचट",
+    "दाणे",
+    "తాలు",
+    "పదర్",
+    "பதர்",
+    "চিটা",
+    "বিবর্ণ"
+   ]
+  },
+  {
+   "id": "neck_rot",
+   "icon": "🥢",
+   "names": {
+    "en": "Panicle neck turns black / breaks",
+    "hi": "बाली की गर्दन काली / टूटना",
+    "mr": "लोंबीची मान काळी / मोडणे",
+    "te": "కంకి మెడ నల్లబడటం / విరగడం",
+    "ta": "கதிர் கழுத்து கருப்பாதல் / முறிதல்",
+    "bn": "শিষের গলা কালো / ভেঙে যাওয়া"
+   },
+   "kw": [
+    "neck",
+    "neck blast",
+    "panicle break",
+    "गर्दन",
+    "बाली टूट",
+    "मान",
+    "लोंबी मोड",
+    "మెడ",
+    "கழுத்து",
+    "গলা"
+   ]
+  },
+  {
+   "id": "holes_chewing",
+   "icon": "🐛",
+   "names": {
+    "en": "Holes / chewed leaves, caterpillars",
+    "hi": "पत्तियों में छेद / इल्ली",
+    "mr": "पानांना छिद्रे / अळी",
+    "te": "ఆకులకు రంధ్రాలు / పురుగు",
+    "ta": "இலையில் துளைகள் / புழு",
+    "bn": "পাতায় ছিদ্র / শুঁয়োপোকা"
+   },
+   "kw": [
+    "hole",
+    "chew",
+    "caterpillar",
+    "worm",
+    "larva",
+    "छेद",
+    "इल्ली",
+    "सुंडी",
+    "कीड़ा",
+    "छिद्र",
+    "अळी",
+    "రంధ్ర",
+    "పురుగు",
+    "துளை",
+    "புழு",
+    "ছিদ্র",
+    "পোকা"
+   ]
+  },
+  {
+   "id": "insects_underside",
+   "icon": "🦟",
+   "names": {
+    "en": "Tiny insects under leaves (whitefly)",
+    "hi": "पत्तियों के नीचे छोटे कीट (सफेद मक्खी)",
+    "mr": "पानाखाली लहान कीड (पांढरी माशी)",
+    "te": "ఆకు కింద చిన్న పురుగులు (తెల్ల దోమ)",
+    "ta": "இலையின் கீழ் சிறு பூச்சிகள் (வெள்ளை ஈ)",
+    "bn": "পাতার নিচে ছোট পোকা (সাদা মাছি)"
+   },
+   "kw": [
+    "whitefly",
+    "white fly",
+    "insect",
+    "aphid",
+    "thrips",
+    "jassid",
+    "सफेद मक्खी",
+    "कीट",
+    "माहू",
+    "पांढरी माशी",
+    "माशी",
+    "मावा",
+    "तुडतुडे",
+    "తెల్ల దోమ",
+    "வெள்ளை ஈ",
+    "সাদা মাছি"
+   ]
+  },
+  {
+   "id": "webbing",
+   "icon": "🕸️",
+   "names": {
+    "en": "Fine webbing (mites)",
+    "hi": "महीन जाला (मकड़ी)",
+    "mr": "बारीक जाळे (कोळी)",
+    "te": "సాలెగూడు (నల్లి)",
+    "ta": "சிலந்தி வலை (பேன்)",
+    "bn": "মাকড়সার জাল"
+   },
+   "kw": [
+    "web",
+    "mite",
+    "spider",
+    "जाला",
+    "मकड़ी",
+    "जाळे",
+    "कोळी",
+    "సాలె",
+    "నల్లి",
+    "வலை",
+    "சிலந்தி",
+    "জাল",
+    "মাকড়"
+   ]
+  },
+  {
+   "id": "stunted",
+   "icon": "📏",
+   "names": {
+    "en": "Stunted plant / small leaves",
+    "hi": "पौधा बौना / छोटी पत्तियाँ",
+    "mr": "खुजे झाड / लहान पाने",
+    "te": "ఎదుగుదల లేకపోవడం",
+    "ta": "வளர்ச்சி குன்றல்",
+    "bn": "বৃদ্ধি কম"
+   },
+   "kw": [
+    "stunted",
+    "short",
+    "small leaves",
+    "not growing",
+    "बौना",
+    "छोटी पत्ती",
+    "बढ़ नहीं",
+    "खुजे",
+    "लहान पाने",
+    "వృద్ధి",
+    "ఎదుగుదల",
+    "குன்ற",
+    "বৃদ্ধি"
+   ]
+  }
  ]
 }
