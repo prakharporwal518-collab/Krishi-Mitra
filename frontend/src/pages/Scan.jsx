@@ -28,17 +28,27 @@ export default function Scan({ t, lang, go, crops = [] }) {
   const [hint, setHint] = useState(loadHint) // crop the farmer says this is ('' = detect automatically)
   const chooseHint = (c) => { setHint(c); setResult(null); try { localStorage.setItem('km_scan_crop', c) } catch { /* ignore */ } }
   const hintName = crops.find((c) => c.id === hint)?.name || hint
+  // 7 main field crops by default; "More crops" adds the fruit and vegetable crops the photo AI also knows
+  const [showMore, setShowMore] = useState(() => !!hint && !['tomato', 'potato', 'rice', 'wheat', 'cotton', 'maize', 'chilli'].includes(hint))
+  const visibleCrops = showMore ? crops : crops.filter((c) => c.main)
+  const moreToggle = crops.some((c) => !c.main) && (
+    <button onClick={() => setShowMore((v) => !v)} aria-expanded={showMore}
+      className="lift rounded-full bg-leaf-50 px-3 py-1.5 text-sm font-bold text-leaf-800 ring-2 ring-leaf-200 hover:ring-leaf-500">
+      {showMore ? '➖ ' + t('fewerCrops') : '➕ ' + t('moreCrops')}
+    </button>
+  )
   // On an uncertain automatic result, let the farmer name the crop and re-check the same photo in one tap
   const cropRetry = !hint && (
     <div className="mt-3 rounded-xl bg-white/80 p-3">
       <p className="mb-2 text-sm font-bold text-leaf-900">🌱 {t('pickCropRetry')}</p>
       <div className="flex flex-wrap gap-2">
-        {crops.filter((c) => c.main).map((c) => (
+        {visibleCrops.map((c) => (
           <button key={c.id} onClick={() => { chooseHint(c.id); diagnose(c.id) }}
             className="lift rounded-full bg-white px-3 py-1.5 text-sm font-bold text-leaf-900 ring-2 ring-leaf-200 hover:ring-leaf-500">
             {c.icon} {c.name}
           </button>
         ))}
+        {moreToggle}
       </div>
     </div>
   )
@@ -87,12 +97,13 @@ export default function Scan({ t, lang, go, crops = [] }) {
         <p className="font-extrabold text-leaf-900">🌱 {t('cropQuestion')}</p>
         <p className="mb-3 text-sm text-gray-600">{t('cropOptional')}</p>
         <div className="flex flex-wrap gap-2">
-          {[{ id: '', icon: '✨', name: t('autoDetect') }, ...crops.filter((c) => c.main)].map((c) => (
+          {[{ id: '', icon: '✨', name: t('autoDetect') }, ...visibleCrops].map((c) => (
             <button key={c.id || 'auto'} onClick={() => chooseHint(c.id)} aria-pressed={hint === c.id}
               className={`lift rounded-full px-3 py-2 text-sm font-bold ring-2 ${hint === c.id ? 'bg-leaf-700 text-white ring-leaf-700' : 'bg-white text-leaf-900 ring-leaf-100 hover:ring-leaf-200'}`}>
               {c.icon} {c.name}
             </button>
           ))}
+          {moreToggle}
         </div>
       </section>
       {!preview && (
