@@ -88,7 +88,7 @@ export default function App() {
         <main key={navKey} className="mx-auto max-w-xl px-4 pt-4 lg:max-w-6xl lg:px-8 lg:pt-8">
           {page.name === 'home' && <Home {...props} region={region} setRegion={setRegion} />}
           {page.name === 'scan' && <Scan {...props} />}
-          {page.name === 'symptoms' && <Symptoms {...props} />}
+          {page.name === 'symptoms' && <Symptoms {...props} params={page.params} />}
           {page.name === 'disease' && <Disease {...props} params={page.params} />}
           {page.name === 'history' && <History {...props} />}
           {page.name === 'help' && <Help t={t} />}

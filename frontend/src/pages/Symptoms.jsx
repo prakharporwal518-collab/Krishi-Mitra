@@ -4,8 +4,8 @@ import { addHistory } from '../history'
 import { listen } from '../speech'
 import { ErrorBox, PageTitle, Spinner } from '../components/ui'
 
-export default function Symptoms({ t, lang, go, crops }) {
-  const [crop, setCrop] = useState(null)
+export default function Symptoms({ t, lang, go, crops, params }) {
+  const [crop, setCrop] = useState(params?.crop || null) // pre-selected when coming from the photo check
   const [list, setList] = useState([])
   const [picked, setPicked] = useState([])
   const [transcript, setTranscript] = useState('')
