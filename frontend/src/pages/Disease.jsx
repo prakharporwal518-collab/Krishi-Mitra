@@ -48,12 +48,13 @@ export default function Disease({ t, lang, params, region, go }) {
         <div className="mt-4"><ReadAloud t={t} text={speech} lang={d.translated ? lang : 'en'} /></div>
       </div>
 
+      <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-4">
       <Section icon="📖" title={t('about')}><p className="text-lg">{d.about}</p></Section>
       <Section icon="🔎" title={t('signs')}><List items={d.symptoms} /></Section>
 
       {!healthy && (
-        <Section icon="🧪" title={t('chemical')}>
-          <dl className="space-y-3 text-lg">
+        <Section icon="🧪" title={t('chemical')} tone="card lg:col-span-2">
+          <dl className="space-y-3 text-lg lg:grid lg:grid-cols-3 lg:gap-4 lg:space-y-0">
             <div><dt className="text-sm font-bold text-gray-500">{t('product')}</dt><dd className="font-extrabold text-leaf-900">{c.product}</dd></div>
             <div className="rounded-2xl bg-leaf-50 p-3"><dt className="text-sm font-bold text-gray-500">⚖️ {t('dosage')}</dt><dd className="font-bold">{c.dosage}</dd></div>
             <div><dt className="text-sm font-bold text-gray-500">⏰ {t('timing')}</dt><dd>{c.timing}</dd></div>
@@ -69,7 +70,7 @@ export default function Disease({ t, lang, params, region, go }) {
       <Section icon="🛡️" title={t('prevention')}><List items={d.prevention} /></Section>
 
       {d.region_tips.length > 0 && (
-        <Section icon="📍" title={t('regionTips')} tone="card bg-blue-50 ring-blue-100">
+        <Section icon="📍" title={t('regionTips')} tone="card bg-blue-50 ring-blue-100 lg:col-span-2">
           {d.region_tips.map((r, i) => (
             <div key={i} className="mb-3 last:mb-0">
               <p>{r.tip}</p>
@@ -78,6 +79,8 @@ export default function Disease({ t, lang, params, region, go }) {
           ))}
         </Section>
       )}
+
+      </div>
 
       {!healthy && (
         <section className="card mt-4 border-2 border-red-300 bg-red-50">

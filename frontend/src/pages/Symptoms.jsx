@@ -50,8 +50,10 @@ export default function Symptoms({ t, lang, go, crops }) {
   return (
     <div>
       <PageTitle icon="📝" title={t('symTitle')} sub={t('symDesc')} />
+      <div className="lg:grid lg:grid-cols-[1fr_24rem] lg:items-start lg:gap-6">
+      <div className="lg:rounded-3xl lg:bg-white lg:p-6 lg:shadow-sm lg:ring-1 lg:ring-leaf-100">
       <h2 className="h2 mb-2">1. {t('selectCrop')}</h2>
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-4 gap-2 lg:grid-cols-7">
         {crops.filter((c) => c.main).map((c) => (
           <button key={c.id} onClick={() => setCrop(c.id)}
             className={`flex flex-col items-center rounded-2xl p-2 text-sm font-semibold ring-2 transition active:scale-95 ${crop === c.id ? 'bg-leaf-700 text-white ring-leaf-700' : 'bg-white ring-leaf-100'}`}>
@@ -68,7 +70,7 @@ export default function Symptoms({ t, lang, go, crops }) {
           </button>
           {transcript && <p className="mb-3 rounded-xl bg-white p-3 text-gray-700">🗣️ {t('youSaid')}: “{transcript}”</p>}
           {!list.length && !error && <Spinner />}
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2 xl:grid-cols-3">
             {list.map((s) => {
               const on = picked.includes(s.id)
               return (
@@ -82,12 +84,20 @@ export default function Symptoms({ t, lang, go, crops }) {
           <button className="btn-primary mt-5 w-full text-xl" disabled={loading || (!picked.length && !transcript)} onClick={find}>🔍 {t('findDisease')}</button>
         </>
       )}
+      </div>
 
+      <div className="lg:sticky lg:top-8">
       {loading && <Spinner />}
       <ErrorBox t={t} error={error} />
+      {!result && !loading && (
+        <div className="card hidden min-h-[16rem] flex-col items-center justify-center border-2 border-dashed border-leaf-200 text-center text-gray-500 lg:flex">
+          <span className="text-6xl opacity-60">🔍</span>
+          <p className="mt-3 text-lg font-semibold">{t('resultHere')}</p>
+        </div>
+      )}
 
       {result && (
-        <div className="mt-5">
+        <div className="mt-5 lg:mt-0">
           <h2 className="h2 mb-2">{t('topMatches')}</h2>
           {!result.matches.length && <p className="card">{t('noMatch')}</p>}
           <div className="space-y-3">
@@ -104,6 +114,8 @@ export default function Symptoms({ t, lang, go, crops }) {
           </div>
         </div>
       )}
+      </div>
+      </div>
     </div>
   )
 }

@@ -28,6 +28,7 @@ export const STRINGS = {
     speechUnsupported: 'Voice input is not supported in this browser. Please tick the symptoms.', changeLang: 'Language',
     trySymptoms: 'Tell symptoms instead', supportedCrops: 'Photo check works for: tomato, potato, rice, wheat, cotton, maize, chilli/capsicum, apple, grape, cherry, peach, squash, strawberry, orange. Make sure the photo shows a plant leaf.',
     possibleTitle: 'Possible disease (not fully sure)', possibleMsg: 'Our AI is not fully sure. Open the treatment and check that the symptoms match your crop, and confirm with your Krishi Vigyan Kendra or call 1800-180-1551 before spraying. A close-up of one leaf gives a surer result.',
+    statDiagnoses: 'Diagnoses done', statLast: 'Last result', statCrops: 'Crops supported', statDiseases: 'Diseases covered', recent: 'Recent diagnoses', viewAll: 'View all', resultHere: 'Your result will appear here', quickActions: 'Start a check', cropsCovered: 'Crops covered', menu: 'Menu',
   },
   hi: {
     appName: 'कृषि मित्र', tagline: 'आपकी भाषा में आपका फसल डॉक्टर',
@@ -57,6 +58,7 @@ export const STRINGS = {
     speechUnsupported: 'इस ब्राउज़र में आवाज़ इनपुट उपलब्ध नहीं। कृपया लक्षणों पर निशान लगाएँ।', changeLang: 'भाषा',
     trySymptoms: 'इसके बजाय लक्षण बताएँ', supportedCrops: 'फोटो जाँच इन फसलों के लिए है: टमाटर, आलू, धान, गेहूँ, कपास, मक्का, मिर्च/शिमला मिर्च, सेब, अंगूर, चेरी, आड़ू, कद्दू, स्ट्रॉबेरी, संतरा। ध्यान दें कि फोटो में पौधे की पत्ती दिखे।',
     possibleTitle: 'संभावित रोग (पूरी तरह पक्का नहीं)', possibleMsg: 'हमारा AI पूरी तरह पक्का नहीं है। जाँचें कि लक्षण आपकी फसल से मिलते हैं, और छिड़काव से पहले कृषि विज्ञान केंद्र या 1800-180-1551 पर पुष्टि करें। एक पत्ती की पास से फोटो से ज़्यादा पक्का परिणाम मिलता है।',
+    statDiagnoses: 'की गई जाँचें', statLast: 'पिछला परिणाम', statCrops: 'समर्थित फसलें', statDiseases: 'शामिल रोग', recent: 'हाल की जाँचें', viewAll: 'सभी देखें', resultHere: 'आपका परिणाम यहाँ दिखेगा', quickActions: 'जाँच शुरू करें', cropsCovered: 'शामिल फसलें', menu: 'मेनू',
   },
   mr: {
     appName: 'कृषी मित्र', tagline: 'तुमच्या भाषेत तुमचा पीक डॉक्टर',
@@ -86,6 +88,7 @@ export const STRINGS = {
     speechUnsupported: 'या ब्राउझरमध्ये आवाज इनपुट उपलब्ध नाही. कृपया लक्षणांवर खूण करा.', changeLang: 'भाषा',
     trySymptoms: 'त्याऐवजी लक्षणे सांगा', supportedCrops: 'फोटो तपासणी या पिकांसाठी आहे: टोमॅटो, बटाटा, भात, गहू, कापूस, मका, मिरची/ढोबळी मिरची, सफरचंद, द्राक्ष, चेरी, पीच, भोपळा, स्ट्रॉबेरी, संत्रा. फोटोत झाडाचे पान दिसत असल्याची खात्री करा.',
     possibleTitle: 'संभाव्य रोग (पूर्ण खात्री नाही)', possibleMsg: 'आमच्या AI ला पूर्ण खात्री नाही. लक्षणे तुमच्या पिकाशी जुळतात का ते तपासा, आणि फवारणीपूर्वी कृषी विज्ञान केंद्र किंवा 1800-180-1551 वर खात्री करा. एका पानाचा जवळून फोटो अधिक खात्रीशीर निकाल देतो.',
+    statDiagnoses: 'केलेल्या तपासण्या', statLast: 'मागील निकाल', statCrops: 'समर्थित पिके', statDiseases: 'समाविष्ट रोग', recent: 'अलीकडील तपासण्या', viewAll: 'सर्व पाहा', resultHere: 'तुमचा निकाल येथे दिसेल', quickActions: 'तपासणी सुरू करा', cropsCovered: 'समाविष्ट पिके', menu: 'मेनू',
   },
   te: {
     appName: 'కృషి మిత్ర', tagline: 'మీ భాషలో మీ పంట డాక్టర్',
@@ -115,6 +118,7 @@ export const STRINGS = {
     speechUnsupported: 'ఈ బ్రౌజర్‌లో వాయిస్ ఇన్‌పుట్ లేదు. దయచేసి లక్షణాలను టిక్ చేయండి.', changeLang: 'భాష',
     trySymptoms: 'బదులుగా లక్షణాలు చెప్పండి', supportedCrops: 'ఫోటో పరీక్ష వీటికి: టమాటా, బంగాళాదుంప, వరి, గోధుమ, పత్తి, మొక్కజొన్న, మిరప, ఆపిల్, ద్రాక్ష, చెర్రీ, పీచ్, గుమ్మడి, స్ట్రాబెర్రీ, నారింజ. ఫోటోలో మొక్క ఆకు కనిపించేలా చూడండి.',
     possibleTitle: 'సంభావ్య వ్యాధి (పూర్తిగా ఖచ్చితం కాదు)', possibleMsg: 'మా AI కి పూర్తి నమ్మకం లేదు. లక్షణాలు మీ పంటకు సరిపోతాయో చూడండి, పిచికారీకి ముందు KVK లేదా 1800-180-1551 కు కాల్ చేసి నిర్ధారించుకోండి. ఒక ఆకు దగ్గరి ఫోటో మరింత ఖచ్చితమైన ఫలితం ఇస్తుంది.',
+    statDiagnoses: 'చేసిన పరీక్షలు', statLast: 'చివరి ఫలితం', statCrops: 'మద్దతు ఉన్న పంటలు', statDiseases: 'ఉన్న వ్యాధులు', recent: 'ఇటీవలి పరీక్షలు', viewAll: 'అన్నీ చూడండి', resultHere: 'మీ ఫలితం ఇక్కడ కనిపిస్తుంది', quickActions: 'పరీక్ష ప్రారంభించండి', cropsCovered: 'ఉన్న పంటలు', menu: 'మెనూ',
   },
   ta: {
     appName: 'கிருஷி மித்ரா', tagline: 'உங்கள் மொழியில் உங்கள் பயிர் மருத்துவர்',
@@ -144,6 +148,7 @@ export const STRINGS = {
     speechUnsupported: 'இந்த உலாவியில் குரல் உள்ளீடு இல்லை. அறிகுறிகளைத் தேர்ந்தெடுக்கவும்.', changeLang: 'மொழி',
     trySymptoms: 'பதிலாக அறிகுறிகளைச் சொல்லுங்கள்', supportedCrops: 'புகைப்பட சோதனை இவற்றுக்கு: தக்காளி, உருளைக்கிழங்கு, நெல், கோதுமை, பருத்தி, மக்காச்சோளம், மிளகாய், ஆப்பிள், திராட்சை, செர்ரி, பீச், பூசணி, ஸ்ட்ராபெர்ரி, ஆரஞ்சு. புகைப்படத்தில் செடியின் இலை தெரிய வேண்டும்.',
     possibleTitle: 'சாத்தியமான நோய் (முழுமையாக உறுதி இல்லை)', possibleMsg: 'எங்கள் AI-க்கு முழு உறுதி இல்லை. அறிகுறிகள் உங்கள் பயிருடன் பொருந்துகிறதா என்று பாருங்கள், தெளிப்பதற்கு முன் KVK அல்லது 1800-180-1551 இல் உறுதிப்படுத்தவும். ஒரு இலையின் அருகாமை புகைப்படம் உறுதியான முடிவைத் தரும்.',
+    statDiagnoses: 'செய்த சோதனைகள்', statLast: 'கடைசி முடிவு', statCrops: 'ஆதரிக்கப்படும் பயிர்கள்', statDiseases: 'உள்ள நோய்கள்', recent: 'சமீபத்திய சோதனைகள்', viewAll: 'அனைத்தையும் பார்', resultHere: 'உங்கள் முடிவு இங்கே தோன்றும்', quickActions: 'சோதனையைத் தொடங்கு', cropsCovered: 'உள்ள பயிர்கள்', menu: 'மெனு',
   },
   bn: {
     appName: 'কৃষি মিত্র', tagline: 'আপনার ভাষায় আপনার ফসলের ডাক্তার',
@@ -173,6 +178,7 @@ export const STRINGS = {
     speechUnsupported: 'এই ব্রাউজারে ভয়েস ইনপুট নেই। লক্ষণগুলিতে টিক দিন।', changeLang: 'ভাষা',
     trySymptoms: 'পরিবর্তে লক্ষণ বলুন', supportedCrops: 'ছবি পরীক্ষা এই ফসলের জন্য: টমেটো, আলু, ধান, গম, তুলা, ভুট্টা, লঙ্কা, আপেল, আঙুর, চেরি, পীচ, কুমড়া, স্ট্রবেরি, কমলা। ছবিতে গাছের পাতা দেখা যাচ্ছে কিনা নিশ্চিত করুন।',
     possibleTitle: 'সম্ভাব্য রোগ (পুরোপুরি নিশ্চিত নয়)', possibleMsg: 'আমাদের AI পুরোপুরি নিশ্চিত নয়। লক্ষণগুলি আপনার ফসলের সাথে মেলে কিনা দেখুন, এবং স্প্রে করার আগে KVK বা 1800-180-1551 নম্বরে নিশ্চিত করুন। একটি পাতার কাছ থেকে তোলা ছবি আরও নিশ্চিত ফল দেয়।',
+    statDiagnoses: 'করা পরীক্ষা', statLast: 'শেষ ফলাফল', statCrops: 'সমর্থিত ফসল', statDiseases: 'অন্তর্ভুক্ত রোগ', recent: 'সাম্প্রতিক পরীক্ষা', viewAll: 'সব দেখুন', resultHere: 'আপনার ফলাফল এখানে দেখাবে', quickActions: 'পরীক্ষা শুরু করুন', cropsCovered: 'অন্তর্ভুক্ত ফসল', menu: 'মেনু',
   },
 }
 
