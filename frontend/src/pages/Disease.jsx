@@ -39,7 +39,7 @@ export default function Disease({ t, lang, params, region, go }) {
 
   return (
     <div>
-      <button className="mb-3 font-bold text-leaf-700" onClick={() => go('back')}>← {t('back')}</button>
+      <button className="mb-3 rounded-lg font-bold text-leaf-700 transition-colors duration-300 hover:text-leaf-900 hover:underline" onClick={() => go('back')}>← {t('back')}</button>
       <div className={`card ${healthy ? 'bg-leaf-100' : 'bg-gradient-to-br from-white to-leaf-50'}`}>
         <p className="text-sm font-bold uppercase tracking-wide text-gray-500">{t('crop')}: {d.crop_name}</p>
         <h1 className="mt-1 text-3xl font-extrabold text-leaf-900">{healthy ? '✅' : '🦠'} {d.name}</h1>
