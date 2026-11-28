@@ -28,6 +28,20 @@ export default function Scan({ t, lang, go, crops = [] }) {
   const [hint, setHint] = useState(loadHint) // crop the farmer says this is ('' = detect automatically)
   const chooseHint = (c) => { setHint(c); setResult(null); try { localStorage.setItem('km_scan_crop', c) } catch { /* ignore */ } }
   const hintName = crops.find((c) => c.id === hint)?.name || hint
+  // On an uncertain automatic result, let the farmer name the crop and re-check the same photo in one tap
+  const cropRetry = !hint && (
+    <div className="mt-3 rounded-xl bg-white/80 p-3">
+      <p className="mb-2 text-sm font-bold text-leaf-900">🌱 {t('pickCropRetry')}</p>
+      <div className="flex flex-wrap gap-2">
+        {crops.filter((c) => c.main).map((c) => (
+          <button key={c.id} onClick={() => { chooseHint(c.id); diagnose(c.id) }}
+            className="lift rounded-full bg-white px-3 py-1.5 text-sm font-bold text-leaf-900 ring-2 ring-leaf-200 hover:ring-leaf-500">
+            {c.icon} {c.name}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
   const [preview, setPreview] = useState(null)
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState(null)
@@ -47,10 +61,11 @@ export default function Scan({ t, lang, go, crops = [] }) {
     } catch { setError('NETWORK') }
   }
 
-  const diagnose = async () => {
+  const diagnose = async (cropOverride) => {
+    const crop = typeof cropOverride === 'string' ? cropOverride : hint // onClick passes an event
     setLoading(true); setError(null)
     try {
-      const r = await api.predict(file, lang, hint || undefined)
+      const r = await api.predict(file, lang, crop || undefined)
       setResult(r)
       if (!r.not_leaf && !r.crop_mismatch && (!r.low_confidence || r.confidence >= POSSIBLE_MIN)) addHistory({ via: 'photo', disease_id: r.disease_id, disease: r.disease, crop: r.crop, crop_name: r.crop_name, confidence: r.confidence })
     } catch (e) { setError(e.message) } finally { setLoading(false) }
@@ -138,6 +153,7 @@ export default function Scan({ t, lang, go, crops = [] }) {
           <div className="mt-2"><ConfidenceBar value={result.confidence} /></div>
           <p className="mt-3 text-yellow-900">{t('possibleMsg')}</p>
           <p className="mt-2 text-sm text-gray-700">🍃 {t('leafHint')}</p>
+          {cropRetry}
           <div className="mt-4 grid gap-3">
             <ReadAloud t={t} text={`${t('possibleTitle')}: ${result.disease}. ${t('possibleMsg')}`} lang={lang} />
             <Heatmap t={t} file={file} label={result.label} />
@@ -153,6 +169,7 @@ export default function Scan({ t, lang, go, crops = [] }) {
           <p className="text-xl font-extrabold text-yellow-800">📷 {result.crop_mismatch ? t('cropMismatchTitle').replace('{crop}', hintName) : t('lowConfTitle')}</p>
           <p className="mt-2 text-yellow-900">{result.crop_mismatch ? t('cropMismatchMsg') : t('lowConfMsg')}</p>
           <p className="mt-2 text-sm text-gray-700">🍃 {t('leafHint')}</p>
+          {cropRetry}
           <p className="mt-3 rounded-xl bg-white/70 p-2 text-sm text-gray-700">🌾 {t('supportedCrops')}</p>
           <div className="mt-4 grid gap-3">
             <button className="btn-primary" onClick={reset}>📸 {t('retake')}</button>
