@@ -53,9 +53,10 @@ Farmers often can't identify crop diseases with confidence. They depend on neigh
 
 ## 🧠 How it works
 
-- **Disease detection:** one small MobileNetV2 model (9 MB, **54 classes**) runs in the browser. It covers the 38 PlantVillage classes, plus **rice** (bacterial leaf blight, blast, brown spot, tungro, hispa, healthy), **wheat** (yellow rust, brown rust, septoria, healthy), **cotton** (bacterial blight, Alternaria leaf spot, Fusarium wilt, Verticillium wilt, healthy) and a **"Not a Plant Leaf"** class for unrelated photos. It started from [`linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification`](https://huggingface.co/linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification) and was trained in two stages:
+- **Disease detection:** one small MobileNetV2 model (9 MB, **55 classes**) runs in the browser. It covers the 38 PlantVillage classes, plus **rice** (bacterial leaf blight, blast, brown spot, tungro, hispa, **false smut** on the grains, healthy), **wheat** (yellow rust, brown rust, septoria, healthy), **cotton** (bacterial blight, Alternaria leaf spot, Fusarium wilt, Verticillium wilt, healthy) and a **"Not a Plant Leaf"** class for unrelated photos. It started from [`linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification`](https://huggingface.co/linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification) and was trained in two stages:
   1. `backend/scripts/finetune_fieldphotos.py`: real field photos ([PlantDoc](https://huggingface.co/datasets/agyaatcoder/PlantDoc)), because the base model only knew lab photos.
   2. `backend/scripts/add_crops.py`: adds rice, wheat and cotton from [rice (India)](https://huggingface.co/datasets/Project-AgML/rice_leaf_disease_classification_india), [cotton](https://huggingface.co/datasets/Project-AgML/cotton_leaf_disease_classification) and [CropLeafDiseases](https://huggingface.co/datasets/wambugu71/CropLeafDiseases) (wheat, rice, non-leaf photos).
+  3. `backend/scripts/add_false_smut.py`: adds rice false smut (a grain disease) from 50 field photos in [minhhungg/rice-disease-dataset](https://huggingface.co/datasets/minhhungg/rice-disease-dataset), with 10 held out for testing. Choosing **Rice** in "Which crop is this?" gives the most reliable result for grain photos.
 
   Weights are in `backend/models/krishi-mobilenetv2-field` (with `training_report.json`). Each prediction averages 3 views of the photo. If the model can't be loaded, the backend falls back to a vision LLM (Claude) when `ANTHROPIC_API_KEY` is set.
 
@@ -66,6 +67,7 @@ Farmers often can't identify crop diseases with confidence. They depend on neigh
   | Lab photos (PlantVillage held-out) | 94% | **95%** |
   | Rice / wheat / cotton test photos (1,281): correct disease | n/a | **89%** |
   | Rice / wheat / cotton: correct crop | n/a | **99%** |
+  | Rice false smut (10 held-out field photos) | n/a | **10/10** |
 
   **Known weak spots:** rice hispa is often mistaken for healthy rice (36%), because the scraping damage is tiny in its training photos. Cotton bacterial blight is 65%. Rice/wheat/cotton test photos come from the same sources as their training photos, so real-world accuracy will be lower than 89%. Cotton leaf curl virus has no photo dataset, so use the symptom checker for it. Results between 35% and 60% confidence are shown as "possible disease"; below 35%, or for non-leaf photos, the app asks for a retake.
 - **Knowledge base:** `backend/data/diseases.json` holds **43 diseases + a healthy entry** (including rice grain diseases: false smut, grain discolouration, neck blast) across tomato, potato, rice, wheat, cotton, maize and chilli, plus the PlantVillage fruit crops. Every disease has full **English, Hindi and Marathi** content. All 54 model classes map to an entry (`class_map.json`). The JSON is generated from `backend/scripts/build_kb.py`.

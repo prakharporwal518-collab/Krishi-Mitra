@@ -15,7 +15,7 @@ ort.env.wasm.numThreads = 1 // avoids needing cross-origin isolation headers
 const MIN_CONFIDENCE = 60
 // With a crop chosen: below CROP_MASS_FULL of the model's belief on that crop, confidence is scaled down;
 // below CROP_MISMATCH the photo is reported as not looking like that crop. (Tuned on PlantDoc field photos.)
-const CROP_MASS_FULL = 0.5
+const CROP_MASS_FULL = 0.3
 const CROP_MISMATCH = 0.12
 const KB = Object.fromEntries(kb.diseases.map((d) => [d.id, d]))
 const CROPS = Object.fromEntries(cropData.crops.map((c) => [c.id, c]))

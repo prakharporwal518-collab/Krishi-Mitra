@@ -10,3 +10,4 @@ frontend/src/data/
 frontend/public/samples/
 finetuned/
 finetuned_crops/
+finetuned_fs/

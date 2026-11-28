@@ -214,5 +214,9 @@
  "Not a Plant Leaf": {
   "crop": "unknown",
   "disease_id": "invalid"
+ },
+ "Rice with False Smut": {
+  "crop": "rice",
+  "disease_id": "rice_false_smut"
  }
 }

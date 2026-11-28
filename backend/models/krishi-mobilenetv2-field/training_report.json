@@ -1,7 +1,8 @@
 {
  "pipeline": [
   "stage 1: scripts/finetune_fieldphotos.py (PlantDoc field photos + PlantVillage replay)",
-  "stage 2: scripts/add_crops.py (adds rice, wheat, cotton and Not a Plant Leaf)"
+  "stage 2: scripts/add_crops.py (adds rice, wheat, cotton and Not a Plant Leaf)",
+  "stage 3: scripts/add_false_smut.py (adds Rice with False Smut, 55 classes)"
  ],
  "base_model": "linkanjarad/mobilenet_v2_1.0_224-plant-disease-identification",
  "stage1": {
@@ -64,6 +65,55 @@
    "Cotton with Verticillium Wilt": 0.98,
    "Healthy Cotton Plant": 1.0,
    "Not a Plant Leaf": 0.91
+  }
+ },
+ "stage3_false_smut": {
+  "before": {
+   "plantdoc_test": {
+    "top1": 0.665,
+    "crop": 0.822,
+    "confident_share": 0.593,
+    "confident_precision": 0.821
+   },
+   "plantvillage_held": {
+    "top1": 0.955,
+    "crop": 0.995,
+    "confident_share": 0.895,
+    "confident_precision": 0.994
+   },
+   "rice_wheat_cotton_test": {
+    "top1": 0.895,
+    "crop": 0.99,
+    "confident_share": 0.781,
+    "confident_precision": 0.977
+   }
+  },
+  "final": {
+   "epoch": 4,
+   "false_smut_test": {
+    "top1": 1.0,
+    "crop": 1.0,
+    "confident_share": 1.0,
+    "confident_precision": 1.0
+   },
+   "plantdoc_test": {
+    "top1": 0.665,
+    "crop": 0.826,
+    "confident_share": 0.572,
+    "confident_precision": 0.844
+   },
+   "plantvillage_held": {
+    "top1": 0.961,
+    "crop": 0.992,
+    "confident_share": 0.924,
+    "confident_precision": 0.994
+   },
+   "rice_wheat_cotton_test": {
+    "top1": 0.882,
+    "crop": 0.988,
+    "confident_share": 0.795,
+    "confident_precision": 0.967
+   }
   }
  }
 }

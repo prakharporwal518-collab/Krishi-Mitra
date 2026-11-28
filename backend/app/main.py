@@ -47,7 +47,7 @@ SYMPTOMS = {s["id"]: s for s in _sym["symptoms"]}
 ALIASES = _sym["aliases"]
 MIN_CONFIDENCE = float(os.getenv("MIN_CONFIDENCE", "0.6"))
 # With a crop chosen (same rule as frontend/src/local.js, tuned on PlantDoc field photos)
-CROP_MASS_FULL, CROP_MISMATCH = 0.5, 0.12
+CROP_MASS_FULL, CROP_MISMATCH = 0.3, 0.12
 MAX_UPLOAD_MB = 8
 
 app = FastAPI(title="Krishi Mitra API", version="1.0")
