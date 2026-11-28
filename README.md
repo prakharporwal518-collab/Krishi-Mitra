@@ -17,6 +17,10 @@ Farmers often can't identify crop diseases with confidence. They depend on neigh
 | 📍 | **Region & season awareness**: choose a state and season (Kharif / Rabi / Zaid) to get region-specific tips. |
 | 🔊 | **Read aloud** (text-to-speech) on every result, in the selected language. |
 | 🕘 | **History** of past diagnoses, stored in localStorage. |
+| 📴 | **Works offline**: an installable app (PWA). After the first visit, photo diagnosis, symptoms and treatment all work without internet, because the model runs on the phone. |
+| 🧮 | **Spray calculator**: enter field size and sprayer tank size to get the exact medicine per tank, number of tanks and total quantity, to prevent over-spraying. |
+| 🌦️ | **Weather-based disease risk**: a 3-day forecast for your state (free [Open-Meteo](https://open-meteo.com) API, no key) is checked against the weather each disease favours, to warn *before* the disease appears. |
+| 🔥 | **"Where the AI looked" heatmap**: occlusion-sensitivity explainability, computed in the browser, shows which part of the leaf drove the diagnosis. |
 | 📞 | **Help**: Kisan Call Centre **1800-180-1551** (tap to call) and a Krishi Vigyan Kendra note. |
 
 ## 🧠 How it works
@@ -37,7 +41,7 @@ Farmers often can't identify crop diseases with confidence. They depend on neigh
 
   **Known weak spots:** rice hispa is often mistaken for healthy rice (36%), because the scraping damage is tiny in its training photos. Cotton bacterial blight is 65%. Rice/wheat/cotton test photos come from the same sources as their training photos, so real-world accuracy will be lower than 89%. Cotton leaf curl virus has no photo dataset, so use the symptom checker for it. Results between 35% and 60% confidence are shown as "possible disease"; below 35%, or for non-leaf photos, the app asks for a retake.
 - **Knowledge base:** `backend/data/diseases.json` holds **41 diseases + a healthy entry** across tomato, potato, rice, wheat, cotton, maize and chilli, plus the PlantVillage fruit crops. Every disease has full **English, Hindi and Marathi** content. All 38 model classes map to an entry (`class_map.json`). The JSON is generated from `backend/scripts/build_kb.py`.
-- **Translation:** the UI is pre-translated into all 6 languages. Disease advice is pre-translated into en/hi/mr. For te/ta/bn the backend uses Google Translate if `GOOGLE_TRANSLATE_API_KEY` is set, and falls back to English otherwise (the UI says so).
+- **Translation:** the UI is hand-translated into all 6 languages. Disease advice is hand-written in English, Hindi and Marathi. Telugu, Tamil and Bengali advice is machine-translated with Meta's open [NLLB-200](https://huggingface.co/facebook/nllb-200-distilled-600M) model, running locally for free (`backend/scripts/translate_kb.py`). Those pages say they are auto-translated and keep the English disease name alongside; strings whose numbers didn't survive translation stay in English, so doses are never garbled. A native-speaker review is still recommended.
 - **Symptom matching:** cosine similarity between the selected or spoken symptoms and each disease's symptom tags. Voice text is matched against keywords in 6 languages.
 
 ## 🛠️ Tech stack

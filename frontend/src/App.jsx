@@ -7,11 +7,33 @@ import { PageTitle } from './components/ui'
 import Scan from './pages/Scan'
 import Symptoms from './pages/Symptoms'
 import Disease from './pages/Disease'
+import RiskCard from './components/RiskCard'
 
 const store = {
   get: (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d } catch { return d } },
   set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)) } catch { /* ignore */ } },
 }
+function useOnline() {
+  const [online, setOnline] = useState(navigator.onLine)
+  useEffect(() => {
+    const on = () => setOnline(true), off = () => setOnline(false)
+    window.addEventListener('online', on); window.addEventListener('offline', off)
+    return () => { window.removeEventListener('online', on); window.removeEventListener('offline', off) }
+  }, [])
+  return online
+}
+
+// Browser "install app" prompt (Chrome/Edge/Android); hidden where not supported or already installed
+function useInstall() {
+  const [evt, setEvt] = useState(null)
+  useEffect(() => {
+    const h = (e) => { e.preventDefault(); setEvt(e) }
+    window.addEventListener('beforeinstallprompt', h)
+    return () => window.removeEventListener('beforeinstallprompt', h)
+  }, [])
+  return evt && (() => { evt.prompt(); setEvt(null) })
+}
+
 const NAV = [['home', '🏠'], ['scan', '📷'], ['symptoms', '📝'], ['history', '🕘'], ['help', '📞']]
 
 export default function App() {
@@ -22,6 +44,8 @@ export default function App() {
   const [navKey, setNavKey] = useState(0) // remounts the page on every navigation, so it always starts fresh
   const t = useMemo(() => makeT(lang || 'en'), [lang])
   const page = stack[stack.length - 1]
+  const online = useOnline()
+  const install = useInstall()
 
   useEffect(() => { if (lang) { store.set('km_lang', lang); document.documentElement.lang = lang } }, [lang])
   useEffect(() => store.set('km_region', region), [region])
@@ -45,7 +69,7 @@ export default function App() {
   const props = { t, lang, go, crops, region: regionParams }
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[17rem_1fr]">
-      <Sidebar t={t} lang={lang} current={current} go={go} region={region} setRegion={setRegion} openLanguage={openLanguage} />
+      <Sidebar t={t} lang={lang} current={current} go={go} region={region} setRegion={setRegion} openLanguage={openLanguage} install={install} />
 
       <div className="min-w-0 pb-28 lg:pb-10">
         {/* Mobile header (the sidebar replaces it on large screens) */}
@@ -53,10 +77,14 @@ export default function App() {
           <button onClick={() => go('home')} className="flex items-center gap-2 text-xl font-extrabold">
             <span className="text-3xl">🌱</span>{t('appName')}
           </button>
-          <button onClick={openLanguage} className="rounded-full bg-leaf-700 px-3 py-2 text-sm font-bold ring-1 ring-leaf-500">
-            🌐 {LANGS.find((l) => l.code === lang)?.native}
-          </button>
+          <span className="flex gap-2">
+            {install && <button onClick={install} className="rounded-full bg-soil-100 px-3 py-2 text-sm font-bold text-leaf-900">⬇️</button>}
+            <button onClick={openLanguage} className="rounded-full bg-leaf-700 px-3 py-2 text-sm font-bold ring-1 ring-leaf-500">
+              🌐 {LANGS.find((l) => l.code === lang)?.native}
+            </button>
+          </span>
         </header>
+        {!online && <p className="bg-yellow-100 px-4 py-2 text-center text-sm font-bold text-yellow-900">📴 {t('offlineBanner')}</p>}
         <main key={navKey} className="mx-auto max-w-xl px-4 pt-4 lg:max-w-6xl lg:px-8 lg:pt-8">
           {page.name === 'home' && <Home {...props} region={region} setRegion={setRegion} />}
           {page.name === 'scan' && <Scan {...props} />}
@@ -72,7 +100,7 @@ export default function App() {
   )
 }
 
-function Sidebar({ t, lang, current, go, region, setRegion, openLanguage }) {
+function Sidebar({ t, lang, current, go, region, setRegion, openLanguage, install }) {
   return (
     <aside className="sticky top-0 hidden h-screen flex-col gap-6 overflow-y-auto bg-gradient-to-b from-leaf-800 to-leaf-900 p-5 text-white lg:flex">
       <button onClick={() => go('home')} className="flex items-center gap-3 text-left">
@@ -97,6 +125,8 @@ function Sidebar({ t, lang, current, go, region, setRegion, openLanguage }) {
         <p className="mb-2 mt-4 text-xs font-bold uppercase tracking-wide text-leaf-200">📍 {t('region')}</p>
         <RegionPicker t={t} region={region} setRegion={setRegion} dark />
       </div>
+
+      {install && <button onClick={install} className="rounded-2xl bg-white/15 px-4 py-3 text-left font-bold hover:bg-white/25">⬇️ {t('installApp')}</button>}
 
       <a href="tel:18001801551" className="mt-auto rounded-2xl bg-soil-100 p-4 text-leaf-900 hover:bg-white">
         <span className="block text-xs font-bold uppercase tracking-wide text-soil-700">☎️ {t('kccTitle')}</span>
@@ -161,7 +191,7 @@ function Stat({ icon, label, value, sub }) {
   )
 }
 
-function Home({ t, go, crops, region, setRegion }) {
+function Home({ t, lang, go, crops, region, setRegion }) {
   const history = useMemo(getHistory, [])
   const last = history[0]
   const diseaseCount = crops.reduce((n, c) => n + (c.diseases || 0), 0)
@@ -181,6 +211,8 @@ function Home({ t, go, crops, region, setRegion }) {
         <Stat icon="🌾" label={t('statCrops')} value={crops.length || '—'} />
         <Stat icon="📚" label={t('statDiseases')} value={diseaseCount || '—'} />
       </section>
+
+      <RiskCard t={t} lang={lang} region={region} go={go} />
 
       {/* Main actions */}
       <section>

@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { api } from '../api'
 import { addHistory } from '../history'
+import Heatmap from '../components/Heatmap'
 import { ConfidenceBar, ErrorBox, PageTitle, ReadAloud, Spinner } from '../components/ui'
 
 const SAMPLES = [
@@ -115,6 +116,7 @@ export default function Scan({ t, lang, go }) {
           <p className="mt-3 text-yellow-900">{t('possibleMsg')}</p>
           <div className="mt-4 grid gap-3">
             <ReadAloud t={t} text={`${t('possibleTitle')}: ${result.disease}. ${t('possibleMsg')}`} lang={lang} />
+            <Heatmap t={t} file={file} label={result.label} />
             <button className="btn-primary text-xl" onClick={() => go('disease', { id: result.disease_id, crop: result.crop })}>💊 {t('seeTreatment')} →</button>
             <button className="btn-light" onClick={reset}>📸 {t('retake')}</button>
             <button className="btn-light" onClick={() => go('symptoms')}>📝 {t('trySymptoms')}</button>
@@ -155,6 +157,7 @@ export default function Scan({ t, lang, go }) {
           )}
           <div className="mt-4 grid gap-3">
             <ReadAloud t={t} text={summary} lang={lang} />
+            <Heatmap t={t} file={file} label={result.label} />
             <button className="btn-primary text-xl" onClick={() => go('disease', { id: result.disease_id, crop: result.crop })}>💊 {t('seeTreatment')} →</button>
             <button className="btn-light" onClick={reset}>📸 {t('retake')}</button>
           </div>

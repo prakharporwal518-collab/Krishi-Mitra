@@ -193,6 +193,7 @@ async def disease(disease_id: str, lang: str = "en", state: str | None = None,
     crop_id = crop if d["crop"] == "any" and crop else d["crop"]
     return {"id": d["id"], "crop": crop_id, "crop_name": crop_name(crop_id, lang), "kind": d["kind"],
             "pathogen": d["pathogen"], "source": d["source"], "lang": lang if translated else "en",
+            "dose_per_litre": d.get("dose_per_litre"),
             "translated": translated, **content, "region_tips": tips,
             "region_match": bool(state or season) and bool(tips)}
 
