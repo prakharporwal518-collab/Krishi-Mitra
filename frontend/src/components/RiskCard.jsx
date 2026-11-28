@@ -45,7 +45,7 @@ export default function RiskCard({ t, lang, region, go }) {
         <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {state.risks.map((r) => (
             <button key={r.id} onClick={() => go('disease', { id: r.id })}
-              className={`rounded-2xl p-3 text-left ring-2 transition hover:shadow ${r.level === 'high' ? 'bg-red-50 ring-red-200' : 'bg-yellow-50 ring-yellow-200'}`}>
+              className={`lift rounded-2xl p-3 text-left ring-2 ${r.level === 'high' ? 'bg-red-50 ring-red-200' : 'bg-yellow-50 ring-yellow-200'}`}>
               <span className={`inline-block rounded-full px-2 py-0.5 text-xs font-bold text-white ${r.level === 'high' ? 'bg-red-600' : 'bg-yellow-600'}`}>
                 {r.level === 'high' ? t('riskHigh') : t('riskMedium')}
               </span>

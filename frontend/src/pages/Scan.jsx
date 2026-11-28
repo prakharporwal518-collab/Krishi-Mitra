@@ -74,7 +74,7 @@ export default function Scan({ t, lang, go }) {
             <p className="mb-3 font-semibold text-leaf-800">{t('trySample')}</p>
             <div className="grid grid-cols-4 gap-2">
               {SAMPLES.map((s) => (
-                <button key={s.file} onClick={() => loadSample(s.file)} className="relative overflow-hidden rounded-2xl ring-2 ring-leaf-200 active:scale-95">
+                <button key={s.file} onClick={() => loadSample(s.file)} className="tile relative overflow-hidden rounded-2xl ring-2 ring-leaf-200">
                   <img src={`/samples/${s.file}`} alt={s.file} className="aspect-square w-full object-cover" />
                   <span className="absolute bottom-1 right-1 text-xl">{s.icon}</span>
                 </button>
@@ -100,7 +100,7 @@ export default function Scan({ t, lang, go }) {
 
       <div className="lg:sticky lg:top-8 [&>.card]:lg:mt-0">
       {!result && !error && (
-        <div className="card hidden min-h-[16rem] flex-col items-center justify-center border-2 border-dashed border-leaf-200 text-center text-gray-500 lg:flex">
+        <div className="card card-flat hidden min-h-[16rem] flex-col items-center justify-center border-2 border-dashed border-leaf-200 text-center text-gray-500 lg:flex">
           <span className="text-6xl opacity-60">🔬</span>
           <p className="mt-3 text-lg font-semibold">{t('resultHere')}</p>
         </div>

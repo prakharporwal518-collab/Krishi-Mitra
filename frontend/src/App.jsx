@@ -78,8 +78,8 @@ export default function App() {
             <span className="text-3xl">🌱</span>{t('appName')}
           </button>
           <span className="flex gap-2">
-            {install && <button onClick={install} className="rounded-full bg-soil-100 px-3 py-2 text-sm font-bold text-leaf-900">⬇️</button>}
-            <button onClick={openLanguage} className="rounded-full bg-leaf-700 px-3 py-2 text-sm font-bold ring-1 ring-leaf-500">
+            {install && <button onClick={install} className="rounded-full bg-soil-100 px-3 py-2 text-sm font-bold text-leaf-900 transition-colors duration-300 hover:bg-white">⬇️</button>}
+            <button onClick={openLanguage} className="rounded-full bg-leaf-700 px-3 py-2 text-sm font-bold ring-1 ring-leaf-500 transition-colors duration-300 hover:bg-leaf-600 active:scale-95">
               🌐 {LANGS.find((l) => l.code === lang)?.native}
             </button>
           </span>
@@ -111,7 +111,7 @@ function Sidebar({ t, lang, current, go, region, setRegion, openLanguage, instal
       <nav className="space-y-1" aria-label={t('menu')}>
         {NAV.map(([k, icon]) => (
           <button key={k} onClick={() => go(k)} aria-current={current === k ? 'page' : undefined}
-            className={`flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left text-base font-bold transition ${current === k ? 'bg-white text-leaf-800 shadow' : 'text-leaf-50 hover:bg-white/10'}`}>
+            className={`flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left text-base font-bold transition duration-300 ease-in-out ${current === k ? 'bg-white text-leaf-800 shadow' : 'text-leaf-50 hover:bg-white/10'}`}>
             <span className="text-2xl">{icon}</span>{t(k)}
           </button>
         ))}
@@ -119,16 +119,16 @@ function Sidebar({ t, lang, current, go, region, setRegion, openLanguage, instal
 
       <div className="rounded-2xl bg-white/10 p-4">
         <p className="mb-2 text-xs font-bold uppercase tracking-wide text-leaf-200">🌐 {t('changeLang')}</p>
-        <button onClick={openLanguage} className="w-full rounded-xl bg-white/15 px-3 py-2 text-left font-bold hover:bg-white/25">
+        <button onClick={openLanguage} className="w-full rounded-xl bg-white/15 px-3 py-2 text-left font-bold transition-colors duration-300 hover:bg-white/25">
           {LANGS.find((l) => l.code === lang)?.native} ▾
         </button>
         <p className="mb-2 mt-4 text-xs font-bold uppercase tracking-wide text-leaf-200">📍 {t('region')}</p>
         <RegionPicker t={t} region={region} setRegion={setRegion} dark />
       </div>
 
-      {install && <button onClick={install} className="rounded-2xl bg-white/15 px-4 py-3 text-left font-bold hover:bg-white/25">⬇️ {t('installApp')}</button>}
+      {install && <button onClick={install} className="rounded-2xl bg-white/15 px-4 py-3 text-left font-bold transition-colors duration-300 hover:bg-white/25">⬇️ {t('installApp')}</button>}
 
-      <a href="tel:18001801551" className="mt-auto rounded-2xl bg-soil-100 p-4 text-leaf-900 hover:bg-white">
+      <a href="tel:18001801551" className="lift mt-auto rounded-2xl bg-soil-100 p-4 text-leaf-900 hover:bg-white">
         <span className="block text-xs font-bold uppercase tracking-wide text-soil-700">☎️ {t('kccTitle')}</span>
         <span className="block text-2xl font-extrabold">1800-180-1551</span>
       </a>
@@ -168,7 +168,7 @@ function LanguagePage({ lang, onPick }) {
       <div className="mt-4 grid w-full max-w-md grid-cols-2 gap-3 lg:max-w-3xl lg:grid-cols-3">
         {LANGS.map((l) => (
           <button key={l.code} onClick={() => onPick(l.code)}
-            className={`rounded-3xl p-5 text-center shadow-lg transition active:scale-95 ${lang === l.code ? 'bg-soil-100 text-leaf-900 ring-4 ring-soil-400' : 'bg-white text-leaf-900 hover:ring-4 hover:ring-leaf-300'}`}>
+            className={`lift rounded-3xl p-5 text-center shadow-lg ${lang === l.code ? 'bg-soil-100 text-leaf-900 ring-4 ring-soil-400' : 'bg-white text-leaf-900 hover:ring-4 hover:ring-leaf-300'}`}>
             <span className="block text-2xl font-extrabold">{l.native}</span>
             <span className="text-sm text-gray-500">{l.name}</span>
           </button>
@@ -218,11 +218,11 @@ function Home({ t, lang, go, crops, region, setRegion }) {
       <section>
         <h2 className="h2 mb-3">{t('quickActions')}</h2>
         <div className="grid gap-3 md:grid-cols-2 lg:gap-4">
-          <button onClick={() => go('scan')} className="flex items-center gap-4 rounded-3xl bg-leaf-700 p-5 text-left text-white shadow-sm transition hover:bg-leaf-800 active:scale-[.98] lg:p-7">
+          <button onClick={() => go('scan')} className="flex items-center gap-4 rounded-3xl bg-leaf-700 p-5 text-left text-white shadow-sm lift hover:bg-leaf-800 lg:p-7">
             <span className="text-5xl lg:text-6xl">📷</span>
             <span><span className="block text-xl font-extrabold lg:text-2xl">{t('scanTitle')}</span><span className="text-leaf-100">{t('scanDesc')}</span></span>
           </button>
-          <button onClick={() => go('symptoms')} className="flex items-center gap-4 rounded-3xl bg-white p-5 text-left shadow-sm ring-1 ring-leaf-100 transition hover:ring-leaf-300 active:scale-[.98] lg:p-7">
+          <button onClick={() => go('symptoms')} className="flex items-center gap-4 rounded-3xl bg-white p-5 text-left shadow-sm ring-1 ring-leaf-100 lift hover:ring-leaf-200 lg:p-7">
             <span className="text-5xl lg:text-6xl">📝</span>
             <span><span className="block text-xl font-extrabold lg:text-2xl">{t('symTitle')}</span><span className="text-gray-600">{t('symDesc')}</span></span>
           </button>
@@ -244,7 +244,7 @@ function Home({ t, lang, go, crops, region, setRegion }) {
           {!history.length && <p className="rounded-2xl bg-leaf-50 p-4 text-center text-gray-600">{t('noHistory')}</p>}
           <div className="divide-y divide-leaf-100">
             {history.slice(0, 4).map((h, i) => (
-              <button key={i} onClick={() => go('disease', { id: h.disease_id, crop: h.crop })} className="flex w-full items-center justify-between gap-3 py-3 text-left hover:bg-leaf-50">
+              <button key={i} onClick={() => go('disease', { id: h.disease_id, crop: h.crop })} className="flex w-full items-center justify-between gap-3 rounded-xl py-3 text-left transition-colors duration-300 ease-in-out hover:bg-leaf-50">
                 <span className="min-w-0">
                   <span className="block truncate font-extrabold text-leaf-900">{h.disease}</span>
                   <span className="text-sm text-gray-500">{h.crop_name} · {h.via === 'photo' ? '📷' : '📝'} · {new Date(h.at).toLocaleDateString()}</span>
@@ -267,7 +267,7 @@ function Home({ t, lang, go, crops, region, setRegion }) {
           <h2 className="h2 mb-3">🌱 {t('cropsCovered')}</h2>
           <div className="grid grid-cols-3 gap-2 sm:grid-cols-5 lg:grid-cols-7">
             {crops.map((c) => (
-              <div key={c.id} className="flex flex-col items-center rounded-2xl bg-leaf-50 p-3 text-center">
+              <div key={c.id} className="tile flex flex-col items-center rounded-2xl bg-leaf-50 p-3 text-center">
                 <span className="text-3xl">{c.icon}</span>
                 <span className="mt-1 text-xs font-bold text-leaf-900">{c.name}</span>
                 <span className="text-[11px] text-gray-500">{c.diseases} 🦠</span>
@@ -300,7 +300,7 @@ function History({ t, go }) {
       {!items.length && <p className="card text-center text-gray-600">{t('noHistory')}</p>}
       <div className="grid gap-3 lg:grid-cols-2">
         {items.map((h, i) => (
-          <button key={i} onClick={() => go('disease', { id: h.disease_id, crop: h.crop })} className="card flex w-full items-center justify-between gap-3 text-left hover:ring-leaf-300 active:scale-[.98]">
+          <button key={i} onClick={() => go('disease', { id: h.disease_id, crop: h.crop })} className="card flex w-full items-center justify-between gap-3 text-left">
             <div className="min-w-0">
               <p className="text-lg font-extrabold text-leaf-900">{h.disease}</p>
               <p className="text-sm text-gray-600">{h.crop_name} · {h.via === 'photo' ? '📷 ' + t('viaPhoto') : '📝 ' + t('viaSymptoms')} · {Math.round(h.confidence)}%</p>
@@ -342,7 +342,7 @@ function BottomNav({ t, current, go }) {
     <nav className="bottom-nav fixed inset-x-0 bottom-0 z-10 border-t border-leaf-100 bg-white/95 backdrop-blur lg:hidden">
       <div className="mx-auto grid max-w-xl grid-cols-5">
         {NAV.map(([k, icon]) => (
-          <button key={k} onClick={() => go(k)} className={`flex flex-col items-center py-2 text-xs font-bold ${current === k ? 'text-leaf-700' : 'text-gray-500'}`}>
+          <button key={k} onClick={() => go(k)} className={`flex flex-col items-center py-2 text-xs font-bold transition-colors duration-300 hover:text-leaf-700 active:scale-95 ${current === k ? 'text-leaf-700' : 'text-gray-500'}`}>
             <span className={`text-2xl ${current === k ? 'scale-110' : ''}`}>{icon}</span>{t(k)}
           </button>
         ))}

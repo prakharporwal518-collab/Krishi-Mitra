@@ -56,7 +56,7 @@ export default function Symptoms({ t, lang, go, crops }) {
       <div className="grid grid-cols-4 gap-2 lg:grid-cols-7">
         {crops.filter((c) => c.main).map((c) => (
           <button key={c.id} onClick={() => setCrop(c.id)}
-            className={`flex flex-col items-center rounded-2xl p-2 text-sm font-semibold ring-2 transition active:scale-95 ${crop === c.id ? 'bg-leaf-700 text-white ring-leaf-700' : 'bg-white ring-leaf-100'}`}>
+            className={`flex flex-col items-center lift rounded-2xl p-2 text-sm font-semibold ring-2 ${crop === c.id ? 'bg-leaf-700 text-white ring-leaf-700' : 'bg-white ring-leaf-100 hover:ring-leaf-200'}`}>
             <span className="text-3xl">{c.icon}</span>{c.name}
           </button>
         ))}
@@ -75,7 +75,7 @@ export default function Symptoms({ t, lang, go, crops }) {
               const on = picked.includes(s.id)
               return (
                 <button key={s.id} onClick={() => toggle(s.id)} aria-pressed={on}
-                  className={`flex items-center gap-2 rounded-2xl p-3 text-left text-sm font-semibold ring-2 transition active:scale-95 ${on ? 'bg-leaf-100 ring-leaf-600' : 'bg-white ring-gray-100'}`}>
+                  className={`flex items-center gap-2 lift rounded-2xl p-3 text-left text-sm font-semibold ring-2 ${on ? 'bg-leaf-100 ring-leaf-600' : 'bg-white ring-gray-100 hover:ring-leaf-200'}`}>
                   <span className="text-2xl">{on ? '✅' : s.icon}</span><span>{s.name}</span>
                 </button>
               )
@@ -90,7 +90,7 @@ export default function Symptoms({ t, lang, go, crops }) {
       {loading && <Spinner />}
       <ErrorBox t={t} error={error} />
       {!result && !loading && (
-        <div className="card hidden min-h-[16rem] flex-col items-center justify-center border-2 border-dashed border-leaf-200 text-center text-gray-500 lg:flex">
+        <div className="card card-flat hidden min-h-[16rem] flex-col items-center justify-center border-2 border-dashed border-leaf-200 text-center text-gray-500 lg:flex">
           <span className="text-6xl opacity-60">🔍</span>
           <p className="mt-3 text-lg font-semibold">{t('resultHere')}</p>
         </div>
@@ -102,7 +102,7 @@ export default function Symptoms({ t, lang, go, crops }) {
           {!result.matches.length && <p className="card">{t('noMatch')}</p>}
           <div className="space-y-3">
             {result.matches.map((m, i) => (
-              <button key={m.disease_id} onClick={() => go('disease', { id: m.disease_id, crop })} className="card block w-full text-left active:scale-[.98]">
+              <button key={m.disease_id} onClick={() => go('disease', { id: m.disease_id, crop })} className="card block w-full text-left">
                 <div className="flex items-center justify-between gap-2">
                   <p className="text-lg font-extrabold text-leaf-900">{i + 1}. {m.disease}</p>
                   <span className="rounded-full bg-leaf-100 px-3 py-1 text-sm font-bold text-leaf-800">{m.score}% {t('match')}</span>

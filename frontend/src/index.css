@@ -4,11 +4,52 @@
 
 body { @apply bg-leaf-50 text-gray-900 antialiased; }
 @layer components {
-  .btn { @apply inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-4 text-lg font-bold shadow-sm transition active:scale-95 disabled:opacity-50 disabled:active:scale-100; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-4 text-lg font-bold shadow-sm disabled:cursor-not-allowed disabled:opacity-50; }
   .btn-primary { @apply btn bg-leaf-700 text-white hover:bg-leaf-800; }
   .btn-light { @apply btn bg-white text-leaf-800 ring-2 ring-leaf-200 hover:bg-leaf-100; }
   .card { @apply rounded-3xl bg-white p-5 shadow-sm ring-1 ring-leaf-100; }
   .h2 { @apply text-xl font-extrabold text-leaf-900; }
+}
+
+/* ---------- Interaction layer: hover, press and focus states ----------
+   .card  = every card / box          .lift = clickable box that is not a .card
+   .tile  = small square tile (lift + subtle scale)          .btn  = buttons
+   Hover effects only run on devices with a real pointer, so phones never get a "stuck" hover;
+   touch devices get a quick press (scale) instead. Transforms never change layout. */
+.card, .lift, .tile, .btn {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+@media (hover: hover) and (pointer: fine) {
+  .card:not(.card-flat):hover, .lift:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000),
+      0 0 0 1px rgb(34 197 94 / 0.22), 0 16px 32px -14px rgb(20 83 45 / 0.28), 0 4px 10px -4px rgb(20 83 45 / 0.10);
+  }
+  .tile:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000),
+      0 0 0 1px rgb(34 197 94 / 0.22), 0 14px 26px -12px rgb(20 83 45 / 0.30);
+  }
+  .btn:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), 0 10px 20px -10px rgb(20 83 45 / 0.45);
+  }
+  button.card:hover, a.card:hover, .lift:hover, .tile:hover { cursor: pointer; }
+}
+/* press feedback (all devices) */
+.btn:not(:disabled):active, button.card:active, .lift:active, button.tile:active {
+  transform: translateY(0) scale(0.97);
+  transition-duration: 0.1s;
+}
+/* keyboard focus: one clear amber ring everywhere (visible on white and on green) */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 3px;
+}
+:where(input, select):focus { border-color: #22c55e; }
+@media (prefers-reduced-motion: reduce) {
+  .card, .lift, .tile, .btn { transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out; }
+  .card:hover, .lift:hover, .tile:hover, .btn:hover, .btn:active, button.card:active, .lift:active, button.tile:active { transform: none !important; }
 }
 
 /* Netlify injects a "Powered by Netlify" badge at the bottom-right; keep the nav buttons above it */
