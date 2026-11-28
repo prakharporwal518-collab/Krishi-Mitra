@@ -2,9 +2,36 @@
 
 **A multilingual crop disease diagnosis and treatment assistant for Indian farmers.**
 
-🌐 **Live demo: [krishi-mitra-ol3d.netlify.app](https://krishi-mitra-ol3d.netlify.app)**. It works on phones too, with no install or sign-up.
+🌐 **Live demo: [krishi-mitra-ol3d.netlify.app](https://krishi-mitra-ol3d.netlify.app)**. It works on phones too, with no install or sign-up, and keeps working offline after the first visit.
+
+![Krishi Mitra dashboard: weather-based disease risk, quick checks, recent diagnoses](docs/screenshots/dashboard.jpg)
 
 Farmers often can't identify crop diseases with confidence. They depend on neighbours or pesticide sellers, which leads to inconsistent advice and pesticide misuse. Most information is also not in their language or specific to their region. Krishi Mitra identifies the disease from a **leaf photo** or from **symptoms (tapped or spoken)**. It then gives **crop-specific, region-aware treatment advice in the farmer's language**, read aloud if needed, and every recommendation cites ICAR / State Agricultural University guidelines.
+
+## 🏆 Why Krishi Mitra stands out
+
+- **Works without internet.** The AI model runs on the phone itself, so diagnosis works in the field with no signal after the first visit.
+- **Trained for real farm photos, not just lab images.** We fine-tuned the model on real field photos: accuracy on them rose from **31% to 67%**, and rice, wheat and cotton were added (**89%** on held-out photos).
+- **Explainable AI.** A heatmap shows *where on the leaf* the AI looked, so farmers and experts can trust or question the result.
+- **Prevents pesticide misuse.** Exact dose per litre and per acre, a **spray calculator** for the farmer's own tank and field, and warnings against overuse and tank-mixing.
+- **Warns before the disease appears.** A 3-day weather forecast for the farmer's state is checked against the conditions each disease favours.
+- **6 Indian languages with voice:** speak the symptoms, and hear the advice read aloud.
+- **Honest about uncertainty.** Low-confidence results are labelled "possible disease" or trigger a retake, and non-leaf photos are rejected.
+- **100% free to run.** No paid APIs, keys or servers: a static site on Netlify, free Open-Meteo weather and open-source models. (The optional Python backend can use a paid vision LLM as a fallback, but only if you add your own key; the live app never does.)
+
+## 📸 Screenshots
+
+| Photo diagnosis with "Where the AI looked" heatmap | Treatment page with spray calculator |
+|---|---|
+| ![Photo check result with explainability heatmap](docs/screenshots/photo-check-heatmap.jpg) | ![Treatment page with dose, timing and spray calculator](docs/screenshots/treatment-spray-calculator.jpg) |
+
+**Symptom check (no photo needed):** pick the crop, tap or speak the symptoms, and get the top 3 likely diseases.
+
+![Symptom-based diagnosis](docs/screenshots/symptom-check.jpg)
+
+**On a phone:** language picker → Hindi photo result → Tamil treatment with spray calculator → still working **offline**.
+
+![Mobile screens: language picker, Hindi result, Tamil spray calculator, offline mode](docs/screenshots/mobile.jpg)
 
 ## ✨ Features
 
@@ -40,13 +67,13 @@ Farmers often can't identify crop diseases with confidence. They depend on neigh
   | Rice / wheat / cotton: correct crop | n/a | **99%** |
 
   **Known weak spots:** rice hispa is often mistaken for healthy rice (36%), because the scraping damage is tiny in its training photos. Cotton bacterial blight is 65%. Rice/wheat/cotton test photos come from the same sources as their training photos, so real-world accuracy will be lower than 89%. Cotton leaf curl virus has no photo dataset, so use the symptom checker for it. Results between 35% and 60% confidence are shown as "possible disease"; below 35%, or for non-leaf photos, the app asks for a retake.
-- **Knowledge base:** `backend/data/diseases.json` holds **41 diseases + a healthy entry** across tomato, potato, rice, wheat, cotton, maize and chilli, plus the PlantVillage fruit crops. Every disease has full **English, Hindi and Marathi** content. All 38 model classes map to an entry (`class_map.json`). The JSON is generated from `backend/scripts/build_kb.py`.
+- **Knowledge base:** `backend/data/diseases.json` holds **41 diseases + a healthy entry** across tomato, potato, rice, wheat, cotton, maize and chilli, plus the PlantVillage fruit crops. Every disease has full **English, Hindi and Marathi** content. All 54 model classes map to an entry (`class_map.json`). The JSON is generated from `backend/scripts/build_kb.py`.
 - **Translation:** the UI is hand-translated into all 6 languages. Disease advice is hand-written in English, Hindi and Marathi. Telugu, Tamil and Bengali advice is machine-translated with Meta's open [NLLB-200](https://huggingface.co/facebook/nllb-200-distilled-600M) model, running locally for free (`backend/scripts/translate_kb.py`). Those pages say they are auto-translated and keep the English disease name alongside; strings whose numbers didn't survive translation stay in English, so doses are never garbled. A native-speaker review is still recommended.
 - **Symptom matching:** cosine similarity between the selected or spoken symptoms and each disease's symptom tags. Voice text is matched against keywords in 6 languages.
 
 ## 🛠️ Tech stack
 
-React 18 + Vite + Tailwind CSS (mobile-first) · Python FastAPI · 🤗 Transformers + PyTorch (CPU) · Web Speech API · JSON knowledge base (no database)
+React 18 + Vite + Tailwind CSS (responsive dashboard, mobile-first) · ONNX Runtime Web (in-browser AI) · PWA / service worker (offline) · Python FastAPI · 🤗 Transformers + PyTorch (training, optional backend) · Meta NLLB-200 (offline translation) · Open-Meteo (free weather) · Web Speech API · JSON knowledge base (no database)
 
 ## 🚀 Setup
 
@@ -96,9 +123,13 @@ Interactive docs are at http://localhost:8000/docs.
 ## 📁 Structure
 
 ```
-backend/   app/ (main.py, classifier.py, translate.py) · data/ (diseases, class_map, crops, symptoms JSON) · scripts/build_kb.py
-frontend/  src/ (App.jsx, pages/, components/, i18n/strings.js, speech.js, history.js)
+backend/   app/ (main.py, classifier.py, translate.py)
+           data/ (diseases.json, class_map.json, crops.json, symptoms.json, kb_auto_translations.json)
+           models/krishi-mobilenetv2-field/ (fine-tuned weights + training_report.json)
+           scripts/ (build_kb.py, translate_kb.py, finetune_fieldphotos.py, add_crops.py, export_onnx.py)
+frontend/  src/ (App.jsx, local.js, weather.js, pages/, components/, i18n/strings.js, model/)
 samples/   demo leaf images
+docs/      screenshots/
 ```
 
 ## ⚠️ Disclaimer
